@@ -1,50 +1,47 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/04/01 16:33:05 by gcesar-n          #+#    #+#              #
-#    Updated: 2025/04/01 16:41:35 by gcesar-n         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = minishell
 
 CC = cc
+#CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES)
 
-# CFLAGS = -Wall -Werror -Wextra
+INCLUDES = includes
+LIBFT_DIR = $(INCLUDES)/libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
-SRCS = src/main.cc
+SRC_DIR = src
+PARSER_DIR = $(SRC_DIR)/parser
+EXEC_DIR = $(SRC_DIR)/executor
 
 OBJ_DIR = objects
 
-OBJS = $(OBJ_DIR)/main.o
+SRCS = $(SRC_DIR)/main.c \
+	   $(PARSER_DIR)/parser.c
 
-all: $(NAME)
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
-$(NAME): $(OBJS) libft/libft.a
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -Llibft -lft
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-#compilaa
-$(OBJ_DIR)/main.o: src/main.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c src/main.c -o $(OBJ_DIR)/main.o
+all: $(OBJ_DIR) $(NAME)
 
-#objects
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 
-libft/libft.a:
-	make -C libft
+$(NAME): $(OBJS)
+	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
 
 clean:
 	rm -rf $(OBJ_DIR)
-	make -C libft clean
+	@make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
-	make -C libft fclean
+	@make -C $(LIBFT_DIR) fclean
 
 re: fclean all
+
+.PHONY: all clean fclean re
