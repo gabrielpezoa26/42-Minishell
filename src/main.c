@@ -6,28 +6,18 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/08 17:26:12 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:51:47 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// void	initialize(void)
-// {
-// 	while (1)
-// 	{
-// 		loop;
-// 	}
-// }
-
 int main(int argc, char **argv, char **envp)
 {
-	t_data	data;
-
-	(void)argv;
-	(void)argc;
-	for (int i = 0; envp[i]; i++)
-		printf("%s\n", envp[i]);
-//	initialize();
+	//lexer
+	validate_input(argv);
+	//parser
+	//init
+	//exec
 	return (0);
 }
