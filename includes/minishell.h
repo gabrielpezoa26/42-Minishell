@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/01 18:57:18 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:41:52 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 typedef struct s_data
 {
 	char	**envp;
-}	t_data;
+}	t_mango;
 
 /*------PARSER------*/
-bool	check_input(int argc, char **argv);
+bool	basic_check(int argc, char **argv);
 
 #endif
