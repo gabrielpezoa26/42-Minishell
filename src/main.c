@@ -6,22 +6,25 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/02 17:33:11 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:59:45 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+//parse_input();
 static void	minishell_loop(t_mango *mango)
 {
 	char	*rl;
 
+	mango = NULL;
+	parse_input(mango);
 	while (1)
 	{
 		rl = readline("minishell$ ");
 		if (rl)
 		{
-			ft_printf("%s\n", rl);
+			printf("%s\n", rl);
 			add_history(rl);
 			free(rl);
 		}
@@ -35,7 +38,10 @@ int	main(int argc, char **argv, char **envp)
 	t_mango	*mango;
 
 	if (!basic_check(argc, argv))
+	{
+		printf("vishh\n");
 		return (1);
+	}
 	minishell_loop(mango);
 	return (0);
 }
@@ -62,4 +68,8 @@ int	main(int argc, char **argv, char **envp)
 		--loop
 	
 		--free
+
+
+	valgrind --suppressions=mango.supp ./minishell
+
 */
