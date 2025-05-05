@@ -6,11 +6,14 @@
 #    By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/01 14:00:06 by gcesar-n          #+#    #+#              #
-#    Updated: 2025/05/03 14:44:10 by gcesar-n         ###   ########.fr        #
+#    Updated: 2025/05/05 14:23:39 by gcesar-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-valgrind --suppressions=your_file.supp ./your_program
+valgrind --suppressions=mango.supp ./minishell
+
+valgrind --leak-check=full --show-leak-kinds=all --suppressions=mango.supp ./minishell
+
 
 ------Readline Library Functions------
 

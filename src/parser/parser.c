@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/03 16:59:28 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:40:57 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,27 @@ bool	basic_check(int argc, char **argv)
 
 	if (argc != 1)
 	{
-		printf("Invalid arguments count :(( \n");
+		printf("Invalid argument count :(( \n");
 		return (false);
 	}
 	return (true);
 }
-#include <stdio.h>
 
 bool	parse_input(t_mango *mango)
 {
-	if (mango == NULL)
-		return (false);
-	else if (verify_space(mango->input))
+	if (mango->input == NULL)
+		exit_minishell(mango, "finished");
+	else if (ft_strcmp(mango->input, "\0") == 0)
 	{
-		printf("vishh");
+		printf("DEBUG: eh nulo");
 		return (false);
 	}
-	else if (ft_strcmp(mango->input, "\0") == 0)
+	else if (verify_space(mango->input))
+	{
+		printf("DEBUG: eh espaço\n");
 		return (false);
+	}
+	add_history(mango->input);
 	return (true);
 }
 

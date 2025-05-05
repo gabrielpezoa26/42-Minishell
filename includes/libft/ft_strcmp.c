@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_parser.c                                     :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 15:03:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/05 14:20:22 by gcesar-n         ###   ########.fr       */
+/*   Created: 2025/05/05 14:09:05 by gcesar-n          #+#    #+#             */
+/*   Updated: 2025/05/05 14:09:26 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-bool	verify_space(char *str)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (i < ft_strlen(str))
+	while (s1[i] && s2[i])
 	{
-		if ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-			return (true);
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
-	return (false);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

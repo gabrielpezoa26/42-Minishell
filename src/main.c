@@ -6,30 +6,22 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/03 16:59:45 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:40:38 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//parse_input();
 static void	minishell_loop(t_mango *mango)
 {
-	char	*rl;
-
-	mango = NULL;
-	parse_input(mango);
 	while (1)
 	{
-		rl = readline("minishell$ ");
-		if (rl)
+		mango->input = readline("minishell$ ");
+		if (parse_input(mango))
 		{
-			printf("%s\n", rl);
-			add_history(rl);
-			free(rl);
+			printf("DEBUG: executaaaaaa\n");
 		}
-		else
-			exit(0);
+		mango->input = NULL;
 	}
 }
 
@@ -37,11 +29,12 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_mango	*mango;
 
-	if (!basic_check(argc, argv))
-	{
-		printf("vishh\n");
+	mango = malloc(sizeof(mango));
+	if (!mango)
 		return (1);
-	}
+	ft_memset(mango, 0, sizeof(t_mango));
+	if (!basic_check(argc, argv))
+		return (1);
 	minishell_loop(mango);
 	return (0);
 }

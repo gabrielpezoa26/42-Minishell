@@ -15,8 +15,9 @@ UTILS_DIR = $(SRC_DIR)/utils
 OBJ_DIR = objects
 
 SRCS = $(SRC_DIR)/main.c \
-	   $(PARSER_DIR)/parser.c \
-	   $(UTILS_DIR)/utils_parser.c
+		$(PARSER_DIR)/parser.c \
+		$(UTILS_DIR)/utils_parser.c \
+		$(UTILS_DIR)/cleanup.c
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

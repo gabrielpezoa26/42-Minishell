@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
+/*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
 /*   Updated: 2025/05/05 17:40:57 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../includes/minishell.h"
 
-# include <stdio.h>
-# include <stdbool.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-
-typedef struct s_data
+static void	free_structs(t_mango *mango)
 {
-	char	**envp;
-	char	*input;
-	char	*token;
-}	t_mango;
+	if (mango)
+		free(mango);
+}
 
-/*---------PARSER---------*/
-bool	basic_check(int argc, char **argv);
-bool	parse_input(t_mango *mango);
-
-/*------UTILS-PARSER-------*/
-bool	verify_space(char *str);
-bool	init_data(t_mango *mango);
-
-/*------CLEAN-------*/
-void	exit_minishell(t_mango *mango, char *message);
-
-#endif
+void	exit_minishell(t_mango *mango, char *message)
+{
+	free_structs(mango);
+	printf("%s\n", message);
+	exit(1);
+}
