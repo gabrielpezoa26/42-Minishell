@@ -1,7 +1,7 @@
 NAME = minishell
 
 CC = cc
-#CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES)
+# CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES)
 
 INCLUDES = includes
 LIBFT_DIR = $(INCLUDES)/libft
@@ -10,11 +10,14 @@ LIBFT = $(LIBFT_DIR)/libft.a
 SRC_DIR = src
 PARSER_DIR = $(SRC_DIR)/parser
 EXEC_DIR = $(SRC_DIR)/executor
+UTILS_DIR = $(SRC_DIR)/utils
 
 OBJ_DIR = objects
 
 SRCS = $(SRC_DIR)/main.c \
-	   $(PARSER_DIR)/parser.c
+		$(PARSER_DIR)/parser.c \
+		$(UTILS_DIR)/utils_parser.c \
+		$(UTILS_DIR)/cleanup.c
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
