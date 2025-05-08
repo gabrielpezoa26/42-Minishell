@@ -1,7 +1,7 @@
 NAME = minishell
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES)
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES)
 
 INCLUDES = includes
 LIBFT_DIR = $(INCLUDES)/libft

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 12:16:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/08 10:05:25 by gcesar-n         ###   ########.fr       */
+/*   Created: 2025/05/08 02:46:37 by gcesar-n          #+#    #+#             */
+/*   Updated: 2025/05/08 02:49:56 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-bool	init_data(t_data *data)
+char	*ft_strcpy(char *result, const char *src)
 {
-	data->envp = NULL;
-	data->token = NULL;
-	data->input = NULL;
-	return (true);
-}
+	int	i;
 
-// bool	init_token(t_token *token)
-// {
-// }
+	i = 0;
+	while (src[i] != '\0')
+	{
+		result[i] = src[i];
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
+}

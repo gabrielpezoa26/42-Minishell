@@ -6,63 +6,38 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/05 17:40:38 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/08 03:50:44 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	minishell_loop(t_mango *mango)
+static void	minishell_loop(t_data *data)
 {
 	while (1)
 	{
-		mango->input = readline("minishell$ ");
-		if (parse_input(mango))
+		data->input = readline("minishell$ ");
+		if (parse_input(data))
 		{
 			printf("DEBUG: executaaaaaa\n");
 		}
-		mango->input = NULL;
+		data->input = NULL;
 	}
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv)
 {
-	t_mango	*mango;
+	t_data	*data;
 
-	mango = malloc(sizeof(mango));
-	if (!mango)
+	(void)argv;
+	data = ft_calloc(1, sizeof(t_data));
+	if (!check_argc(argc))
 		return (1);
-	ft_memset(mango, 0, sizeof(t_mango));
-	if (!basic_check(argc, argv))
-		return (1);
-	minishell_loop(mango);
+	minishell_loop(data);
 	return (0);
 }
 
 /*
-	--lexer
-		trata erros basicos
-		transforma o input em tokens
-
-	--parser
-		lê os tokens e valida
-
-	--init
-		sla
-
-	--exec
-		sla
-*/
-
-/*
-	na main:
-		--chama o parser
-
-		--loop
-	
-		--free
-
-
-	valgrind --suppressions=mango.supp ./minishell
-
+	leaks readline():
+		valgrind --suppressions=mango.supp ./minishell
 */

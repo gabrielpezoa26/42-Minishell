@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/05 17:40:57 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/08 11:02:15 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,37 @@ typedef struct s_data
 	char	**envp;
 	char	*input;
 	char	*token;
-}	t_mango;
+}	t_data;
+
+typedef struct s_token
+{
+	char			*token_id;
+	int				type_operator;
+	bool			variable_exists;
+	struct s_token	*next;
+	struct s_token	*prev;
+}	t_token;
+
+enum e_token_types {
+	SPACES = 1,
+	WORD,
+	VAR,
+	PIPE,
+};
 
 /*---------PARSER---------*/
-bool	basic_check(int argc, char **argv);
-bool	parse_input(t_mango *mango);
+bool	check_argc(int argc);
+bool	parse_input(t_data *data);
 
-/*------UTILS-PARSER-------*/
+/*---------UTILS---------*/
+void	exit_minishell(t_data *data, char *message);
+bool	init_data(t_data *data);
+// bool	init_token(t_token *token);
+
+/*---------UTILS-PARSER---------*/
+void	*ft_calloc(size_t item_count, size_t size_bytes);
+char	*ft_malloc(const char *src);
 bool	verify_space(char *str);
-bool	init_data(t_mango *mango);
-
-/*------CLEAN-------*/
-void	exit_minishell(t_mango *mango, char *message);
+char *trim_space(char *string);
 
 #endif
