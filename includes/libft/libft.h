@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:01:40 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/05 14:08:52 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/08 02:57:18 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,8 @@ int		ft_putptr(void *y);
 int		ft_print_hex_upper(unsigned long n);
 int		ft_print_hex_lower(unsigned long n);
 char	*ft_strchr(const char *s, int c);
+
+/*--------EXTRAS-----------*/
+char	*ft_strcpy(char *result, const char *src);
+
 #endif
