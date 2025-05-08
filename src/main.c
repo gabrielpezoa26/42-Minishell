@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/05 17:40:38 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/07 22:41:47 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@ static void	minishell_loop(t_mango *mango)
 		mango->input = NULL;
 	}
 }
+/*
+	TODO: trocar malloc pelo ft_malloc
+*/
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_mango	*mango;
 
-	mango = malloc(sizeof(mango));
+	mango = malloc(sizeof(t_mango));
 	if (!mango)
 		return (1);
 	ft_memset(mango, 0, sizeof(t_mango));
@@ -40,29 +43,6 @@ int	main(int argc, char **argv, char **envp)
 }
 
 /*
-	--lexer
-		trata erros basicos
-		transforma o input em tokens
-
-	--parser
-		lê os tokens e valida
-
-	--init
-		sla
-
-	--exec
-		sla
-*/
-
-/*
-	na main:
-		--chama o parser
-
-		--loop
-	
-		--free
-
-
-	valgrind --suppressions=mango.supp ./minishell
-
+	leaks readline():
+		valgrind --suppressions=mango.supp ./minishell
 */

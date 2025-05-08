@@ -1,0 +1,27 @@
+PROXIMOS PASSOS
+
+1 -> Tokenizar os bagui (ler input e jogar nos struct)
+	{
+		fazer o t_token
+		tratar os operadores | <, >, >>, <<
+		variavel de ambiente
+		fzr o trim dos espaço
+	}
+
+2 -> tratar erros de token
+	{
+		aspas sem fechar
+		sequencias q n funfam ( || , >>>)
+
+	}
+
+
+aq ja começa o "back end"
+
+3 -> Parser (converte os token em comandos)
+	{
+		dividir os comandos se tiver pipe
+		redirections
+		built-ins
+		bla bla bla
+	}

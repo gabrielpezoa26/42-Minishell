@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:03:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/05 14:20:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/07 22:54:40 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,22 @@ bool	verify_space(char *str)
 	}
 	return (false);
 }
+/*
+	falta implementar o strcpy
+*/
+
+// char	*ft_malloc(char *to_malloc)
+// {
+// 	char	*maloka;
+
+// 	if (!to_malloc)
+// 		return (NULL);
+// 	maloka = malloc(ft_strlen(to_malloc) + 1);
+// 	if (!maloka)
+// 	{
+// 		printf("malloc failed\n");
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	ft_strcpy(maloka, to_malloc);
+// 	return (maloka);
+// }
