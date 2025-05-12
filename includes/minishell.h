@@ -6,13 +6,12 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/12 13:51:26 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/12 16:30:04 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-//testando esse negocio de branch
 
 # include <stdio.h>
 # include <stdbool.h>
@@ -59,5 +58,8 @@ void	*ft_calloc(size_t item_count, size_t size_bytes);
 char	*ft_malloc(const char *src);
 bool	verify_space(char *str);
 char *trim_space(char *string);
+
+/*-----------TOKEN---------------*/
+void	to_token(t_data *data);
 
 #endif
