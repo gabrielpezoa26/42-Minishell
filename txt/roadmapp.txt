@@ -8,6 +8,13 @@ PROXIMOS PASSOS
 		fzr o trim dos espaço
 	}
 
+void	tokinization(t_data *data)
+{
+	ft_verifica_aspas("'oi"ei');
+	ft_branco();
+
+}
+
 2 -> tratar erros de token
 	{
 		aspas sem fechar

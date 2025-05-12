@@ -10,12 +10,14 @@ LIBFT = $(LIBFT_DIR)/libft.a
 SRC_DIR = src
 PARSER_DIR = $(SRC_DIR)/parser
 EXEC_DIR = $(SRC_DIR)/executor
+TOKEN_DIR = $(SRC_DIR)/token
 UTILS_DIR = $(SRC_DIR)/utils
 
 OBJ_DIR = objects
 
 SRCS = $(SRC_DIR)/main.c \
 		$(PARSER_DIR)/parser.c \
+		$(TOKEN_DIR)/token.c \
 		$(UTILS_DIR)/utils_parser.c \
 		$(UTILS_DIR)/cleanup.c
 

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/08 04:08:44 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/12 13:22:26 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	parse_input(t_data *data)
 		exit_minishell(data, "DEBUG: finishhhh");
 	else if (ft_strcmp(data->input, "\0") == 0)
 	{
-		printf("DEBUG: eh nulo");
+		printf("DEBUG: eh nulo\n");
 		return (false);
 	}
 	else if (verify_space(data->input))
