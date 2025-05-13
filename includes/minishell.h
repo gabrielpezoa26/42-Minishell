@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/12 16:30:04 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/12 23:07:37 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
-enum e_token_types {
+enum e_token_types
+{
 	SPACES = 1,
 	WORD,
 	VAR,
@@ -55,11 +56,11 @@ bool	init_data(t_data *data);
 
 /*---------UTILS-PARSER---------*/
 void	*ft_calloc(size_t item_count, size_t size_bytes);
-char	*ft_malloc(const char *src);
+void	*ft_malloc(size_t size);
 bool	verify_space(char *str);
-char *trim_space(char *string);
+char	*trim_space(char *string);
 
 /*-----------TOKEN---------------*/
-void	to_token(t_data *data);
+bool	to_token(t_data *data);
 
 #endif
