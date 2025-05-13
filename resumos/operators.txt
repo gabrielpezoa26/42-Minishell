@@ -1,0 +1,44 @@
+resumao com certeza NAO feito pelo gepeto:
+
+
+
+
+Sure! Here are very simple bash examples showing how >>, <<, and | work:
+
+------------>>-----------------
+🔁 >> — Append output to a file
+bash
+Kopieren
+Bearbeiten
+    echo "Hello" >> log.txt
+    ✅ Appends "Hello" to the end of log.txt. If the file doesn't exist, it creates it.
+
+
+
+---------<<---------------
+🧾 << — Here document (multi-line input)
+bash
+Kopieren
+Bearbeiten
+    cat << END
+    Line 1
+    Line 2
+    END
+✅ Prints:
+
+scss
+Kopieren
+Bearbeiten
+Line 1
+Line 2
+Everything between << END and the closing END is sent to cat as input.
+
+
+----------PIPE--------
+🔗 | — Pipe output to another command
+bash
+Kopieren
+Bearbeiten
+    echo "HELLO" | tr 'A-Z' 'a-z'
+    ✅ Converts "HELLO" to "hello" by piping it through tr.
+

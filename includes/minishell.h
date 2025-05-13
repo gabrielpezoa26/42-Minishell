@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/08 11:02:15 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:09:32 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+/*--------MACROS-------*/
+# define TOKEN "bash: syntax error near unexpected token `>'"
+
 typedef struct s_data
 {
 	char	**envp;
 	char	*input;
 	char	*token;
+	bool	exec;
 }	t_data;
 
 typedef struct s_token
@@ -37,7 +41,8 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
-enum e_token_types {
+enum e_token_types
+{
 	SPACES = 1,
 	WORD,
 	VAR,
@@ -46,7 +51,7 @@ enum e_token_types {
 
 /*---------PARSER---------*/
 bool	check_argc(int argc);
-bool	parse_input(t_data *data);
+void	parse_input(t_data *data);
 
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, char *message);
@@ -55,8 +60,15 @@ bool	init_data(t_data *data);
 
 /*---------UTILS-PARSER---------*/
 void	*ft_calloc(size_t item_count, size_t size_bytes);
-char	*ft_malloc(const char *src);
+void	*ft_malloc(size_t size);
 bool	verify_space(char *str);
-char *trim_space(char *string);
+char	*trim_space(char *string);
+
+/*-----------TOKEN---------------*/
+bool	to_token(t_data *data);
+
+bool	token_operators(char *input);
+
+bool	are_quotes_valid(char *input);
 
 #endif

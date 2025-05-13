@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:03:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/12 13:22:19 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/12 21:30:16 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,31 @@ char	*trim_space(char *string)
 	int		j;
 	char	*trimmed;
 
+	trimmed = ft_malloc(ft_strlen(string) + 1);
+	if (!trimmed)
+		return (NULL);
 	i = 0;
 	j = 0;
-	trimmed = ft_malloc(trimmed);
 	while (string[i] != '\0')
 	{
-		if ((string[i] >= 9 && string[i] <= 13) || string[i] == 32)
-		{
-			trimmed[j] = string[i];
-			i++;
-			j++;
-		}
+		if (!((string[i] >= 9 && string[i] <= 13) || string[i] == 32))
+			trimmed[j++] = string[i];
 		i++;
 	}
+	trimmed[j] = '\0';
 	return (trimmed);
 }
 
-char	*ft_malloc(const char *src)
+void	*ft_malloc(size_t size)
 {
-	char	*result;
+	void	*result;
 
-	if (!src)
-		return (NULL);
-	result = malloc(ft_strlen(src) + 1);
+	result = malloc(size);
 	if (!result)
 	{
 		perror("malloc failed");
 		exit(EXIT_FAILURE);
 	}
-	ft_strcpy(result, src);
 	return (result);
 }
 
