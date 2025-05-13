@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:04:15 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/13 12:05:45 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/13 14:06:10 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static bool	is_invalid_operator(const char *input)
 {
-	if (input[0] == '|' && input[1] == '|')
-		return (true);
-	if (input[0] == '>' && input[1] == '>' && input[2] == '>')
-		return (true);
-	if (input[0] == '<' && input[1] == '<' && input[2] == '<')
-		return (true);
-	if (input[0] == '<' && input[1] == '>')
-		return (true);
-	if (input[0] == '>' && input[1] == '<')
-		return (true);
+		if (input[0] == '|' && input[1] == '|')
+			return (true);
+		if (input[0] == '>' && input[1] == '>' && input[2] == '>')
+			return (true);
+		if (input[0] == '<' && input[1] == '<' && input[2] == '<')
+			return (true);
+		if (input[0] == '<' && input[1] == '>')
+			return (true);
+		if (input[0] == '>' && input[1] == '<')
+			return (true);
 	return (false);
 }
 
