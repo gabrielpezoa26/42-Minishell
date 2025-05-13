@@ -1,6 +1,7 @@
 
 -- trocar as msg de erro (dxar igual do bash)
 
--- organizar os arquivos da token/
+--depois de verificar o padrão do token, precisamos:
+	
 
 -- ver a rua

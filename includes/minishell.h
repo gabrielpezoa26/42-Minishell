@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/13 16:43:22 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/13 17:10:41 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_token
 	int				type_operator;
 	bool			variable_exists;
 	struct s_token	*next;
-	struct s_token	*prev;
 }	t_token;
 
 enum e_token_types
