@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/12 23:07:37 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/13 12:14:23 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+/*--------MACROS-------*/
+#define TOKEN ""
+
 typedef struct s_data
 {
 	char	**envp;
 	char	*input;
 	char	*token;
+	bool	exec;
 }	t_data;
 
 typedef struct s_token
@@ -47,7 +51,7 @@ enum e_token_types
 
 /*---------PARSER---------*/
 bool	check_argc(int argc);
-bool	parse_input(t_data *data);
+void	parse_input(t_data *data);
 
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, char *message);
@@ -62,5 +66,9 @@ char	*trim_space(char *string);
 
 /*-----------TOKEN---------------*/
 bool	to_token(t_data *data);
+
+bool	token_operators(char *input);
+
+bool	are_quotes_valid(char *input);
 
 #endif

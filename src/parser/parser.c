@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/12 23:07:03 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/13 12:12:14 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,21 @@ bool	check_argc(int argc)
 	return (true);
 }
 
-bool	parse_input(t_data *data)
+void	parse_input(t_data *data)
 {
 	if (data->input == NULL)
 		exit_minishell(data, "DEBUG: finishhhh");
 	else if (ft_strcmp(data->input, "\0") == 0)
 	{
 		printf("DEBUG: eh nulo\n");
-		return (false);
+		data->exec = false;
 	}
 	else if (verify_space(data->input))
 	{
 		printf("DEBUG: eh espaço\n");
-		return (false);
+		data->exec = false;
 	}
 	if (!to_token(data))
-		return (false);
+		data->exec = false;
 	add_history(data->input);
-	return (true);
 }

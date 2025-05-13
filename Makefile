@@ -18,6 +18,8 @@ OBJ_DIR = objects
 SRCS = $(SRC_DIR)/main.c \
 		$(PARSER_DIR)/parser.c \
 		$(TOKEN_DIR)/token.c \
+		$(TOKEN_DIR)/operators.c \
+		$(TOKEN_DIR)/quotes.c \
 		$(UTILS_DIR)/utils_parser.c \
 		$(UTILS_DIR)/cleanup.c
 
