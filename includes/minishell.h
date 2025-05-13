@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/13 12:14:23 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/13 15:09:32 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <readline/history.h>
 
 /*--------MACROS-------*/
-#define TOKEN ""
+# define TOKEN "bash: syntax error near unexpected token `>'"
 
 typedef struct s_data
 {

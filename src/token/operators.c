@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:04:15 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/13 14:06:10 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/13 15:08:11 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,34 @@
 
 static bool	is_invalid_operator(const char *input)
 {
-		if (input[0] == '|' && input[1] == '|')
+	if (input[0] == '|'
+		&& (input[1] == '|' || input[1] == '>' || input[1] == '<'))
+		return (true);
+	if (input[0] == '>')
+	{
+		if ((input[1] == '|' || input[1] == '<')
+			|| (input[1] == '>' && input[2] == '>'))
 			return (true);
-		if (input[0] == '>' && input[1] == '>' && input[2] == '>')
+	}
+	if (input[0] == '<')
+	{
+		if ((input[1] == '|') || (input[1] == '<' && input[2] == '<'))
 			return (true);
-		if (input[0] == '<' && input[1] == '<' && input[2] == '<')
-			return (true);
-		if (input[0] == '<' && input[1] == '>')
-			return (true);
-		if (input[0] == '>' && input[1] == '<')
-			return (true);
+	}
+	return (false);
+}
+
+static bool	is_operators(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '|' || input[i] == '>' || input[i] == '<')
+			return (is_invalid_operator(input));
+		i++;
+	}
 	return (false);
 }
 
@@ -43,7 +61,7 @@ bool	token_operators(char *input)
 		}
 		else if (in_quote && *input == quote)
 			in_quote = false;
-		if (!in_quote && is_invalid_operator(input))
+		if (!in_quote && is_operators(input))
 			return (true);
 		input++;
 	}
