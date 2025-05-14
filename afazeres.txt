@@ -1,6 +1,3 @@
 
--- trocar as msg de erro (dxar igual do bash)
-
--- organizar os arquivos da token/
-
--- ver a rua
+-- compilar o bagui
+	

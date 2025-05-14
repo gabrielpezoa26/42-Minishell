@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/13 15:09:32 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/14 17:27:52 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <readline/history.h>
 
 /*--------MACROS-------*/
-# define TOKEN "bash: syntax error near unexpected token `>'"
+# define TOKEN "bash: syntax error"
 
 typedef struct s_data
 {
@@ -32,31 +32,32 @@ typedef struct s_data
 	bool	exec;
 }	t_data;
 
+typedef enum e_token_types
+{
+	WORD, // WORD
+	PIPE, // |
+	REDIR_IN, //<
+	REDIR_OUT, //>
+	REDIR_APPEND, //>>
+	REDIR_DELIMITER, //<<
+}	t_type;
+
 typedef struct s_token
 {
-	char			*token_id;
-	int				type_operator;
-	bool			variable_exists;
-	struct s_token	*next;
-	struct s_token	*prev;
+	char			*str;
+	t_type			type;
+	bool			is_redir;
+	bool			is_BOOM;
+	struct s_token	*next_token;
 }	t_token;
-
-enum e_token_types
-{
-	SPACES = 1,
-	WORD,
-	VAR,
-	PIPE,
-};
 
 /*---------PARSER---------*/
 bool	check_argc(int argc);
-void	parse_input(t_data *data);
+void	parse_input(t_data *data, t_token **tokens);
 
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, char *message);
 bool	init_data(t_data *data);
-// bool	init_token(t_token *token);
 
 /*---------UTILS-PARSER---------*/
 void	*ft_calloc(size_t item_count, size_t size_bytes);
@@ -65,10 +66,14 @@ bool	verify_space(char *str);
 char	*trim_space(char *string);
 
 /*-----------TOKEN---------------*/
-bool	to_token(t_data *data);
+bool	to_token(t_data *data, t_token **tokens);
 
+void	init_tokens(t_token **token, char *input);
 bool	token_operators(char *input);
-
 bool	are_quotes_valid(char *input);
+bool	is_operator(char input); //verificar os operadores
+
+/*----------UTILS-TOKEN-------------*/
+char	*ft_join(const char *s1, char s2);
 
 #endif
