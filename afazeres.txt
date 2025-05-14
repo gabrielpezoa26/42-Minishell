@@ -1,7 +1,3 @@
 
--- trocar as msg de erro (dxar igual do bash)
-
---depois de verificar o padrão do token, precisamos:
+-- compilar o bagui
 	
-
--- ver a rua

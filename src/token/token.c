@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/14 14:20:32 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/14 15:50:03 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,12 @@ bool	to_token(t_data *data, t_token **tokens)
 		printf("%s\n", TOKEN);
 		return (false);
 	}
-	while (*(data->input))
+	while (*(data->input)) // percorre toda a string
 	{
-		if (*(data->input) == ' ' || *(data->input) == '\t')
+		if (*(data->input) == ' ' || *(data->input) == '\t') // pula os espaços e tabs
 			data->input++;
 		else if (*(data->input))
-		{
-			init_tokens(tokens, data->input);
-		}
+			init_tokens(tokens, data->input); // tudo que não for espaço ou tab
 	}
-	printf("%s\n", data->input);
 	return (true);
 }
