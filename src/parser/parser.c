@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/13 16:39:35 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/14 14:23:16 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	check_argc(int argc)
 	return (true);
 }
 
-void	parse_input(t_data *data)
+void	parse_input(t_data *data, t_token **tokens)
 {
 	if (data->input == NULL)
 		exit_minishell(data, "DEBUG: finishhhh");
@@ -30,7 +30,7 @@ void	parse_input(t_data *data)
 		data->exec = false;
 	else if (verify_space(data->input))
 		data->exec = false;
-	if (!to_token(data))
+	if (!to_token(data, tokens))
 		data->exec = false;
 	add_history(data->input);
 }

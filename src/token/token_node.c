@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   token_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/14 14:20:32 by dteruya          ###   ########.fr       */
+/*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
+/*   Updated: 2025/05/14 14:23:33 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	to_token(t_data *data, t_token **tokens)
-{
-	if (!are_quotes_valid(data->input) || token_operators(data->input))
-	{
-		printf("%s\n", TOKEN);
-		return (false);
-	}
-	while (*(data->input))
-	{
-		if (*(data->input) == ' ' || *(data->input) == '\t')
-			data->input++;
-		else if (*(data->input))
-		{
-			init_tokens(tokens, data->input);
-		}
-	}
-	printf("%s\n", data->input);
-	return (true);
-}
+// void	init_tokens(t_token **tokens, char *input)
+// {
+	
+// 	printf("%s", input);
+// 	printf("%s", (*tokens)->str);
+// }

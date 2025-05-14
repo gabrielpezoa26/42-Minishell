@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:04:15 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/13 15:08:11 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/14 11:59:18 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool	is_invalid_operator(const char *input)
 	}
 	if (input[0] == '<')
 	{
-		if ((input[1] == '|') || (input[1] == '<' && input[2] == '<'))
+		if ((input[1] == '|') || input[1] == '>' || (input[1] == '<' && input[2] == '<'))
 			return (true);
 	}
 	return (false);

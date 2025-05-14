@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/13 12:20:25 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/14 14:15:04 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 static void	minishell_loop(t_data *data)
 {
+	t_token	**tokens;
+
+	tokens = NULL;
 	while (1)
 	{
 		data->exec = true;
 		data->input = readline("minishell$ ");
-		parse_input(data);
+		parse_input(data, tokens);
 		if (data->exec)
 		{
 			printf("DEBUG: executaaaaaa\n");
