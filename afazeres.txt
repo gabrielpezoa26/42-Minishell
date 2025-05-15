@@ -1,6 +1,10 @@
 
--- trocar as msg de erro (dxar igual do bash)
+-- tirar segfault
 
--- organizar os arquivos da token/
+-- token words
 
--- ver a rua
+-- >= 9 && <= 13 || == ' '
+
+-- fazer doc das funcoes
+
+-- começar arrumar init_tokens

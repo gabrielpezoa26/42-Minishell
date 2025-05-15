@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/13 12:08:17 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/15 17:13:25 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	to_token(t_data *data)
+bool	to_token(t_data *data, t_token **tokens)
 {
 	if (!are_quotes_valid(data->input))
 	{
@@ -24,5 +24,6 @@ bool	to_token(t_data *data)
 		printf("Error!\n");
 		return (false);
 	}
+	init_tokens(tokens, data->input);
 	return (true);
 }
