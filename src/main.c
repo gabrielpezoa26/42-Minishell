@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/14 14:15:04 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/15 17:23:24 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 static void	minishell_loop(t_data *data)
 {
-	t_token	**tokens;
+	t_token	*tokens;
 
-	tokens = NULL;
 	while (1)
 	{
 		data->exec = true;
 		data->input = readline("minishell$ ");
-		parse_input(data, tokens);
+		if (!data->input)
+			break ;
+		if (*data->input)
+			add_history(data->input);
+		tokens = NULL;
+		parse_input(data, &tokens);
 		if (data->exec)
-		{
 			printf("DEBUG: executaaaaaa\n");
-		}
+		free(data->input);
 		data->input = NULL;
 	}
 }
@@ -44,5 +47,5 @@ int	main(int argc, char **argv)
 
 /*
 	leaks readline():
-		valgrind --suppressions=mango.supp ./minishell
+valgrind --suppressions=readline.supp ./minishell
 */

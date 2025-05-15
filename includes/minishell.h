@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/14 17:27:52 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/15 17:16:22 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ typedef struct s_token
 {
 	char			*str;
 	t_type			type;
-	bool			is_redir;
-	bool			is_BOOM;
+	bool			is_expandable;
+	int				**array;
 	struct s_token	*next_token;
 }	t_token;
 
@@ -71,9 +71,15 @@ bool	to_token(t_data *data, t_token **tokens);
 void	init_tokens(t_token **token, char *input);
 bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
-bool	is_operator(char input); //verificar os operadores
+
+/*-----------TOKEN_NODES---------------*/
+
+void	append_node(t_token **tokens, char *content, int operator);
+void	add_back(t_token **token, t_token *node);
 
 /*----------UTILS-TOKEN-------------*/
+bool	is_operator(char input);
 char	*ft_join(const char *s1, char s2);
+char	*ft_strdup_char(int *index);
 
 #endif

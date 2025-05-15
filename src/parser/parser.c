@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/14 14:27:03 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/15 17:25:41 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,33 @@ bool	check_argc(int argc)
 	return (true);
 }
 
+void	debug_print_tokens(t_token *tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens)
+	{
+		printf("Token %d: str='%s' | type=%d | BOOM=%d\n",
+			i, tokens->str, tokens->type, tokens->is_expandable);
+		tokens = tokens->next_token;
+		i++;
+	}
+}
+
 void	parse_input(t_data *data, t_token **tokens)
 {
-	if (data->input == NULL)
+	if (!data->input)
 		exit_minishell(data, "DEBUG: finishhhh");
-	else if (ft_strcmp(data->input, "\0") == 0)
+	if (ft_strcmp(data->input, "\0") == 0 || verify_space(data->input))
 	{
 		data->exec = false;
 		return ;
 	}
-	else if (verify_space(data->input))
-		data->exec = false;
 	if (!to_token(data, tokens))
+	{
 		data->exec = false;
-	add_history(data->input);
+		return ;
+	}
+	debug_print_tokens(*tokens);
 }
