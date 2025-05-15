@@ -6,12 +6,20 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/15 17:17:54 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:31:56 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * char *str_quote - extracts what is inside quotes (either single or double)
+ * 
+ * @input: input from command line
+ * @quote: marks if it is single or double
+ * 
+ * @return: a pointer to the extracted content
+ */
 static char	*str_quote(char *input, char quote)
 {
 	char	*str;
@@ -30,6 +38,14 @@ static char	*str_quote(char *input, char quote)
 	return (str);
 }
 
+/**
+ * char *str_operator - identify the operator type and malloc's it
+ * 
+ * @input: input from command line
+ * @redir: marks the type based on the enum
+ * 
+ * @return: a representation of the operator type
+ */
 static char	*str_operator(char *input, int *redir)
 {
 	char	*str;
@@ -67,6 +83,14 @@ static char	*str_operator(char *input, int *redir)
 	BOOM_IS_? = false;
 */
 
+/**
+ * char *handle_token - extracts the token from the input
+ * 
+ * @input: input from command line
+ * @operator: the operator type to be identified
+ * 
+ * @return:a pointer to the extracted tokens
+ */
 static char	*handle_token(char **input, int *operator)
 {
 	char	quote;
@@ -99,6 +123,15 @@ static char	*handle_token(char **input, int *operator)
 	return (NULL);
 }
 
+/**
+ * void init_tokens - extracts each token initialize them, and
+ * 						appends to the list
+ * 
+ * @tokens: the list to be filled
+ * @input: input straight from the command-line
+ * 
+ * @return: void
+ */
 void	init_tokens(t_token **tokens, char *input)
 {
 	char	*str;

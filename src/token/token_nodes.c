@@ -6,12 +6,21 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:23:00 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/15 17:16:55 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:35:14 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+
+/**
+ * t_token *init_node - creates a new node
+ *
+ * @content: the string part of the token
+ * @operator: the operator type 
+ * 
+ * @return: a pointer to the new t_token
+ */
 static t_token	*init_node(char	*content, int operator)
 {
 	t_token	*new_node;

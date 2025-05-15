@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/15 17:25:41 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:35:11 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ void	debug_print_tokens(t_token *tokens)
 	}
 }
 
+/**
+ * parse_input - validates and tokenizes the user input string
+ * 
+ * @data: pointer to the main struct
+ * @tokens: pointer to the token list
+ * 
+ * @return: void
+ */
 void	parse_input(t_data *data, t_token **tokens)
 {
 	if (!data->input)
