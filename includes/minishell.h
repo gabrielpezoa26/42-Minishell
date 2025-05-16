@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/15 17:16:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:43:04 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_token
 	char			*str;
 	t_type			type;
 	bool			is_expandable;
-	int				**array;
+	int				*array;
 	struct s_token	*next_token;
 }	t_token;
 
@@ -74,12 +74,18 @@ bool	are_quotes_valid(char *input);
 
 /*-----------TOKEN_NODES---------------*/
 
-void	append_node(t_token **tokens, char *content, int operator);
+void	append_node(t_token **tokens, char *content, int operator, bool is_BOOM);
 void	add_back(t_token **token, t_token *node);
 
 /*----------UTILS-TOKEN-------------*/
 bool	is_operator(char input);
+bool	is_wspace(char input);
+bool	is_quote(char input);
 char	*ft_join(const char *s1, char s2);
 char	*ft_strdup_char(int *index);
+
+/*-------TOKEN_NODES_UTILS-----------*/
+int		word_count(char *str_token);
+void	find_money(int v[], char *str, int size);
 
 #endif
