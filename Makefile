@@ -21,6 +21,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(TOKEN_DIR)/operators.c \
 		$(TOKEN_DIR)/quotes.c \
 		$(TOKEN_DIR)/token_nodes.c \
+		$(TOKEN_DIR)/token_nodes_utils.c \
 		$(TOKEN_DIR)/token_init.c \
 		$(TOKEN_DIR)/token_utils.c \
 		$(UTILS_DIR)/utils_parser.c \
