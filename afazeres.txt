@@ -1,8 +1,10 @@
 
--- tokenizar palavras
-    {
-        -- tratar casos de $
-        -- tratar casos de aspas, ex: echo he"llo"   <-- cpa melhor ser no parser
-    }
+-- tirar segfault
 
--- >= 9 && <= 13 || == ' '  <-- inclui \n etc
+-- token words
+
+-- >= 9 && <= 13 || == ' '
+
+-- fazer doc das funcoes
+
+-- começar arrumar init_tokens

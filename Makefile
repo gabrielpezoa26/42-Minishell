@@ -8,15 +8,16 @@ LIBFT_DIR = $(INCLUDES)/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_DIR = src
-PARSER_DIR = $(SRC_DIR)/parser
+PARSER_DIR = $(SRC_DIR)/parser_input
 EXEC_DIR = $(SRC_DIR)/executor
 TOKEN_DIR = $(SRC_DIR)/token
 UTILS_DIR = $(SRC_DIR)/utils
+VRF_TOKEN = $(SRC_DIR)/verify_tokens
 
 OBJ_DIR = objects
 
 SRCS = $(SRC_DIR)/main.c \
-		$(PARSER_DIR)/parser.c \
+		$(PARSER_DIR)/parser_input.c \
 		$(TOKEN_DIR)/token.c \
 		$(TOKEN_DIR)/operators.c \
 		$(TOKEN_DIR)/quotes.c \
@@ -25,7 +26,8 @@ SRCS = $(SRC_DIR)/main.c \
 		$(TOKEN_DIR)/token_init.c \
 		$(TOKEN_DIR)/token_utils.c \
 		$(UTILS_DIR)/utils_parser.c \
-		$(UTILS_DIR)/cleanup.c
+		$(UTILS_DIR)/cleanup.c \
+		$(VRF_TOKEN)/verify.c \
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
