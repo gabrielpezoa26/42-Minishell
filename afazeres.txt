@@ -1,10 +1,3 @@
 
--- tirar segfault
-
--- token words
-
 -- >= 9 && <= 13 || == ' '
 
--- fazer doc das funcoes
-
--- começar arrumar init_tokens
