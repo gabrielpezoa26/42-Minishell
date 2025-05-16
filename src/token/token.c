@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/14 15:50:03 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/15 17:13:25 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 
 bool	to_token(t_data *data, t_token **tokens)
 {
-	if (!are_quotes_valid(data->input) || token_operators(data->input))
+	if (!are_quotes_valid(data->input))
 	{
-		printf("%s\n", TOKEN);
+		printf("Error!\n");
 		return (false);
 	}
-	while (*(data->input)) // percorre toda a string
+	if (token_operators(data->input))
 	{
-		if (*(data->input) == ' ' || *(data->input) == '\t') // pula os espaços e tabs
-			data->input++;
-		else if (*(data->input))
-			init_tokens(tokens, data->input); // tudo que não for espaço ou tab
+		printf("Error!\n");
+		return (false);
 	}
+	init_tokens(tokens, data->input);
 	return (true);
 }

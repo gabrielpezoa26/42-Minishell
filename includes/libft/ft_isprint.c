@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:37:13 by gcesar-n          #+#    #+#             */
-/*   Updated: 2024/11/12 16:54:37 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:31:48 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
+int	is_print(int c)
 {
 	if ((c >= 32) && (c <= 126))
 		return (1);

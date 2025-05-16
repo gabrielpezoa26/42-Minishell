@@ -6,72 +6,112 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/14 18:17:16 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/16 16:12:44 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*str_quote(char *input, char quote)
+static char	*str_quote(char **input, char quote, bool *is_BOOM)
 {
 	char	*str;
+	char	*temp;
 
-	while (*input != quote)
+	str = ft_strdup("");
+	while (**input != quote)
 	{
-		str = *ft_join(str, *input);
-		input++;
+		if (quote == '\"' && **input == '$')
+			*is_BOOM = true;
+		temp = ft_join(str, **input);
+		free(str);
+		str = temp;
+		(*input)++;
 	}
-	input++;
+	(*input)++;
 	return (str);
 }
 
-static char	*str_operator(char *input, int *redir)
+static char	*str_operator(char **input, int *redir)
 {
 	char	*str;
+	int		c;
 
-	if (*input == '|')
-		redir = 1;
-	else if (*input == '<')
-		redir = 2;
-	else if (*input == '>')
-		redir = 3;
-	input++;
-	if (*input == '>')
+	if (**input == '|')
+		*redir = 1;
+	else if (**input == '<')
+		*redir = 2;
+	else if (**input == '>')
+		*redir = 3;
+	(*input)++;
+	if (**input == '>' && *redir == 3)
 	{
-		redir = 4;
-		str = ft_strdup(">>");
-		input++;
-		return (str);
+		*redir = 4;
+		(*input)++;
+		return (ft_strdup(">>"));
 	}
-	else if (*input == '<')
+	else if (**input == '<' && *redir == 2)
 	{
-		redir = 5;
-		str = ft_strdup("<<");
-		input++;
-		return (str);
+		*redir = 5;
+		(*input)++;
+		return (ft_strdup("<<"));
 	}
-	str = ft_strdup_char(redir);
+	c = *(*input - 1);
+	str = ft_strdup_char(&c);
+	return (str);
+}
+
+static char *str_string(char **input, bool *is_BOOM)
+{
+	char	*str;
+	char	*temp;
+
+	str = ft_strdup("");
+	while (**input && !is_wspace(**input)/* && !is_operator(**input) && !is_quote(**input)*/)
+	{
+		if (**input == '$')
+			*is_BOOM = true;
+		temp = ft_join(str, **input);
+		free(str);
+		str = temp;
+		(*input)++;
+	}
+	return (str);
+}
+
+static char	*handle_token(char **input, int *operator, bool *is_BOOM)
+{
+	char	quote;
+	char	*str;
+
+	if (**input == '\'' || **input == '\"')
+	{
+		quote = **input;
+		(*input)++;
+		str = str_quote(input, quote, is_BOOM);
+	}
+	else if (is_operator(**input))
+		str = str_operator(input, operator);
+	else
+		str = str_string(input, is_BOOM);
 	return (str);
 }
 
 void	init_tokens(t_token **tokens, char *input)
 {
-	char	quote;
 	char	*str;
 	int		operator;
+	bool	is_BOOM;
 
-	str = "";
-	operator = 0;
-	quote = '\0';
-	while (*input || *input != ' ' || *input != '\t')
+	while (*input)
 	{
-		if (*input == '\'' || *input == '\"')
+		is_BOOM = false;
+		operator = 0;
+		if (is_wspace(*input))
+			input++;
+		else
 		{
-			quote = *input;
-			str = str_quote(input, quote);
+			str = handle_token(&input, &operator, &is_BOOM);
+			append_node(tokens, str, operator, is_BOOM);
 		}
-		else if (is_operator(*input))
-			str = str_operator(*input, &operator);
-		append_node(*tokens, str, operator);
 	}
 }
