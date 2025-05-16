@@ -6,14 +6,14 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/15 19:31:56 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/16 00:01:36 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
- * char *str_quote - extracts what is inside quotes (either single or double)
+ * char *str_quote -> extracts what is inside quotes (either single or double)
  * 
  * @input: input from command line
  * @quote: marks if it is single or double
@@ -39,7 +39,7 @@ static char	*str_quote(char *input, char quote)
 }
 
 /**
- * char *str_operator - identify the operator type and malloc's it
+ * char *str_operator -> identify the operator type and allocs it
  * 
  * @input: input from command line
  * @redir: marks the type based on the enum
@@ -84,7 +84,7 @@ static char	*str_operator(char *input, int *redir)
 */
 
 /**
- * char *handle_token - extracts the token from the input
+ * char *handle_token -> extracts the token from the input
  * 
  * @input: input from command line
  * @operator: the operator type to be identified
@@ -124,7 +124,7 @@ static char	*handle_token(char **input, int *operator)
 }
 
 /**
- * void init_tokens - extracts each token initialize them, and
+ * void init_tokens -> extracts each token initialize them, and
  * 						appends to the list
  * 
  * @tokens: the list to be filled

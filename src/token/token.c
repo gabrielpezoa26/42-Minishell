@@ -6,13 +6,13 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/15 17:13:25 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/15 22:06:35 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	to_token(t_data *data, t_token **tokens)
+bool	convert_token(t_data *data, t_token **tokens)
 {
 	if (!are_quotes_valid(data->input))
 	{

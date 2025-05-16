@@ -6,14 +6,14 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:04:15 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/15 18:44:10 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/15 22:03:23 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
- * bool is_invalid_operator - validates the operators (no "||", ">>>", "<<")
+ * bool is_invalid_operator -> validates the operators (no "||", ">>>", "<<")
  * 
  * @input: operator to be validated
  * 
@@ -40,7 +40,7 @@ static bool	is_invalid_operator(const char *input)
 }
 
 /**
- * bool is_operator-> detects any operator (valid or invalid) then validates it
+ * bool is_operator -> detects any operator(valid or invalid) then validates it
  * 
  * @input: the prompt to be scanned for operators
  * 

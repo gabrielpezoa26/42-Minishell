@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/15 17:16:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/15 22:06:34 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,12 @@ bool	verify_space(char *str);
 char	*trim_space(char *string);
 
 /*-----------TOKEN---------------*/
-bool	to_token(t_data *data, t_token **tokens);
-
+bool	convert_token(t_data *data, t_token **tokens);
 void	init_tokens(t_token **token, char *input);
 bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
 
 /*-----------TOKEN_NODES---------------*/
-
 void	append_node(t_token **tokens, char *content, int operator);
 void	add_back(t_token **token, t_token *node);
 
