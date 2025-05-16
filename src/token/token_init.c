@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/16 16:12:44 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/16 17:06:13 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*str_quote(char **input, char quote, bool *is_BOOM)
+static char	*str_quote(char *input, char quote)
 {
 	char	*str;
 	char	*temp;
@@ -31,7 +31,7 @@ static char	*str_quote(char **input, char quote, bool *is_BOOM)
 	return (str);
 }
 
-static char	*str_operator(char **input, int *redir)
+static char	*str_operator(char *input, int *redir)
 {
 	char	*str;
 	int		c;
@@ -78,7 +78,7 @@ static char *str_string(char **input, bool *is_BOOM)
 	return (str);
 }
 
-static char	*handle_token(char **input, int *operator, bool *is_BOOM)
+static char	*handle_token(char **input, int *operator)
 {
 	char	quote;
 	char	*str;
@@ -96,6 +96,15 @@ static char	*handle_token(char **input, int *operator, bool *is_BOOM)
 	return (str);
 }
 
+/**
+ * void init_tokens -> extracts each token initialize them, and
+ * 						appends to the list
+ * 
+ * @tokens: the list to be filled
+ * @input: input straight from the command-line
+ * 
+ * @return: void
+ */
 void	init_tokens(t_token **tokens, char *input)
 {
 	char	*str;

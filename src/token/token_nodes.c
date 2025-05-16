@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:23:00 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/16 15:48:10 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/16 17:06:50 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_token	*init_node(char	*content, int operator, bool is_BOOM)
+static t_token	*init_node(char	*content, int operator)
 {
 	t_token	*new_node;
 	int		size;
@@ -32,7 +32,7 @@ static t_token	*init_node(char	*content, int operator, bool is_BOOM)
 	return (new_node);
 }
 
-void	append_node(t_token **tokens, char *content, int operator, bool is_BOOM)
+void	append_node(t_token **tokens, char *content, int operator)
 {
 	t_token	*node;
 
@@ -43,6 +43,13 @@ void	append_node(t_token **tokens, char *content, int operator, bool is_BOOM)
 		add_back(tokens, node);
 }
 
+/**
+ * t_token *last_node -> finds the last node from the list and returns it
+ *
+ * @token: the token at the top of the list
+ * 
+ * @return: returns the last token
+ */
 static t_token	*last_node(t_token *token)
 {
 	if (!token)
@@ -52,6 +59,14 @@ static t_token	*last_node(t_token *token)
 	return (token);
 }
 
+/**
+ * void add_back -> adds the given token at the end of the list
+ *
+ * @tokens: the list of the tokens
+ * @node: the token to be added
+ * 
+ * @return: void
+ */
 void	add_back(t_token **token, t_token *node)
 {
 	t_token	*last;

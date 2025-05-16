@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/16 15:52:16 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/16 17:06:40 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ void	debug_print_tokens(t_token *tokens)
 	}
 }
 
+/**
+ * parse_input - validates and tokenizes the user input string
+ * 
+ * @data: pointer to the main struct
+ * @tokens: pointer to the token list
+ * 
+ * @return: void
+ */
 void	parse_input(t_data *data, t_token **tokens)
 {
 	if (!data->input)
@@ -45,7 +53,7 @@ void	parse_input(t_data *data, t_token **tokens)
 		data->exec = false;
 		return ;
 	}
-	if (!to_token(data, tokens))
+	if (!convert_token(data, tokens))
 	{
 		data->exec = false;
 		return ;
