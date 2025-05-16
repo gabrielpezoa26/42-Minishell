@@ -6,9 +6,13 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:14:13 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/16 17:16:32 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/16 17:29:32 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+bool	token_valid(t_token **tokens)
+{
+	
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/16 17:06:34 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:30:24 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,8 @@ char	*ft_strdup_char(int *index);
 /*-------TOKEN_NODES_UTILS-----------*/
 int		word_count(char *str_token);
 void	find_money(int v[], char *str, int size);
+
+/*----------VERIFY_TOKENS----------*/
+bool	token_valid(t_token **tokens);
 
 #endif
