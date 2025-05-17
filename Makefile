@@ -57,4 +57,9 @@ fclean: clean
 
 re: fclean all
 
+SUPP = supp.supp
+
+val: $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=$(SUPP) ./$(NAME)
+
 .PHONY: all clean fclean re

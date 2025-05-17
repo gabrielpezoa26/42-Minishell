@@ -6,13 +6,13 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/16 17:06:13 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/17 17:18:36 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*str_quote(char *input, char quote)
+static char	*str_quote(char **input, char quote, bool *is_expandable)
 {
 	char	*str;
 	char	*temp;
@@ -21,7 +21,7 @@ static char	*str_quote(char *input, char quote)
 	while (**input != quote)
 	{
 		if (quote == '\"' && **input == '$')
-			*is_BOOM = true;
+			*is_expandable = true;
 		temp = ft_join(str, **input);
 		free(str);
 		str = temp;
@@ -31,7 +31,7 @@ static char	*str_quote(char *input, char quote)
 	return (str);
 }
 
-static char	*str_operator(char *input, int *redir)
+static char	*str_operator(char **input, int *redir)
 {
 	char	*str;
 	int		c;
@@ -60,7 +60,7 @@ static char	*str_operator(char *input, int *redir)
 	return (str);
 }
 
-static char *str_string(char **input, bool *is_BOOM)
+static char	*str_string(char **input, bool *is_expandable)
 {
 	char	*str;
 	char	*temp;
@@ -69,7 +69,7 @@ static char *str_string(char **input, bool *is_BOOM)
 	while (**input && !is_wspace(**input)/* && !is_operator(**input) && !is_quote(**input)*/)
 	{
 		if (**input == '$')
-			*is_BOOM = true;
+			*is_expandable = true;
 		temp = ft_join(str, **input);
 		free(str);
 		str = temp;
@@ -78,7 +78,7 @@ static char *str_string(char **input, bool *is_BOOM)
 	return (str);
 }
 
-static char	*handle_token(char **input, int *operator)
+static char	*handle_token(char **input, int *operator, bool *is_expandable)
 {
 	char	quote;
 	char	*str;
@@ -87,12 +87,12 @@ static char	*handle_token(char **input, int *operator)
 	{
 		quote = **input;
 		(*input)++;
-		str = str_quote(input, quote, is_BOOM);
+		str = str_quote(input, quote, is_expandable);
 	}
 	else if (is_operator(**input))
 		str = str_operator(input, operator);
 	else
-		str = str_string(input, is_BOOM);
+		str = str_string(input, is_expandable);
 	return (str);
 }
 
@@ -109,18 +109,18 @@ void	init_tokens(t_token **tokens, char *input)
 {
 	char	*str;
 	int		operator;
-	bool	is_BOOM;
+	bool	is_expandable;
 
 	while (*input)
 	{
-		is_BOOM = false;
+		is_expandable = false;
 		operator = 0;
 		if (is_wspace(*input))
 			input++;
 		else
 		{
-			str = handle_token(&input, &operator, &is_BOOM);
-			append_node(tokens, str, operator, is_BOOM);
+			str = handle_token(&input, &operator, &is_expandable);
+			append_node(tokens, str, operator);
 		}
 	}
 }

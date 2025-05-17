@@ -6,13 +6,8 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:26:16 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/17 16:27:04 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/17 17:20:32 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-bool parse_tokens(t_data *data, t_token **tokens)
-{
-	
-}

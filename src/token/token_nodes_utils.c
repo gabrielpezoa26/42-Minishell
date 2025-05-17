@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_nodes_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:12:58 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/16 16:04:13 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/17 17:19:21 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ int	word_count(char *s)
 
 void	find_money(int v[], char *str, int size)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (i < size && *str)
 	{
 		if (!is_wspace(*str))

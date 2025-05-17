@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/17 16:27:13 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/17 17:19:46 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,4 @@ void	parse_input(t_data *data, t_token **tokens)
 		return ;
 	}
 	debug_print_tokens(*tokens);
-	//parse_tokens()
 }

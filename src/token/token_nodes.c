@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:23:00 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/16 17:06:50 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/17 16:59:44 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static t_token	*init_node(char	*content, int operator)
 	new_node = (t_token *)ft_malloc(sizeof(t_token));
 	new_node->str = ft_strdup(content);
 	new_node->type = operator;
-	new_node->is_expandable = is_BOOM;
+	new_node->is_expandable = false;
 	new_node->array = NULL;
-	if (is_BOOM)
+	if (new_node->is_expandable)
 	{
 		size = word_count(new_node->str);
 		new_node->array = ft_calloc(size, sizeof(int));
@@ -36,7 +36,7 @@ void	append_node(t_token **tokens, char *content, int operator)
 {
 	t_token	*node;
 
-	node = init_node(content, operator, is_BOOM);
+	node = init_node(content, operator);
 	if (*tokens == NULL)
 		*tokens = node;
 	else

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/15 18:31:25 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/17 17:17:35 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int argc, char **argv)
 	if (!check_argc(argc))
 		return (1);
 	minishell_loop(data);
+	free(data);
 	return (0);
 }
 

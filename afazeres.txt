@@ -9,6 +9,7 @@
 
 O que devemos fazer agora:
 
+    compilar o bagui
 1º) vai chegar um token e precisamos verificar se a ordem está correta
 
 exemplos de erros:

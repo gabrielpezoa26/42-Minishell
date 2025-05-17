@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 17:14:13 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/16 17:29:32 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/17 17:18:19 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 bool	token_valid(t_token **tokens)
 {
-	
+	if (!tokens)
+		return (false);
+	return (true);
 }
