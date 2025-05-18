@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/17 17:18:36 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/17 23:37:04 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*str_string(char **input, bool *is_expandable)
 	char	*temp;
 
 	str = ft_strdup("");
-	while (**input && !is_wspace(**input)/* && !is_operator(**input) && !is_quote(**input)*/)
+	while (**input && !is_wspace(**input))
 	{
 		if (**input == '$')
 			*is_expandable = true;

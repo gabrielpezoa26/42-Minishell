@@ -27,6 +27,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(TOKEN_DIR)/token_utils.c \
 		$(UTILS_DIR)/utils_parser.c \
 		$(UTILS_DIR)/cleanup.c \
+		$(PARSER_DIR)/parse_tokens.c \
 		$(VRF_TOKEN)/verify.c \
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)

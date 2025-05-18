@@ -1,21 +1,26 @@
 
--- token words
-
--- >= 9 && <= 13 || == ' '
-
--- fazer doc das funcoes
-
-----------------------------------------
-
 O que devemos fazer agora:
 
-    compilar o bagui
-1º) vai chegar um token e precisamos verificar se a ordem está correta
+    arrumar leaks
+    arrumar msgs de erro "error syntax near blablabla"
 
-exemplos de erros:
+tratar:
+    -> se tiver operadores seguidos, > |
 
-se começar ou terminar com operadores
+    -> verificar outros tipos de rros que tem que tratar no parser
 
-se tiver operadores seguidos, > |
 
-verificar outros tipos de rros que tem que tratar no parser
+
+gabriel@T480:~$ echo $USER
+gabriel
+
+gabriel@T480:~$ echo "$USER"
+gabriel
+
+gabriel@T480:~$ echo ""$USER""
+gabriel
+
+gabriel@T480:~$ echo '$USER'
+$USER
+
+^^ so nao expande se for aspas simples

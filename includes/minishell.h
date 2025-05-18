@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/17 16:58:14 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:15:22 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,13 @@ typedef struct s_token
 	t_type			type;
 	bool			is_expandable;
 	int				*array;
-	struct s_token	*next_token;
+	struct s_token	*next;
 }	t_token;
 
 /*---------PARSER---------*/
 bool	check_argc(int argc);
 void	parse_input(t_data *data, t_token **tokens);
+bool	validate_tokens(t_token **tokens);
 
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, char *message);
@@ -72,7 +73,6 @@ bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
 
 /*-----------TOKEN_NODES---------------*/
-
 void	append_node(t_token **tokens, char *content, int operator);
 void	add_back(t_token **token, t_token *node);
 
@@ -85,7 +85,7 @@ char	*ft_strdup_char(int *index);
 
 /*-------TOKEN_NODES_UTILS-----------*/
 int		word_count(char *str_token);
-void	find_money(int v[], char *str, int size);
+void	find_dollar_sign(int v[], char *str, int size);
 
 /*----------VERIFY_TOKENS----------*/
 bool	token_valid(t_token **tokens);

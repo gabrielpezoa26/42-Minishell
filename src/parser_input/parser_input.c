@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/17 17:19:46 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:21:44 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	debug_print_tokens(t_token *tokens)
 	{
 		printf("Token %d: str='%s' | type=%d | BOOM=%d\n",
 			i, tokens->str, tokens->type, tokens->is_expandable);
-		tokens = tokens->next_token;
+		tokens = tokens->next;
 		i++;
 	}
 }

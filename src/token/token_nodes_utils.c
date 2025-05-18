@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:12:58 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/17 17:19:21 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/17 23:35:52 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	word_count(char *s)
 	return (num);
 }
 
-void	find_money(int v[], char *str, int size)
+void	find_dollar_sign(int v[], char *str, int size)
 {
 	int	i;
 

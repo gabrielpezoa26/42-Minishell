@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:23:00 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/17 16:59:44 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:15:21 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static t_token	*init_node(char	*content, int operator)
 	{
 		size = word_count(new_node->str);
 		new_node->array = ft_calloc(size, sizeof(int));
-		find_money(new_node->array, new_node->str, size);
+		find_dollar_sign(new_node->array, new_node->str, size);
 	}
-	new_node->next_token = NULL;
+	new_node->next = NULL;
 	return (new_node);
 }
 
@@ -54,8 +54,8 @@ static t_token	*last_node(t_token *token)
 {
 	if (!token)
 		return (NULL);
-	while (token->next_token)
-		token = token->next_token;
+	while (token->next)
+		token = token->next;
 	return (token);
 }
 
@@ -79,5 +79,5 @@ void	add_back(t_token **token, t_token *node)
 		return ;
 	}
 	last = last_node(*token);
-	last->next_token = node;
+	last->next = node;
 }
