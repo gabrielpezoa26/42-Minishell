@@ -1,8 +1,11 @@
 
 O que devemos fazer agora:
 
-    arrumar leaks
-    arrumar msgs de erro "error syntax near blablabla"
+    -> arrumar leaks   OK
+    -> arrumar msgs de erro "error syntax near blablabla"
+        -> vai ter q mexer na func de validar token p retornar oq ta errado
+            e printar
+    -> tratar $
 
 tratar:
     -> se tiver operadores seguidos, > |
@@ -22,5 +25,11 @@ gabriel
 
 gabriel@T480:~$ echo '$USER'
 $USER
+
+gabriel@T480:~$ echo $$USER
+14334USER         <-- printa o pid
+
+
+
 
 ^^ so nao expande se for aspas simples

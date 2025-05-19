@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:12:58 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/17 23:35:52 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:20:28 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,18 @@ void	find_dollar_sign(int v[], char *str, int size)
 		}
 		else
 			str++;
+	}
+}
+
+void	free_tokens(t_token *tokens)
+{
+	t_token	*next_token;
+
+	while (tokens)
+	{
+		next_token = tokens->next;
+		free(tokens->str);
+		free(tokens);
+		tokens = next_token;
 	}
 }

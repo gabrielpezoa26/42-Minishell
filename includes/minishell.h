@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/17 19:15:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:19:26 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char	*ft_strdup_char(int *index);
 /*-------TOKEN_NODES_UTILS-----------*/
 int		word_count(char *str_token);
 void	find_dollar_sign(int v[], char *str, int size);
+void	free_tokens(t_token *tokens);
 
 /*----------VERIFY_TOKENS----------*/
 bool	token_valid(t_token **tokens);

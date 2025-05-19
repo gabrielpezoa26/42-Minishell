@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/17 23:37:04 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:15:26 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	init_tokens(t_token **tokens, char *input)
 		{
 			str = handle_token(&input, &operator, &is_expandable);
 			append_node(tokens, str, operator);
+			free(str);
 		}
 	}
 }
