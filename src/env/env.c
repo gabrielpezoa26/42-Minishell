@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:37:22 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/22 18:09:14 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/22 18:23:38 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	search_dollar(t_token **tokens, char **my_envp)
 					is_open = true;
 				else if (*tokens->str[i] == '\'')
 					is_open = false;
-				else if (*tokens->str[i] == '$')
+				else if (*tokens->str[i] == '$' && !is_open)
 					search_var(*tokens->str, &i, my_envp);
 				i++;
 			}
@@ -37,7 +37,7 @@ static void	search_dollar(t_token **tokens, char **my_envp)
 	}
 }
 
-void	search_var(char *str, int *index, char **my_env)
+void	search_var(char *str, int *index, char **my_envp)
 {
 	int		start;
 	int		finish;
@@ -49,24 +49,26 @@ void	search_var(char *str, int *index, char **my_env)
 		index++;
 	finish = index;
 	finish = finish - start;
-	while (*my_env)
+	start = 0;
+	while (*my_envp)
 	{
-		if (ft_strncmp(*my_env, str, finish) == 0);
+		if (ft_strncmp(*my_envp, str, finish) == 0);
 		{
-			expand_var(found_it,);
+			expand_var(found_it, str, my_envp, start);
 			return ;
 		}
 		else
 			*(my_env)++;
+			start++;
 	}
 	expand_var(found_it);
 }
 
-void	expand_var(bool flag, str)
+void	expand_var(bool flag, char *str, char **my_envp, int index)
 {
 	if (flag)
 	{
-		
+		str = 
 	}
 	else
 	{
