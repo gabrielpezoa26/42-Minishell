@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/19 16:19:26 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:30:16 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
 
 /*-----------TOKEN_NODES---------------*/
-void	append_node(t_token **tokens, char *content, int operator);
+void	append_node(t_token **tokens, char *content, int operator, bool is_expandable);
 void	add_back(t_token **token, t_token *node);
+t_token	*last_node(t_token *token);
 
 /*----------UTILS-TOKEN-------------*/
 bool	is_operator(char input);
@@ -86,7 +87,7 @@ char	*ft_strdup_char(int *index);
 /*-------TOKEN_NODES_UTILS-----------*/
 int		word_count(char *str_token);
 void	find_dollar_sign(int v[], char *str, int size);
-void	free_tokens(t_token *tokens);
+void	free_tokens(t_token **tokens);
 
 /*----------VERIFY_TOKENS----------*/
 bool	token_valid(t_token **tokens);

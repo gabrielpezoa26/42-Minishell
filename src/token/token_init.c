@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/19 16:15:26 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:03:42 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	init_tokens(t_token **tokens, char *input)
 		else
 		{
 			str = handle_token(&input, &operator, &is_expandable);
-			append_node(tokens, str, operator);
+			append_node(tokens, str, operator, is_expandable);
 			free(str);
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/19 16:19:47 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:17:13 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	minishell_loop(t_data *data)
 		parse_input(data, &tokens);
 		if (data->exec)
 			printf("DEBUG: executaaaaaa\n");
-		free_tokens(tokens);
+		free_tokens(&tokens);
 		free(data->input);
 		data->input = NULL;
 	}

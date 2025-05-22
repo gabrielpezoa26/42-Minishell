@@ -1,10 +1,8 @@
 
 O que devemos fazer agora:
 
-    -> arrumar leaks   OK
     -> arrumar msgs de erro "error syntax near blablabla"
-        -> vai ter q mexer na func de validar token p retornar oq ta errado
-            e printar
+        -> vai ter q mexer na func de validar token p retornar oq ta errado e printar
     -> tratar $
 
 tratar:
@@ -12,7 +10,23 @@ tratar:
 
     -> verificar outros tipos de rros que tem que tratar no parser
 
+-------------------------------------------------------------------------------------------
 
+O que devemos fazer agora:
+
+1º) vai chegar um token e precisamos verificar se a ordem está correta
+
+exemplos de erros:
+
+se começar ou terminar com operadores
+
+se tiver operadores seguidos, > |
+
+verificar outros tipos de erros que tem que tratar no parser
+
+arrumar o parse, exemplo: "echo | > arquivo1"
+
+---------------------------------------------------------------------------------------------
 
 gabriel@T480:~$ echo $USER
 gabriel
