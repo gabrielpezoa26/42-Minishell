@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/22 12:30:16 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/22 16:00:35 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool	init_data(t_data *data);
 
 /*---------UTILS-PARSER---------*/
 void	*ft_calloc(size_t item_count, size_t size_bytes);
-void	*ft_malloc(size_t size);
+void	*ft_malloc(size_t size, size_t type);
 bool	verify_space(char *str);
 char	*trim_space(char *string);
 
@@ -91,5 +91,9 @@ void	free_tokens(t_token **tokens);
 
 /*----------VERIFY_TOKENS----------*/
 bool	token_valid(t_token **tokens);
+
+/*--------------ENVP----------------*/
+void	env_dup(char **envp, char **my_env);
+size_t	count_rows(char **s);
 
 #endif

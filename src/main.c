@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/22 12:17:13 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/22 16:08:06 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * 
  * @return: void
  */
-static void	minishell_loop(t_data *data)
+static void	minishell_loop(t_data *data, char **my_envp)
 {
 	t_token	*tokens;
 
@@ -41,15 +41,18 @@ static void	minishell_loop(t_data *data)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
+	char	**my_env;
 
 	(void)argv;
+	my_env = ft_malloc(count_rows(envp), sizeof(char *));
+	env_dup(envp, my_env);
 	data = ft_calloc(1, sizeof(t_data));
 	if (!check_argc(argc))
 		return (1);
-	minishell_loop(data);
+	minishell_loop(data, my_env);
 	free(data);
 	return (0);
 }

@@ -26,6 +26,12 @@ verificar outros tipos de erros que tem que tratar no parser
 
 arrumar o parse, exemplo: "echo | > arquivo1"
 
+-----------------------------------------------------------------------------------------
+
+
+
+
+
 ---------------------------------------------------------------------------------------------
 
 gabriel@T480:~$ echo $USER

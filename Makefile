@@ -12,6 +12,7 @@ PARSER_DIR = $(SRC_DIR)/parser_input
 EXEC_DIR = $(SRC_DIR)/executor
 TOKEN_DIR = $(SRC_DIR)/token
 UTILS_DIR = $(SRC_DIR)/utils
+ENV_DIR = $(SRC_DIR)/env
 VRF_TOKEN = $(SRC_DIR)/verify_tokens
 
 OBJ_DIR = objects
@@ -29,6 +30,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(UTILS_DIR)/cleanup.c \
 		$(PARSER_DIR)/parse_tokens.c \
 		$(VRF_TOKEN)/verify.c \
+		$(ENV_DIR)/env.c \
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

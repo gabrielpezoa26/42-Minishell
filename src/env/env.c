@@ -1,35 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/22 16:11:15 by dteruya          ###   ########.fr       */
+/*   Created: 2025/05/22 14:37:22 by dteruya           #+#    #+#             */
+/*   Updated: 2025/05/22 16:20:25 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	convert_token(t_data *data, t_token **tokens)
+void	expand_variables(t_token **tokens)
 {
-	if (!are_quotes_valid(data->input))
+	while (*tokens)
 	{
-		printf("Error!\n");
-		return (false);
+		if ()
 	}
-	if (token_operators(data->input))
-	{
-		printf("Error!\n");
-		return (false);
-	}
-	init_tokens(tokens, data->input);
-	if (!validate_tokens(tokens))
-	{
-		printf("%s\n", TOKEN);
-		return (false);
-	}
-	expand_variables(tokens);
-	return (true);
 }
+
+size_t	count_rows(char **s)
+{
+	size_t	count;
+
+	count = 0;
+	while (s[count])
+		count++;
+	return (count);
+}
+
+void	env_dup(char **envp, char **my_env)
+{
+	int		i;
+
+	i = 0;
+	while (*envp)
+	{
+		my_env[i] = ft_strdup(*envp);
+		envp++;
+		i++;
+	}
+}
+
