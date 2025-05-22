@@ -6,13 +6,13 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/22 16:11:15 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/22 17:43:11 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	convert_token(t_data *data, t_token **tokens)
+bool	convert_token(t_data *data, t_token **tokens, char **my_envp)
 {
 	if (!are_quotes_valid(data->input))
 	{
@@ -30,6 +30,6 @@ bool	convert_token(t_data *data, t_token **tokens)
 		printf("%s\n", TOKEN);
 		return (false);
 	}
-	expand_variables(tokens);
+	search_dollar(tokens, my_envp);
 	return (true);
 }

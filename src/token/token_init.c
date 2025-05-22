@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/22 11:03:42 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/22 17:56:35 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*str_quote(char **input, char quote, bool *is_expandable)
 	str = ft_strdup("");
 	while (**input != quote)
 	{
-		if (quote == '\"' && **input == '$')
+		if (quote == '\"' && **input == '$' && ft_isalpha(**(input + 1))
 			*is_expandable = true;
 		temp = ft_join(str, **input);
 		free(str);

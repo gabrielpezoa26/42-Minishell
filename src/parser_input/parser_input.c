@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/22 14:37:16 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/22 17:41:29 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	debug_print_tokens(t_token *tokens)
  * 
  * @return: void
  */
-void	parse_input(t_data *data, t_token **tokens)
+void	parse_input(t_data *data, t_token **tokens, char **my_envp)
 {
 	if (!data->input)
 		exit_minishell(data, "DEBUG: finishhhh");
@@ -53,7 +53,7 @@ void	parse_input(t_data *data, t_token **tokens)
 		data->exec = false;
 		return ;
 	}
-	if (!convert_token(data, tokens))
+	if (!convert_token(data, tokens, my_envp))
 	{
 		data->exec = false;
 		return ;
