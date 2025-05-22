@@ -1,10 +1,8 @@
 
 O que devemos fazer agora:
 
-    -> arrumar leaks   OK
     -> arrumar msgs de erro "error syntax near blablabla"
-        -> vai ter q mexer na func de validar token p retornar oq ta errado
-            e printar
+        -> vai ter q mexer na func de validar token p retornar oq ta errado e printar
     -> tratar $
 
 tratar:
