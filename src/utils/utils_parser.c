@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:03:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/22 16:07:15 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/23 12:41:23 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	verify_space(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (i < ft_strlen(str))

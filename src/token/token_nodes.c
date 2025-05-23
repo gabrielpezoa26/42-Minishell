@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:23:00 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/22 16:06:55 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/23 12:26:17 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,12 @@
 static t_token	*init_node(char	*content, int operator, bool is_expandable)
 {
 	t_token	*new_node;
-	int		size;
 
 	new_node = (t_token *)ft_malloc(sizeof(t_token), sizeof(char));
 	new_node->str = ft_strdup(content);
 	new_node->type = operator;
 	new_node->is_expandable = is_expandable;
-	new_node->array = NULL;
-	if (new_node->is_expandable)
-	{
-		size = word_count(new_node->str);
-		new_node->array = ft_calloc(size, sizeof(int));
-		find_dollar_sign(new_node->array, new_node->str, size);
-	}
+	new_node->index = 0;
 	new_node->next = NULL;
 	return (new_node);
 }

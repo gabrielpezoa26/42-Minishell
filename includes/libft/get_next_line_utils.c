@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:35:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/01/09 13:11:54 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:34:59 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	{
 		return (NULL);
 	}
-	if ((size_t)start >= ft_strlen(s))
+	if (start >= (unsigned int)ft_strlen(s))
 	{
 		return (ft_strdup(""));
 	}

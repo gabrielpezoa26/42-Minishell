@@ -31,6 +31,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(PARSER_DIR)/parse_tokens.c \
 		$(VRF_TOKEN)/verify.c \
 		$(ENV_DIR)/env.c \
+		$(ENV_DIR)/env.utils.c \
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

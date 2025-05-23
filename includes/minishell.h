@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/22 16:00:35 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/23 15:03:36 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,19 @@ typedef struct s_token
 	char			*str;
 	t_type			type;
 	bool			is_expandable;
-	int				*array;
+	int				index;
 	struct s_token	*next;
 }	t_token;
 
+// typedef struct s_env
+// {
+// 	int	index;
+	
+// }
+
 /*---------PARSER---------*/
 bool	check_argc(int argc);
-void	parse_input(t_data *data, t_token **tokens);
+void	parse_input(t_data *data, t_token **tokens, char **my_envp);
 bool	validate_tokens(t_token **tokens);
 
 /*---------UTILS---------*/
@@ -67,7 +73,7 @@ bool	verify_space(char *str);
 char	*trim_space(char *string);
 
 /*-----------TOKEN---------------*/
-bool	convert_token(t_data *data, t_token **tokens);
+bool	convert_token(t_data *data, t_token **tokens, char **my_envp);
 void	init_tokens(t_token **token, char *input);
 bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
@@ -85,15 +91,17 @@ char	*ft_join(const char *s1, char s2);
 char	*ft_strdup_char(int *index);
 
 /*-------TOKEN_NODES_UTILS-----------*/
-int		word_count(char *str_token);
-void	find_dollar_sign(int v[], char *str, int size);
 void	free_tokens(t_token **tokens);
 
 /*----------VERIFY_TOKENS----------*/
 bool	token_valid(t_token **tokens);
 
 /*--------------ENVP----------------*/
+void	search_dollar(t_token **tokens, char **my_envp);
+
 void	env_dup(char **envp, char **my_env);
 size_t	count_rows(char **s);
+bool	char_expandable(char c);
+void	ft_strcat(char *dst, const char *src, size_t index);
 
 #endif
