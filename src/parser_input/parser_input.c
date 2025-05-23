@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/22 17:41:29 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/23 16:12:12 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	debug_print_tokens(t_token *tokens)
 	i = 0;
 	while (tokens)
 	{
-		printf("Token %d: str='%s' | type=%d | BOOM=%d\n",
+		ft_printf("Token %d: str='%s' | type=%d | BOOM=%d\n",
 			i, tokens->str, tokens->type, tokens->is_expandable);
 		tokens = tokens->next;
 		i++;
