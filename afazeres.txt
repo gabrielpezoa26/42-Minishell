@@ -4,6 +4,15 @@
 mexer no env.c
 
 
+resolver leaks
+fzr as docstring
+
+implementar garbage_collector()
+
+
+
+
+
 ---------------------------------------------------------------------------------------------
 
 gabriel@T480:~$ echo $USER

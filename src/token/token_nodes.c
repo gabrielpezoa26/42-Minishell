@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:23:00 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/23 12:26:17 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/26 10:54:26 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static t_token	*init_node(char	*content, int operator, bool is_expandable)
 	return (new_node);
 }
 
-void	append_node(t_token **tokens, char *content, int operator, bool is_expandable)
+void	append_node(t_token **tokens, char *content, int op, bool is_expand)
 {
 	t_token	*node;
 
-	node = init_node(content, operator, is_expandable);
+	node = init_node(content, op, is_expand);
 	if (*tokens == NULL)
 		*tokens = node;
 	else

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.utils.c                                        :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 10:29:09 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/23 15:42:30 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/26 10:55:02 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ void	env_dup(char **envp, char **my_env)
 		envp++;
 		i++;
 	}
+	my_env[i] = NULL;
 }
 
 bool	char_expandable(char c)
 {
 	if (ft_isalpha(c) || c == '_')
-		return(true);
+		return (true);
 	return (false);
 }
 

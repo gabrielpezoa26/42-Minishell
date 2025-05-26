@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/23 13:14:09 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/26 10:56:35 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*str_string(char **input, bool *is_expandable)
 	str = ft_strdup("");
 	while (**input && !is_wspace(**input))
 	{
-		if (**input == '$'&& char_expandable(*(*input + 1)))
+		if (**input == '$' && char_expandable(*(*input + 1)))
 			*is_expandable = true;
 		temp = ft_join(str, **input);
 		free(str);
