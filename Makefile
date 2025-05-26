@@ -64,6 +64,6 @@ re: fclean all
 SUPP = supp.supp
 
 val: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=$(SUPP) ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=$(SUPP) ./$(NAME)
 
 .PHONY: all clean fclean re

@@ -4,12 +4,38 @@
 mexer no env.c
 
 
-resolver leaks
-fzr as docstring
+->resolver leaks
 
-implementar garbage_collector()
+->arrumar
+    "Not interpret unclosed quotes or special characters which are not required by the
+    subject such as \ (backslash) or ; (semicolon)."
 
+-implementar garbage_collector()
 
+minishell$ aaa | ccc
+DEBUG: executaaaaaa
+minishell$ aaa || ccc
+Error!
+minishell$ aaa | hhh | lll
+DEBUG: executaaaaaa
+minishell$ aaa | hhh | lll |
+bash: syntax error
+minishell$ aaa | $USER
+==30033== Conditional jump or move depends on uninitialised value(s)
+==30033==    at 0x10A8BB: search_dollar (in /home/gabriel/common_core/m3/minishell/minishell)
+==30033==    by 0x109558: convert_token (in /home/gabriel/common_core/m3/minishell/minishell)
+==30033==    by 0x109481: parse_input (in /home/gabriel/common_core/m3/minishell/minishell)
+==30033==    by 0x1092B9: minishell_loop (in /home/gabriel/common_core/m3/minishell/minishell)
+==30033==    by 0x1093A2: main (in /home/gabriel/common_core/m3/minishell/minishell)
+==30033== 
+DEBUG: executaaaaaa
+minishell$ $USER
+DEBUG: executaaaaaa
+minishell$ "$USER "
+DEBUG: executaaaaaa
+minishell$ 
+
+so da erro quando tem $ (depende do caso tlg)
 
 
 
