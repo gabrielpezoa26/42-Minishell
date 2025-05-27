@@ -1,28 +1,24 @@
 
+-> testar as $variavel direito
 
-->arrumar as msg de erro
+-> começar as built-in
 {
-    gcesar-n@c1r6p3:~$ echo >>>
-    bash: syntax error near unexpected token `>'
+   echo with option -n
+◦ cd with only a relative or absolute path
+◦ pwd with no options
+◦ export with no options
+◦ unset with no options
+◦ env with no options or arguments
+◦ exit with no options
 }
 
 ->testar parse direito  (fzr um .sh?)
 {
     aspas (ex: sem fechar, quantidade incorreta, etc)
     variavel is_boom
-    operadores (ex: ||, >>>,><)  obs: <> eh valido
+    operadores (ex: ||, >>>,><)  obs: <> eh valido()
     começa ou termina c operador
 }
-
-->ver oq faz casos com ';' ou '\'
-{
-    no pdf: "Not interpret unclosed quotes or special characters which are not required by the
-    subject such as \ (backslash) or ; (semicolon)."
-}
-
--implementar garbage_collector()
-
-
 
 
 
@@ -38,7 +34,6 @@ echo foo && echo bar
 echo foo || echo bar
 echo "Mistura de 'aspas' dentro"
 echo <> file
-
 
 
 testar no bash normal:
