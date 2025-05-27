@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/26 10:56:16 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/27 15:34:07 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	mango_free(char **matrix)
 	if (!matrix)
 		return ;
 	while (matrix[i])
-		free(matrix[i++]);
+	{
+		free(matrix[i]);
+		i++;
+	}
 	free(matrix);
 }
 

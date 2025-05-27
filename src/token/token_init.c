@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/26 14:19:28 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:33:55 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*str_string(char **input, bool *is_expandable)
 	char	*str;
 	char	*temp;
 
-	*is_expandable = false;  // ✅ Always set
+	*is_expandable = false;
 	str = ft_strdup("");
 	while (**input && !is_wspace(**input))
 	{

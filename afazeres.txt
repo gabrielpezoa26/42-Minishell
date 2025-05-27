@@ -1,62 +1,56 @@
 
 
-"$USER " está printando 'dteruya' só que sem o espaço no final, ou seja,
-mexer no env.c
+->arrumar as msg de erro
+{
+    gcesar-n@c1r6p3:~$ echo >>>
+    bash: syntax error near unexpected token `>'
+}
 
+->testar parse direito  (fzr um .sh?)
+{
+    aspas (ex: sem fechar, quantidade incorreta, etc)
+    variavel is_boom
+    operadores (ex: ||, >>>,><)  obs: <> eh valido
+    começa ou termina c operador
+}
 
-->resolver leaks
-
-->arrumar
-    "Not interpret unclosed quotes or special characters which are not required by the
+->ver oq faz casos com ';' ou '\'
+{
+    no pdf: "Not interpret unclosed quotes or special characters which are not required by the
     subject such as \ (backslash) or ; (semicolon)."
+}
 
 -implementar garbage_collector()
 
-minishell$ aaa | ccc
-DEBUG: executaaaaaa
-minishell$ aaa || ccc
-Error!
-minishell$ aaa | hhh | lll
-DEBUG: executaaaaaa
-minishell$ aaa | hhh | lll |
-bash: syntax error
-minishell$ aaa | $USER
-==30033== Conditional jump or move depends on uninitialised value(s)
-==30033==    at 0x10A8BB: search_dollar (in /home/gabriel/common_core/m3/minishell/minishell)
-==30033==    by 0x109558: convert_token (in /home/gabriel/common_core/m3/minishell/minishell)
-==30033==    by 0x109481: parse_input (in /home/gabriel/common_core/m3/minishell/minishell)
-==30033==    by 0x1092B9: minishell_loop (in /home/gabriel/common_core/m3/minishell/minishell)
-==30033==    by 0x1093A2: main (in /home/gabriel/common_core/m3/minishell/minishell)
-==30033== 
-DEBUG: executaaaaaa
-minishell$ $USER
-DEBUG: executaaaaaa
-minishell$ "$USER "
-DEBUG: executaaaaaa
-minishell$ 
-
-so da erro quando tem $ (depende do caso tlg)
-
-
-
----------------------------------------------------------------------------------------------
-
-gabriel@T480:~$ echo $USER
-gabriel
-
-gabriel@T480:~$ echo "$USER"
-gabriel
-
-gabriel@T480:~$ echo ""$USER""
-gabriel
-
-gabriel@T480:~$ echo '$USER'
-$USER
-
-gabriel@T480:~$ echo $$USER
-14334USER         <-- printa o pid
 
 
 
 
-^^ so nao expande se for aspas simples
+
+testar no minishell:
+
+echo 'texto entre aspas simples'
+echo "texto entre aspas duplas"
+echo $HOME
+ls -l | grep txt
+cat file.txt > output.txt
+echo foo && echo bar
+echo foo || echo bar
+echo "Mistura de 'aspas' dentro"
+echo <> file
+
+
+
+testar no bash normal:
+
+echo 'texto entre aspas simples'
+echo "texto entre aspas duplas"
+echo $HOME
+ls -l | grep txt
+cat file.txt > output.txt
+echo foo && echo bar
+echo foo || echo bar
+echo "Mistura de 'aspas' dentro"
+VAR=teste; echo $VAR
+for i in 1 2 3; do echo $i; done
+echo <> file

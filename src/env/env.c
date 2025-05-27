@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:37:22 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/26 14:54:40 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:36:40 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	expand_var(char *value, t_token *token, int *i)
 	amount = ft_strlen(value);
 	size = amount + size;
 	size += ft_strlen(token->str + *i);
-	// new_str = ft_malloc(size + 1, sizeof(char));
 	new_str = ft_calloc(size + 1, sizeof(char));
 	ft_memcpy(new_str, old_str, token->index);
 	ft_memcpy(new_str + token->index, value, ft_strlen(value));
@@ -69,7 +68,9 @@ static void	search_and_replace_rs(t_token *token, int *i, char **my_envp)
 	(*i)++;
 	start = *i;
 	while (ft_isalnum((*token).str[*i]) || (*token).str[*i] == '_')
+	{
 		(*i)++;
+	}
 	len = *i - start;
 	variable = ft_substr(token->str, start, len);
 	value = my_getenv(variable, my_envp);
