@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/26 14:56:20 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:38:24 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,15 @@ void	debug_print_tokens(t_token *tokens)
  * 
  * @return: void
  */
-void	parse_input(t_data *data, t_token **tokens, char **my_envp)
+bool	parse_input(t_data *data, t_token **tokens, char **my_envp)
 {
 	if (!data->input)
 		exit_minishell(data, "DEBUG: finishhhh");
 	if (ft_strcmp(data->input, "\0") == 0 || verify_space(data->input))
-	{
-		data->exec = false;
-		return ;
-	}
+		return (false);
 	if (!convert_token(data, tokens, my_envp))
-	{
-		data->exec = false;
-		return ;
-	}
+		return (false);
 	debug_print_tokens(*tokens);
+	my_echo(data);
+	return (true);
 }

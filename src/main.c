@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/26 10:34:46 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:33:54 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ static void	minishell_loop(t_data *data, char **my_envp)
 
 	while (1)
 	{
-		data->exec = true;
 		data->input = readline("minishell$ ");
 		if (!data->input)
 			break ;
 		if (*data->input)
 			add_history(data->input);
 		tokens = NULL;
-		parse_input(data, &tokens, my_envp);
-		if (data->exec)
+		if (parse_input(data, &tokens, my_envp))
 			printf("DEBUG: executaaaaaa\n");
 		free_tokens(&tokens);
 		free(data->input);

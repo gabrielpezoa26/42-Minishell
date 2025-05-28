@@ -1,25 +1,38 @@
 
--> testar as $variavel direito
 
--> começar as built-in
+proxs passos:
+
+-> implementar o echo 
 {
-   echo with option -n
-◦ cd with only a relative or absolute path
-◦ pwd with no options
-◦ export with no options
-◦ unset with no options
-◦ env with no options or arguments
-◦ exit with no options
+    echo "abcd"
+    echo -n "abcd"
+
+    printar $USER, $HOME, etc
 }
 
-->testar parse direito  (fzr um .sh?)
+-> começar funçao execution
+{
+    - lê qual built-in/comando eh e chama
+    - vê se deu certo ou n
+    - t_command?
+}
+
+
+
+
+
+----------------------------------------
+
+pra depois:
+
+->testar parse direito  (fzr um .sh cpa)
 {
     aspas (ex: sem fechar, quantidade incorreta, etc)
     variavel is_boom
+    variavel invalida $POTATO
     operadores (ex: ||, >>>,><)  obs: <> eh valido()
     começa ou termina c operador
 }
-
 
 
 
