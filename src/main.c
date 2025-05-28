@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/27 20:33:54 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:55:06 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	minishell_loop(t_data *data, char **my_envp)
 			add_history(data->input);
 		tokens = NULL;
 		if (parse_input(data, &tokens, my_envp))
-			printf("DEBUG: executaaaaaa\n");
+			execution(data);
 		free_tokens(&tokens);
 		free(data->input);
 		data->input = NULL;

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/27 20:30:10 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:58:24 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ size_t	count_rows(char **s);
 bool	char_expandable(char c);
 void	ft_strcat(char *dst, const char *src, size_t index);
 
+/*--------------EXECUTION----------------*/
+bool	execution(t_data *data);
+
 /*--------------BUILT-INS----------------*/
-void	my_echo(t_data *data);
+bool	my_echo(t_data *data);
 
 #endif

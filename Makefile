@@ -15,6 +15,7 @@ UTILS_DIR = $(SRC_DIR)/utils
 ENV_DIR = $(SRC_DIR)/env
 VRF_TOKEN = $(SRC_DIR)/verify_tokens
 BUILTINS_DIR = $(SRC_DIR)/builtins
+EXEC_DIR = $(SRC_DIR)/execution
 
 OBJ_DIR = objects
 
@@ -34,6 +35,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(ENV_DIR)/env.c \
 		$(ENV_DIR)/env_utils.c \
 		$(BUILTINS_DIR)/my_echo.c \
+		$(EXEC_DIR)/execution.c \
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

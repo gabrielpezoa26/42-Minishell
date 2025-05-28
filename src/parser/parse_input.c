@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_input.c                                     :+:      :+:    :+:   */
+/*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/27 20:38:24 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/28 11:03:00 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	debug_print_tokens(t_token *tokens)
 	i = 0;
 	while (tokens)
 	{
-		ft_printf("Token %d: str='%s' | type=%d | BOOM=%d\n",
+		ft_printf("DEBUG: Token %d: str='%s' | type=%d | BOOM=%d\n",
 			i, tokens->str, tokens->type, tokens->is_expandable);
 		tokens = tokens->next;
 		i++;
@@ -53,6 +53,5 @@ bool	parse_input(t_data *data, t_token **tokens, char **my_envp)
 	if (!convert_token(data, tokens, my_envp))
 		return (false);
 	debug_print_tokens(*tokens);
-	my_echo(data);
 	return (true);
 }

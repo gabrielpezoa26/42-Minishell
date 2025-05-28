@@ -2,7 +2,7 @@
 
 proxs passos:
 
--> implementar o echo 
+-> implementar o echo isoladamente
 {
     echo "abcd"
     echo -n "abcd"
@@ -62,3 +62,11 @@ echo "Mistura de 'aspas' dentro"
 VAR=teste; echo $VAR
 for i in 1 2 3; do echo $i; done
 echo <> file
+
+
+
+n esquecer:
+    casos especificos
+    {
+        operador <> eh valido, no nosso ele invalida
+    }
