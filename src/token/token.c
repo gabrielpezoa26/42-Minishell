@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/23 12:07:04 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/27 16:16:19 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+// static void print_error(void *ptr)
+// {
+// 	char	type;
+
+// 	type = &ptr;
+// 	if (type == '|')
+// 		printf("bash: syntax error near unexpected token `|'\n");
+// 	if (type == '>')
+// 		printf("bash: syntax error near unexpected token `>'\n");
+// 	if (type == '<')
+// 		printf("bash: syntax error near unexpected token `<'\n");
+// }
 
 bool	convert_token(t_data *data, t_token **tokens, char **my_envp)
 {

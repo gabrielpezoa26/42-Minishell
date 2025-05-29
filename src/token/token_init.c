@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/23 13:14:09 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/27 14:33:55 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,20 @@ static char	*str_quote(char **input, char quote, bool *is_expandable)
 	char	*str;
 	char	*temp;
 
+	*is_expandable = false;
 	str = ft_strdup("");
-	while (**input != quote)
+	while (**input && **input != quote)
 	{
-		if (quote == '\"' && **input == '$' && char_expandable(*(*input + 1)))
+		if (quote == '\"' && **input == '$'
+			&& *(*input + 1) && char_expandable(*(*input + 1)))
 			*is_expandable = true;
 		temp = ft_join(str, **input);
 		free(str);
 		str = temp;
 		(*input)++;
 	}
-	(*input)++;
+	if (**input == quote)
+		(*input)++;
 	return (str);
 }
 
@@ -65,10 +68,12 @@ static char	*str_string(char **input, bool *is_expandable)
 	char	*str;
 	char	*temp;
 
+	*is_expandable = false;
 	str = ft_strdup("");
 	while (**input && !is_wspace(**input))
 	{
-		if (**input == '$'&& char_expandable(*(*input + 1)))
+		if (**input == '$'
+			&& *(*input + 1) && char_expandable(*(*input + 1)))
 			*is_expandable = true;
 		temp = ft_join(str, **input);
 		free(str);

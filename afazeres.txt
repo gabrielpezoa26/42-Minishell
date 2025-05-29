@@ -1,10 +1,18 @@
 
+O que devemos fazer agora:
 
-"$USER " está printando 'dteruya' só que sem o espaço no final, ou seja,
-mexer no env.c
+    -> arrumar leaks   OK
+    -> arrumar msgs de erro "error syntax near blablabla"
+        -> vai ter q mexer na func de validar token p retornar oq ta errado
+            e printar
+    -> tratar $
+
+tratar:
+    -> se tiver operadores seguidos, > |
+
+    -> verificar outros tipos de rros que tem que tratar no parser
 
 
----------------------------------------------------------------------------------------------
 
 gabriel@T480:~$ echo $USER
 gabriel

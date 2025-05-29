@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/23 15:03:36 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/28 10:58:24 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,15 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-// typedef struct s_env
-// {
-// 	int	index;
-	
-// }
-
 /*---------PARSER---------*/
 bool	check_argc(int argc);
-void	parse_input(t_data *data, t_token **tokens, char **my_envp);
+bool	parse_input(t_data *data, t_token **tokens, char **my_envp);
 bool	validate_tokens(t_token **tokens);
 
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, char *message);
 bool	init_data(t_data *data);
+void	mango_free(char **matrix);
 
 /*---------UTILS-PARSER---------*/
 void	*ft_calloc(size_t item_count, size_t size_bytes);
@@ -79,7 +74,7 @@ bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
 
 /*-----------TOKEN_NODES---------------*/
-void	append_node(t_token **tokens, char *content, int operator, bool is_expandable);
+void	append_node(t_token **tokens, char *content, int op, bool is_expand);
 void	add_back(t_token **token, t_token *node);
 t_token	*last_node(t_token *token);
 
@@ -103,5 +98,11 @@ void	env_dup(char **envp, char **my_env);
 size_t	count_rows(char **s);
 bool	char_expandable(char c);
 void	ft_strcat(char *dst, const char *src, size_t index);
+
+/*--------------EXECUTION----------------*/
+bool	execution(t_data *data);
+
+/*--------------BUILT-INS----------------*/
+bool	my_echo(t_data *data);
 
 #endif
