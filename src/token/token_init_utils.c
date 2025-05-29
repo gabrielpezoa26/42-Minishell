@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   token_init_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/29 15:45:06 by dteruya          ###   ########.fr       */
+/*   Created: 2025/05/29 17:04:55 by dteruya           #+#    #+#             */
+/*   Updated: 2025/05/29 17:05:32 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-/*
-	aqui a gnt identifica o comando, ve se eh valido, etc
-*/
-// bool	execution(t_token **tokens)
-// {
-// 	my_echo(data);
-// 	return (true);
-// }
+bool	str_string_append(char **input, char **str, bool *is_expandable)
+{
+	char	*tmp;
+
+	if (**input == '$' && *(*input + 1) && char_expandable(*(*input + 1)))
+		*is_expandable = true;
+	tmp = ft_join(*str, **input);
+	if (!tmp)
+		return (false);
+	free(*str);
+	*str = tmp;
+	(*input)++;
+	return (true);
+}

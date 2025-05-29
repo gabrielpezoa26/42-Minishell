@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/27 14:33:55 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:20:03 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,21 @@ static char	*str_operator(char **input, int *redir)
 static char	*str_string(char **input, bool *is_expandable)
 {
 	char	*str;
-	char	*temp;
+	char	quote;
 
 	*is_expandable = false;
+	quote = 0;
 	str = ft_strdup("");
-	while (**input && !is_wspace(**input))
+	if (!str)
+		return (NULL);
+	while (**input && (quote || !is_wspace(**input)))
 	{
-		if (**input == '$'
-			&& *(*input + 1) && char_expandable(*(*input + 1)))
-			*is_expandable = true;
-		temp = ft_join(str, **input);
-		free(str);
-		str = temp;
-		(*input)++;
+		if (!quote && (**input == '"' || **input == '\''))
+			quote = *(*input)++;
+		else if (quote && **input == quote)
+			quote = 0, (*input)++;
+		else if (!str_string_append(input, &str, is_expandable))
+			return (NULL);
 	}
 	return (str);
 }
@@ -125,7 +127,7 @@ void	init_tokens(t_token **tokens, char *input)
 		else
 		{
 			str = handle_token(&input, &operator, &is_expandable);
-			append_node(tokens, str, operator, is_expandable);
+			append_token(tokens, str, operator, is_expandable);
 			free(str);
 		}
 	}

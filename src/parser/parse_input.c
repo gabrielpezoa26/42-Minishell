@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/28 11:03:00 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:35:56 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,17 @@ void	debug_print_tokens(t_token *tokens)
  */
 bool	parse_input(t_data *data, t_token **tokens, char **my_envp)
 {
+	bool	flag;
+
+	flag = true;
 	if (!data->input)
 		exit_minishell(data, "DEBUG: finishhhh");
 	if (ft_strcmp(data->input, "\0") == 0 || verify_space(data->input))
-		return (false);
+		flag = false;
 	if (!convert_token(data, tokens, my_envp))
-		return (false);
+		flag = false;
 	debug_print_tokens(*tokens);
-	return (true);
+	if (flag == true)
+		add_history(data->input);
+	return (flag);
 }

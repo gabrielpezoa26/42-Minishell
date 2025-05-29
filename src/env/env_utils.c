@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 10:29:09 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/26 10:55:02 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:31:20 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,17 @@ size_t	count_rows(char **s)
 	return (count);
 }
 
-void	env_dup(char **envp, char **my_env)
+void	env_dup(char **envp, t_env **my_env)
 {
-	int		i;
+	char	temp;
 
-	i = 0;
 	while (*envp)
 	{
-		my_env[i] = ft_strdup(*envp);
+		temp = ft_strdup(*envp);
+		append_env(my_env, temp);
+		free(temp);
 		envp++;
-		i++;
 	}
-	my_env[i] = NULL;
 }
 
 bool	char_expandable(char c)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/28 10:58:24 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:34:54 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,15 @@
 /*--------MACROS-------*/
 # define TOKEN "bash: syntax error"
 
+typedef struct s_env
+{
+	char			*str;
+	struct s_env	*next;
+}	t_env;
+
 typedef struct s_data
 {
-	char	**envp;
+	t_env	*env;
 	char	*input;
 	char	*token;
 	bool	exec;
@@ -53,7 +59,7 @@ typedef struct s_token
 
 /*---------PARSER---------*/
 bool	check_argc(int argc);
-bool	parse_input(t_data *data, t_token **tokens, char **my_envp);
+bool	parse_input(t_data *data, t_token **tokens);
 bool	validate_tokens(t_token **tokens);
 
 /*---------UTILS---------*/
@@ -73,10 +79,13 @@ void	init_tokens(t_token **token, char *input);
 bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
 
+/*--------TOKEN_INIT_UTILS----------*/
+bool	str_string_append(char **input, char **str, bool *is_expandable);
+
 /*-----------TOKEN_NODES---------------*/
-void	append_node(t_token **tokens, char *content, int op, bool is_expand);
+void	append_token(t_token **tokens, char *content, int op, bool is_expand);
 void	add_back(t_token **token, t_token *node);
-t_token	*last_node(t_token *token);
+t_token	*last_token(t_token *token);
 
 /*----------UTILS-TOKEN-------------*/
 bool	is_operator(char input);
@@ -92,9 +101,9 @@ void	free_tokens(t_token **tokens);
 bool	token_valid(t_token **tokens);
 
 /*--------------ENVP----------------*/
-void	search_dollar(t_token **tokens, char **my_envp);
+void	search_dollar(t_data *data, t_token **tokens);
 
-void	env_dup(char **envp, char **my_env);
+void	env_dup(char **envp, t_env **my_env);
 size_t	count_rows(char **s);
 bool	char_expandable(char c);
 void	ft_strcat(char *dst, const char *src, size_t index);

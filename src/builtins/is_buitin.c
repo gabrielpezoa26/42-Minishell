@@ -1,22 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   is_buitin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/29 15:45:06 by dteruya          ###   ########.fr       */
+/*   Created: 2025/05/29 15:38:12 by dteruya           #+#    #+#             */
+/*   Updated: 2025/05/29 15:38:42 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-/*
-	aqui a gnt identifica o comando, ve se eh valido, etc
-*/
-// bool	execution(t_token **tokens)
-// {
-// 	my_echo(data);
-// 	return (true);
-// }
+#include "../../include"

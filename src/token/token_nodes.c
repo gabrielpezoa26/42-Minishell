@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   token_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:23:00 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/26 11:55:32 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:11:38 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_token	*init_node(char	*content, int operator, bool is_expandable)
+static t_token	*init_token(char	*content, int operator, bool is_expandable)
 {
-	t_token	*new_node;
+	t_token	*new_token;
 
-	new_node = (t_token *)ft_malloc(sizeof(t_token), sizeof(char));
-	new_node->str = ft_strdup(content);
-	new_node->type = operator;
-	new_node->is_expandable = is_expandable;
-	new_node->index = 0;
-	new_node->next = NULL;
-	return (new_node);
+	new_token = (t_token *)ft_malloc(sizeof(t_token), sizeof(char));
+	new_token->str = ft_strdup(content);
+	new_token->type = operator;
+	new_token->is_expandable = is_expandable;
+	new_token->index = 0;
+	new_token->next = NULL;
+	return (new_token);
 }
 
-void	append_node(t_token **tokens, char *content, int op, bool is_expand)
+void	append_token(t_token **tokens, char *content, int op, bool is_expand)
 {
-	t_token	*node;
+	t_token	*token;
 
-	node = init_node(content, op, is_expand);
+	token = init_token(content, op, is_expand);
 	if (*tokens == NULL)
-		*tokens = node;
+		*tokens = token;
 	else
-		add_back(tokens, node);
+		add_back(tokens, token);
 }
 
 /**
@@ -43,7 +43,7 @@ void	append_node(t_token **tokens, char *content, int op, bool is_expand)
  * 
  * @return: returns the last token
  */
-t_token	*last_node(t_token *token)
+t_token	*last_token(t_token *token)
 {
 	if (!token)
 		return (NULL);
@@ -71,6 +71,6 @@ void	add_back(t_token **token, t_token *node)
 		*token = node;
 		return ;
 	}
-	last = last_node(*token);
+	last = last_token(*token);
 	last->next = node;
 }

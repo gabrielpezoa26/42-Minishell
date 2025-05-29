@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:37:22 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/27 14:36:40 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:54:36 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	search_and_replace_rs(t_token *token, int *i, char **my_envp)
 	expand_var(value, token, i);
 }
 
-void	search_dollar(t_token **tokens, char **my_envp)
+void	search_dollar(t_data *data, t_token **tokens)
 {
 	t_token	*curr;
 	int		i;
@@ -98,7 +98,7 @@ void	search_dollar(t_token **tokens, char **my_envp)
 			{
 				if (curr->str[i] == '$')
 				{
-					search_and_replace_rs(curr, &i, my_envp);
+					search_and_replace_rs(curr, &i, data);
 					i = 0;
 				}
 				else

@@ -27,13 +27,18 @@ SRCS = $(SRC_DIR)/main.c \
 		$(TOKEN_DIR)/token_nodes.c \
 		$(TOKEN_DIR)/token_nodes_utils.c \
 		$(TOKEN_DIR)/token_init.c \
+		$(TOKEN_DIR)/token_init_utils.c \
 		$(TOKEN_DIR)/token_utils.c \
 		$(UTILS_DIR)/utils_parser.c \
 		$(UTILS_DIR)/cleanup.c \
 		$(PARSER_DIR)/parse_tokens.c \
 		$(VRF_TOKEN)/verify.c \
 		$(ENV_DIR)/env.c \
-		$(ENV_DIR)/env.utils.c \
+		$(ENV_DIR)/env_init.c \
+		$(ENV_DIR)/env_nodes.c \
+		$(BUILTINS_DIR)/my_echo.c \
+		$(EXEC_DIR)/execution.c \
+
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

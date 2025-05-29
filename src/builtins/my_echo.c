@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 19:01:59 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/28 12:52:16 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:44:53 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,32 @@
 	-> tratar caso de vazio, ex: echo ""
 */
 
-static bool remove_newline(t_data *data)
-{
-	bool	flag;
+// static bool remove_newline(t_data *data)
+// {
+// 	bool	flag;
 
-	flag = false;
-	if (ft_strcmp(&data->input[1], "-n") == 0)
-		flag = true;
-	return (flag);
-}
+// 	flag = false;
+// 	if (ft_strcmp(&data->input[1], "-n") == 0)
+// 		flag = true;
+// 	return (flag);
+// }
 
-bool	my_echo(t_data *data)
-{
-	int	i;
+// bool	my_echo(t_data *data)
+// {
+// 	int	i;
 
-	i = 0;
-	if (!data->input[i])
-	{
-		printf("DEBUG: echo error\n");
-		return (false);
-	}
-	while(data->input[i])
-	{
-		write(1, &data->input[i], 1);
-		i++;
-	}
-	if (!remove_newline(data))
-		write(1, "\n", 1);
-	return (true);
-}
+// 	i = 0;
+// 	if (!data->input[i])
+// 	{
+// 		printf("DEBUG: echo error\n");
+// 		return (false);
+// 	}
+// 	while(data->input[i])
+// 	{
+// 		write(1, &data->input[i], 1);
+// 		i++;
+// 	}
+// 	if (!remove_newline(data))
+// 		write(1, "\n", 1);
+// 	return (true);
+// }
