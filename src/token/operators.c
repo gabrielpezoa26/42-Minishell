@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:04:15 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/15 22:03:23 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:19:56 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * bool is_invalid_operator -> validates the operators (no "||", ">>>", "<<")
- * 
+ *  obs: tem q mexer aqui
  * @input: operator to be validated
  * 
  * @return: bool 

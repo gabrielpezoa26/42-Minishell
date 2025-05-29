@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 12:37:13 by gcesar-n          #+#    #+#             */
-/*   Updated: 2024/11/12 16:54:37 by gcesar-n         ###   ########.fr       */
+/*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
+/*   Updated: 2025/05/28 11:00:44 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
-{
-	if ((c >= 32) && (c <= 126))
-		return (1);
-	return (0);
-}
+#include "../includes/minishell.h"
 
-//verifica se o parâmetro é imprimível
+/*
+	aqui a gnt identifica o comando, ve se eh valido, etc
+*/
+bool	execution(t_data *data)
+{
+	my_echo(data);
+	return (true);
+}

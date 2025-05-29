@@ -8,16 +8,19 @@ LIBFT_DIR = $(INCLUDES)/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_DIR = src
-PARSER_DIR = $(SRC_DIR)/parser_input
+PARSER_DIR = $(SRC_DIR)/parser
 EXEC_DIR = $(SRC_DIR)/executor
 TOKEN_DIR = $(SRC_DIR)/token
 UTILS_DIR = $(SRC_DIR)/utils
+ENV_DIR = $(SRC_DIR)/env
 VRF_TOKEN = $(SRC_DIR)/verify_tokens
+BUILTINS_DIR = $(SRC_DIR)/builtins
+EXEC_DIR = $(SRC_DIR)/execution
 
 OBJ_DIR = objects
 
 SRCS = $(SRC_DIR)/main.c \
-		$(PARSER_DIR)/parser_input.c \
+		$(PARSER_DIR)/parse_input.c \
 		$(TOKEN_DIR)/token.c \
 		$(TOKEN_DIR)/operators.c \
 		$(TOKEN_DIR)/quotes.c \
@@ -29,6 +32,10 @@ SRCS = $(SRC_DIR)/main.c \
 		$(UTILS_DIR)/cleanup.c \
 		$(PARSER_DIR)/parse_tokens.c \
 		$(VRF_TOKEN)/verify.c \
+		$(ENV_DIR)/env.c \
+		$(ENV_DIR)/env_utils.c \
+		$(BUILTINS_DIR)/my_echo.c \
+		$(EXEC_DIR)/execution.c \
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
@@ -61,6 +68,6 @@ re: fclean all
 SUPP = supp.supp
 
 val: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=$(SUPP) ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=$(SUPP) ./$(NAME)
 
 .PHONY: all clean fclean re

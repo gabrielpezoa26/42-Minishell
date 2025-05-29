@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:03:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/12 21:30:16 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:23:45 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 bool	verify_space(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (i < ft_strlen(str))
+	while (i < (int)ft_strlen(str))
 	{
 		if ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 			i++;
@@ -33,7 +33,7 @@ char	*trim_space(char *string)
 	int		j;
 	char	*trimmed;
 
-	trimmed = ft_malloc(ft_strlen(string) + 1);
+	trimmed = ft_malloc(ft_strlen(string) + 1, sizeof(char));
 	if (!trimmed)
 		return (NULL);
 	i = 0;
@@ -48,11 +48,11 @@ char	*trim_space(char *string)
 	return (trimmed);
 }
 
-void	*ft_malloc(size_t size)
+void	*ft_malloc(size_t size, size_t type)
 {
 	void	*result;
 
-	result = malloc(size);
+	result = malloc(size * type);
 	if (!result)
 	{
 		perror("malloc failed");

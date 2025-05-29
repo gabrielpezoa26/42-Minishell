@@ -6,13 +6,26 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/19 17:33:46 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:16:19 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	convert_token(t_data *data, t_token **tokens)
+// static void print_error(void *ptr)
+// {
+// 	char	type;
+
+// 	type = &ptr;
+// 	if (type == '|')
+// 		printf("bash: syntax error near unexpected token `|'\n");
+// 	if (type == '>')
+// 		printf("bash: syntax error near unexpected token `>'\n");
+// 	if (type == '<')
+// 		printf("bash: syntax error near unexpected token `<'\n");
+// }
+
+bool	convert_token(t_data *data, t_token **tokens, char **my_envp)
 {
 	if (!are_quotes_valid(data->input))
 	{
@@ -30,5 +43,6 @@ bool	convert_token(t_data *data, t_token **tokens)
 		printf("%s\n", TOKEN);
 		return (false);
 	}
+	search_dollar(tokens, my_envp);
 	return (true);
 }
