@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:37:22 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/29 17:54:36 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/30 13:48:48 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,22 @@ static void	expand_var(char *value, t_token *token, int *i)
 	*i = token->index + ft_strlen(value);
 }
 
-static char	*my_getenv(char *name, char **my_envp)
+static char	*my_getenv(char *name, t_env **my_envp)
 {
 	size_t	len;
-	int		i;
 
 	len = (size_t)ft_strlen(name);
-	i = 0;
-	while (my_envp[i] != NULL)
+	while ((*my_envp)->next != NULL)
 	{
-		if ((ft_strncmp(my_envp[i], name, len) == 0)
-			&& (my_envp[i][len] == '='))
-			return (&my_envp[i][len + 1]);
-		i++;
+		if ((ft_strncmp((*my_envp)->str, name, len) == 0)
+			&& ((*my_envp)->str[len] == '='))
+			return (&(*my_envp)->str[len + 1]);
+		 *my_envp = (*my_envp)->next;
 	}
 	return (NULL);
 }
 
-static void	search_and_replace_rs(t_token *token, int *i, char **my_envp)
+static void	search_and_replace_rs(t_token *token, int *i, t_env **my_envp)
 {
 	char	*variable;
 	char	*value;
@@ -83,7 +81,7 @@ static void	search_and_replace_rs(t_token *token, int *i, char **my_envp)
 	expand_var(value, token, i);
 }
 
-void	search_dollar(t_data *data, t_token **tokens)
+void	search_dollar(t_env **my_env, t_token **tokens)
 {
 	t_token	*curr;
 	int		i;
@@ -98,7 +96,7 @@ void	search_dollar(t_data *data, t_token **tokens)
 			{
 				if (curr->str[i] == '$')
 				{
-					search_and_replace_rs(curr, &i, data);
+					search_and_replace_rs(curr, &i, my_env);
 					i = 0;
 				}
 				else

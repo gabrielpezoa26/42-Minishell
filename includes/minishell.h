@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/29 18:34:54 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/30 14:47:32 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_token
 
 /*---------PARSER---------*/
 bool	check_argc(int argc);
-bool	parse_input(t_data *data, t_token **tokens);
+bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp);
 bool	validate_tokens(t_token **tokens);
 
 /*---------UTILS---------*/
@@ -74,7 +74,7 @@ bool	verify_space(char *str);
 char	*trim_space(char *string);
 
 /*-----------TOKEN---------------*/
-bool	convert_token(t_data *data, t_token **tokens, char **my_envp);
+bool	convert_token(t_data *data, t_token **tokens, t_env **my_envp);
 void	init_tokens(t_token **token, char *input);
 bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
@@ -96,17 +96,22 @@ char	*ft_strdup_char(int *index);
 
 /*-------TOKEN_NODES_UTILS-----------*/
 void	free_tokens(t_token **tokens);
+void	free_env(t_env **my_env);
 
 /*----------VERIFY_TOKENS----------*/
 bool	token_valid(t_token **tokens);
 
 /*--------------ENVP----------------*/
-void	search_dollar(t_data *data, t_token **tokens);
+void	search_dollar(t_env **my_env, t_token **tokens);
 
 void	env_dup(char **envp, t_env **my_env);
 size_t	count_rows(char **s);
 bool	char_expandable(char c);
 void	ft_strcat(char *dst, const char *src, size_t index);
+
+/*------------ENVP-NODE-------------*/
+void	append_env(t_env **my_env, char *content);
+void	add_back_env(t_env **my_env, t_env *node);
 
 /*--------------EXECUTION----------------*/
 bool	execution(t_data *data);

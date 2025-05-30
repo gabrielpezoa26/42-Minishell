@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:26:16 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/22 12:37:47 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/30 13:38:31 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@
  */
 bool	validate_tokens(t_token **tokens)
 {
-	t_token	*curr_token;
-	t_token	*last_token;
+	t_token	*current_t;
+	t_token	*last_t;
 
 	if (!tokens || !*tokens)
 		return (false);
-	curr_token = *tokens;
-	last_token = last_node(*tokens);
-	if (curr_token->type > 0)
+	current_t = *tokens;
+	last_t = last_token(*tokens);
+	if (current_t->type > 0)
 		return (false);
-	if (last_token->type > 0)
+	if (last_t->type > 0)
 		return (false);
-	while (curr_token->next)
+	while (current_t->next)
 	{
-		if (curr_token->type == 1 && curr_token->next->type == 1)
+		if (current_t->type == 1 && current_t->next->type == 1)
 			return (false);
-		curr_token = curr_token->next;
+		current_t = current_t->next;
 	}
 	return (true);
 }

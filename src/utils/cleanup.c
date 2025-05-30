@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/27 15:34:07 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:50:08 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@ static void	free_structs(t_data *target)
 {
 	if (target)
 		free(target);
+}
+
+void	free_env(t_env **my_env)
+{
+	t_env	*next;
+
+	if (my_env == NULL)
+		return ;
+	while (*my_env)
+	{
+		next = (*my_env)->next;
+		free((*my_env)->str);
+		free(*my_env);
+		*my_env = next;
+	}
+	*my_env = NULL;
 }
 
 void	mango_free(char **matrix)

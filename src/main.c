@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/29 18:35:38 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/30 14:53:57 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ static void	minishell_loop(t_data *data, t_env **my_env)
 		if (*data->input)
 			add_history(data->input);
 		tokens = NULL;
-		if (parse_input(data, &tokens))
+		if (parse_input(data, &tokens, my_env))
 			// execution(&token);
 		free_tokens(&tokens);
 		free(data->input);
 		data->input = NULL;
 	}
-}
+} 
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -48,10 +48,12 @@ int	main(int argc, char **argv, char **envp)
 	data = ft_calloc(1, sizeof(t_data));
 	if (!check_argc(argc))
 		return (1);
+	my_env = NULL;
 	env_dup(envp, &my_env);
-	data.env = my_env; //deixei que o data apontasse para o 1º nó apenas pra prevenir
-	minishell_loop(data, my_env);
+	data->env = my_env; //deixei que o data apontasse para o 1º nó apenas pra prevenir
+	minishell_loop(data, &my_env);
 	free(data);
+	free_env(&my_env);
 	//free na lista **my_env
 	return (0);
 }

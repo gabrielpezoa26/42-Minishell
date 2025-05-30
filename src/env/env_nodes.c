@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_nodes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:21:25 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/29 18:29:25 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/30 15:06:25 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	append_env(t_env **my_env, char *content)
 	if (*my_env == NULL)
 		*my_env = env;
 	else
-		add_back(my_env, env);
+		add_back_env(my_env, env);
 }
 
 /**

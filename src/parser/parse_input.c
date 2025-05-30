@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/29 18:35:56 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/30 13:36:28 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	debug_print_tokens(t_token *tokens)
  * 
  * @return: void
  */
-bool	parse_input(t_data *data, t_token **tokens, char **my_envp)
+bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp)
 {
 	bool	flag;
 

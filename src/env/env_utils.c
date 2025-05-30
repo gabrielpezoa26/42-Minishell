@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 10:29:09 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/29 18:31:20 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/30 15:12:42 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ size_t	count_rows(char **s)
 
 void	env_dup(char **envp, t_env **my_env)
 {
-	char	temp;
+	char	*temp;
 
+	temp = "";
 	while (*envp)
 	{
-		temp = ft_strdup(*envp);
+		temp = ft_strdup(*envp);  //usamo malloc
 		append_env(my_env, temp);
 		free(temp);
 		envp++;
