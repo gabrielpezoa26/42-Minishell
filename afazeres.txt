@@ -1,35 +1,3 @@
-
-O que devemos fazer agora:
-
-    -> arrumar leaks   OK
-    -> arrumar msgs de erro "error syntax near blablabla"
-        -> vai ter q mexer na func de validar token p retornar oq ta errado
-            e printar
-    -> tratar $
-
-tratar:
-    -> se tiver operadores seguidos, > |
-
-    -> verificar outros tipos de rros que tem que tratar no parser
-
-
-
-gabriel@T480:~$ echo $USER
-gabriel
-
-gabriel@T480:~$ echo "$USER"
-gabriel
-
-gabriel@T480:~$ echo ""$USER""
-gabriel
-
-gabriel@T480:~$ echo '$USER'
-$USER
-
-gabriel@T480:~$ echo $$USER
-14334USER         <-- printa o pid
-
-
 ==================================================================
 DE: diego do dia 29/05
 PARA: gabriel e diego do futuro
@@ -42,6 +10,16 @@ e é melhor fazer com strcut, apontando para o prox, eai se a gnt deletar uma va
 sem contar que eu arrumei echo echo"HELLO world" 
 
 ver o bash, pois no bash ele add os "espaços" no histórico
+
+==================================================================
+
+DE: gabriel do dia 30/05
+PARA: gabriel e diego do futuro
+
+    -> arrumar leaks ex: $USER
+    -> baguio dos espacos q tem q salvar
+    -> implementar built-ins
+    -> vai ter q mexer na func de validar token p retornar oq ta errado e printar
 
 ==================================================================
 

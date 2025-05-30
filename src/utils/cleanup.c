@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/30 14:50:08 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:31:44 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,20 @@ void	exit_minishell(t_data *data, char *message)
 	free_structs(data);
 	printf("%s\n", message);
 	exit(1);
+}
+
+void	free_tokens(t_token **tokens)
+{
+	t_token	*next_token;
+
+	if (tokens == NULL)
+		return ;
+	while (*tokens)
+	{
+		next_token = (*tokens)->next;
+		free((*tokens)->str);
+		free(*tokens);
+		*tokens = next_token;
+	}
+	*tokens = NULL;
 }
