@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/30 13:36:28 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/31 13:07:15 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,48 @@ void	debug_print_tokens(t_token *tokens)
 	}
 }
 
+static bool	is_all_spaces(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (!is_wspace(input[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 /**
  * parse_input - validates and tokenizes the user input string
  * 
  * @data: pointer to the main struct
  * @tokens: pointer to the token list
+ * @my_envp:
  * 
- * @return: void
+ * @return: true if input is valid, returns false otherwise
  */
 bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp)
 {
-	bool	flag;
-
-	flag = true;
 	if (!data->input)
-		exit_minishell(data, "DEBUG: finishhhh");
-	if (ft_strcmp(data->input, "\0") == 0 || verify_space(data->input))
-		flag = false;
+		exit_minishell(data, "DEBUG: finishhhh\n");
+	else if (ft_strcmp(data->input, "\0") == 0)
+	{
+		printf("DEBUG: enter\n");
+		return (false);
+	}
+	else if (is_all_spaces(data->input))
+	{
+		printf("DEBUG: td espaço\n");
+		return (true);
+	}
 	if (!convert_token(data, tokens, my_envp))
-		flag = false;
+	{
+		printf("DEBUG: convert_token deu ruim\n");
+		return (false);
+	}
 	debug_print_tokens(*tokens);
-	if (flag == true)
-		add_history(data->input);
-	return (flag);
+	return (true);
 }

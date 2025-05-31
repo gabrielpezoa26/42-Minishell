@@ -6,19 +6,12 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:26:16 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/30 13:38:31 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/31 00:24:18 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/**
- * bool parse_tokens -> checks if input starts or ends with operators
- * 
- * @input: list of already tokenized items
- * 
- * @return: bool
- */
 bool	validate_tokens(t_token **tokens)
 {
 	t_token	*current_t;

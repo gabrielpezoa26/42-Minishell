@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/31 00:06:54 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/31 13:08:08 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * minishell_loop - reads, parses and prepares for execution
  * 
  * @data: pointer to the main struct
+ * @my_env:
  * 
  * @return: void
  */
@@ -32,12 +33,12 @@ static void	minishell_loop(t_data *data, t_env **my_env)
 			add_history(data->input);
 		tokens = NULL;
 		if (parse_input(data, &tokens, my_env))
-			// execution(&token);
+			printf("chama o execution()\n");
 		free_tokens(&tokens);
 		free(data->input);
 		data->input = NULL;
 	}
-} 
+}
 
 int	main(int argc, char **argv, char **envp)
 {
