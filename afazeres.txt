@@ -4,7 +4,7 @@ PARA: gabriel e diego do futuro
 
 env_utils_utils
 mano acabei de conversar com a carol e ela falou que as variaveis de ambiente,
-e é melhor fazer com strcut, apontando para o prox, eai se a gnt deletar uma variavel,
+e é melhor fazer com struct, apontando para o prox, eai se a gnt deletar uma variavel,
 é só ir la e dar free, não preciso deletar TODA a matrix que nós fizemos malloc :(
 
 sem contar que eu arrumei echo echo"HELLO world" 
@@ -16,12 +16,14 @@ ver o bash, pois no bash ele add os "espaços" no histórico
 DE: gabriel do dia 30/05
 PARA: gabriel e diego do futuro
 
-    -> arrumar leaks ex: $USER
+    -> arrumar leaks qdo tem $        OK
+    {
+        $abc
+        $USER
+    }
     -> baguio dos espacos q tem q salvar
     -> implementar built-ins
-    -> vai ter q mexer na func de validar token p retornar oq ta errado e printar
 
+    obs: tava dando leak no my_getenv, a gnt tava alterando o ponteiro original, aí um node ficava "perdido"
+        agr a gnt faz uma copia e itera por ele
 ==================================================================
-
-
-^^ so nao expande se for aspas simples

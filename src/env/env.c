@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:37:22 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/30 13:48:48 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/31 00:09:15 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,17 @@ static void	expand_var(char *value, t_token *token, int *i)
 
 static char	*my_getenv(char *name, t_env **my_envp)
 {
+	t_env	*env_copy;
 	size_t	len;
 
-	len = (size_t)ft_strlen(name);
-	while ((*my_envp)->next != NULL)
+	len = ft_strlen(name);
+	env_copy = *my_envp;
+	while (env_copy != NULL)
 	{
-		if ((ft_strncmp((*my_envp)->str, name, len) == 0)
-			&& ((*my_envp)->str[len] == '='))
-			return (&(*my_envp)->str[len + 1]);
-		 *my_envp = (*my_envp)->next;
+		if ((ft_strncmp(env_copy->str, name, len) == 0)
+			&& (env_copy->str[len] == '='))
+			return (&env_copy->str[len + 1]);
+		env_copy = env_copy->next;
 	}
 	return (NULL);
 }

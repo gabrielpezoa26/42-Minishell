@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/30 15:25:04 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/31 00:06:54 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	my_env = NULL;
 	env_dup(envp, &my_env);
-	data->env = my_env; //deixei que o data apontasse para o 1º nó apenas pra prevenir
+	data->env = my_env;
 	minishell_loop(data, &my_env);
 	free(data);
 	free_env(&my_env);
-	//free na lista **my_env
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 10:29:09 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/30 15:25:51 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/05/30 23:57:58 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ void	env_dup(char **envp, t_env **my_env)
 {
 	char	*temp;
 
-	temp = "";
 	while (*envp)
 	{
-		temp = ft_strdup(*envp);  //usamo malloc
+		temp = ft_strdup(*envp);
 		append_env(my_env, temp);
 		free(temp);
 		envp++;

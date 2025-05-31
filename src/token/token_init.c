@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/29 18:20:03 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/30 20:01:12 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ static char	*str_string(char **input, bool *is_expandable)
 		if (!quote && (**input == '"' || **input == '\''))
 			quote = *(*input)++;
 		else if (quote && **input == quote)
-			quote = 0, (*input)++;
+		{
+			quote = 0;
+			(*input)++;
+		}
 		else if (!str_string_append(input, &str, is_expandable))
 			return (NULL);
 	}

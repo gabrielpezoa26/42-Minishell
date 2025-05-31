@@ -3,11 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   is_buitin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:38:12 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/29 15:38:42 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/05/30 19:47:38 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include"
+#include "../includes/minishell.h"
