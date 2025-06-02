@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/31 00:29:34 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:16:48 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ void	append_env(t_env **my_env, char *content);
 void	add_back_env(t_env **my_env, t_env *node);
 
 /*--------------EXECUTION----------------*/
-bool	execution(t_data *data);
+bool	execution(t_token *tokens);
 
 /*--------------BUILT-INS----------------*/
-bool	my_echo(t_data *data);
+bool	my_echo(char **args);
 
 #endif

@@ -41,3 +41,8 @@ PARA: gabriel e diego do futuro
     tratar no execution() quando for esses casos, pra so jogar o prompt de volta
 
 ==================================================================
+
+terminar echo (falta o caso de -nnnn, o nosso quebra)
+
+fazer pwd e env (acho q eh so printar)
+
