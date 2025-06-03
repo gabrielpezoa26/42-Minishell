@@ -49,5 +49,8 @@ fazer pwd e env (acho q eh so printar)
 ==================================================================
 
 implementar:
+    my_env()    OK
     my_exit()
-    my_env()
+
+
+arrumar a parte de definir variavel de ambiente

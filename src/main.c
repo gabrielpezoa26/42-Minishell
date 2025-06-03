@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/01 22:16:33 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:26:44 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	minishell_loop(t_data *data, t_env **my_env)
 			add_history(data->input);
 		tokens = NULL;
 		if (parse_input(data, &tokens, my_env))
-			execution(tokens);
+			execution(data, tokens);
 		free_tokens(&tokens);
 		free(data->input);
 		data->input = NULL;

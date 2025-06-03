@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/02 22:05:18 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:37:24 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef enum e_token_types
 	REDIR_APPEND, //>>
 	REDIR_DELIMITER, //<<
 }	t_type;
-
 typedef struct s_token
 {
 	char			*str;
@@ -114,9 +113,11 @@ void	append_env(t_env **my_env, char *content);
 void	add_back_env(t_env **my_env, t_env *node);
 
 /*--------------EXECUTION----------------*/
-bool	execution(t_token *tokens);
+bool	execution(t_data *data, t_token *tokens);
 
 /*--------------BUILT-INS----------------*/
-bool	my_echo(char **args);
 bool	my_pwd(void);
+bool	my_echo(char **args);
+bool	my_env(t_data *data);
+
 #endif

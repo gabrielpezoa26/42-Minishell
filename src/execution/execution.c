@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/02 22:04:38 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:28:43 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**tokens_to_args(t_token *tokens)
 	return (args);
 }
 
-bool	execution(t_token *tokens)
+bool	execution(t_data *data, t_token *tokens)
 {
 	char	**arg_list;
 
@@ -55,6 +55,8 @@ bool	execution(t_token *tokens)
 		my_echo(arg_list);
 	if (ft_strcmp(arg_list[0], "pwd") == 0)
 		my_pwd();
+	if (ft_strcmp(arg_list[0], "env") == 0)
+		my_env(data);
 	free(arg_list);
 	return (true);
 }
