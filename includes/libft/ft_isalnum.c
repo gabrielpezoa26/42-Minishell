@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:12:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2024/11/12 16:53:50 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:54:16 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,3 @@ int	ft_isalnum(int c)
 	}
 	return (0);
 }
-
-//verifica se o parâmetro é alfanumérico

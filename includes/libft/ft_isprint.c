@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:37:13 by gcesar-n          #+#    #+#             */
-/*   Updated: 2024/11/12 16:54:37 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:54:34 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,3 @@ int	ft_isprint(int c)
 		return (1);
 	return (0);
 }
-
-//verifica se o parâmetro é imprimível
