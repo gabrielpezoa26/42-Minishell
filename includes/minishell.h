@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/01 22:16:48 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:05:18 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,5 @@ bool	execution(t_token *tokens);
 
 /*--------------BUILT-INS----------------*/
 bool	my_echo(char **args);
-
+bool	my_pwd(void);
 #endif

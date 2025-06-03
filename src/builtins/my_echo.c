@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 19:01:59 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/01 22:59:55 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:03:26 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,23 @@
 	-> tratar caso de vazio, ex: echo ""
 */
 
-static	int	arg_size(char **args)
+static bool	check_multiple_ns(char *str)
 {
-	int		len;
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+static int	arg_size(char **args)
+{
+	int	len;
 
 	len = 0;
 	while (args[len])
@@ -36,7 +50,8 @@ bool	my_echo(char **arg_list)
 	remove_newline = false;
 	if (arg_size(arg_list) > 1)
 	{
-		while (arg_list[i] && ft_strcmp(arg_list[i], "-n") == 0)
+		while (arg_list[i] && ft_strncmp(arg_list[i], "-n", 2) == 0
+			&& check_multiple_ns(arg_list[i] + 1))
 		{
 			remove_newline = true;
 			i++;

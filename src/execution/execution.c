@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/01 23:00:49 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:04:38 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ bool	execution(t_token *tokens)
 	}
 	if (ft_strcmp(arg_list[0], "echo") == 0)
 		my_echo(arg_list);
+	if (ft_strcmp(arg_list[0], "pwd") == 0)
+		my_pwd();
 	free(arg_list);
 	return (true);
 }

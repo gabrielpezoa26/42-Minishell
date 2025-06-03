@@ -46,3 +46,8 @@ terminar echo (falta o caso de -nnnn, o nosso quebra)
 
 fazer pwd e env (acho q eh so printar)
 
+==================================================================
+
+implementar:
+    my_exit()
+    my_env()
