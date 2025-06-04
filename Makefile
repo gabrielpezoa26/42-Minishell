@@ -35,6 +35,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(ENV_DIR)/env.c \
 		$(ENV_DIR)/env_utils.c \
 		$(ENV_DIR)/env_nodes.c \
+		$(ENV_DIR)/assign_env_var.c \
 		$(BUILTINS_DIR)/my_pwd.c \
 		$(BUILTINS_DIR)/my_echo.c \
 		$(BUILTINS_DIR)/my_env.c \

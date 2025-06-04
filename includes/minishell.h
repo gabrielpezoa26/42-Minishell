@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/03 16:48:20 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:47:31 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ bool	update_env(t_env **env, char *assignment);
 /*------------ENVP-NODE-------------*/
 void	append_env(t_env **my_env, char *content);
 void	add_back_env(t_env **my_env, t_env *node);
+void	handle_assignments(t_token *tokens, t_env **env);
 
 /*--------------EXECUTION----------------*/
 bool	execution(t_data *data, t_token *tokens);

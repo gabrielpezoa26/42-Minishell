@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:12:57 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/03 20:57:34 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:45:22 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*get_assignment_name(char *string)
 		pos++;
 	if (pos == 0)
 		return (NULL);
-	result = malloc(pos * sizeof(char));
+	result = malloc((pos + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
 	while (i < pos)
@@ -56,26 +56,74 @@ static char	*get_assignment_name(char *string)
 
 static bool	already_exists(t_env *env, char *name)
 {
-	env = env->str;
-	while (env)
+	while (env != NULL)
 	{
-		if (ft_strncmp(env->str, name, ft_strlen(name)) == 0)
-		// {
-			// verifica se o prox eh '=', se for, retorna true
-		// }
+		if ((ft_strncmp(env->str, name, ft_strlen(name)) == 0)
+				&& (env->str[ft_strlen(name)] == '='))
+			return (true);
 		env = env->next;
 	}
 	return (false);
 }
 
-void assign_variable(t_env **env, char *assignment)
+static void	assign_variable(t_env **env, char *assignment)
 {
-	
+	char	*name;
+
+	name = get_assignment_name(assignment);
+	if (!name)
+		return ;
+	if (!update_env(env, assignment))
+		append_env(env, assignment);
+	free(name);
+}
+
+static bool	update_env_value(t_env **env, char *name, char *assignment)
+{
+	t_env	*curr;
+
+	curr = *env;
+	while (curr)
+	{
+		if (ft_strncmp(curr->str, name, ft_strlen(name)) == 0
+			&& curr->str[ft_strlen(name)] == '=')
+		{
+			free(curr->str);
+			curr->str = ft_strdup(assignment);
+			return (true);
+		}
+		curr = curr->next;
+	}
+	return (false);
 }
 
 bool	update_env(t_env **env, char *assignment)
 {
-	if (!is_valid_assignment)
+	char	*name;
+	bool	result;
+
+	if (!is_valid_assignment(assignment))
 		return (false);
-	return (true);
+	name = get_assignment_name(assignment);
+	if (!name || !already_exists(*env, name))
+	{
+		free(name);
+		return (false);
+	}
+	result = update_env_value(env, name, assignment);
+	free(name);
+	return (result);
+}
+
+void	handle_assignments(t_token *tokens, t_env **env)
+{
+	t_token *tmp;
+	
+	tmp = tokens;
+	while (tmp)
+	{
+		if (is_valid_assignment(tmp->str))
+			assign_variable(env, tmp->str);
+		tmp = tmp->next;
+	}
 }
