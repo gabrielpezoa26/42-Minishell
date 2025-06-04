@@ -54,3 +54,7 @@ implementar:
 
 
 arrumar a parte de definir variavel de ambiente
+
+no bash:
+    EXAMPLE=hello
+    echo $EXAMPLE

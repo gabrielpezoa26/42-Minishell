@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/03 11:37:24 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:48:20 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,11 @@ bool	token_valid(t_token **tokens);
 
 /*--------------ENVP----------------*/
 void	search_dollar(t_env **my_env, t_token **tokens);
-
 void	env_dup(char **envp, t_env **my_env);
 size_t	count_rows(char **s);
 bool	char_expandable(char c);
 void	ft_strcat(char *dst, const char *src, size_t index);
+bool	update_env(t_env **env, char *assignment);
 
 /*------------ENVP-NODE-------------*/
 void	append_env(t_env **my_env, char *content);
