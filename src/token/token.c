@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/31 00:20:37 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:11:22 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 // 		printf("bash: syntax error near unexpected token `<'\n");
 // }
 
-bool	convert_token(t_data *data, t_token **tokens, t_env **my_envp)
+bool	convert_token(t_data *data, t_token **tokens)
 {
 	if (!are_quotes_valid(data->input))
 	{
@@ -43,6 +43,6 @@ bool	convert_token(t_data *data, t_token **tokens, t_env **my_envp)
 		printf("%s\n", TOKEN);
 		return (false);
 	}
-	search_dollar(my_envp, tokens);
+	search_dollar(data->env, data->locals, tokens);
 	return (true);
 }

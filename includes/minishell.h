@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 13:47:31 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:26:51 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_env	*env;
+	t_env	*locals;
 	char	*input;
 	char	*token;
 	bool	exec;
@@ -73,7 +74,7 @@ bool	verify_space(char *str);
 char	*trim_space(char *string);
 
 /*-----------TOKEN---------------*/
-bool	convert_token(t_data *data, t_token **tokens, t_env **my_envp);
+bool	convert_token(t_data *data, t_token **tokens);
 void	init_tokens(t_token **token, char *input);
 bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
@@ -101,7 +102,7 @@ void	free_env(t_env **my_env);
 bool	token_valid(t_token **tokens);
 
 /*--------------ENVP----------------*/
-void	search_dollar(t_env **my_env, t_token **tokens);
+void	search_dollar(t_env *env, t_env *locals, t_token **tokens);
 void	env_dup(char **envp, t_env **my_env);
 size_t	count_rows(char **s);
 bool	char_expandable(char c);

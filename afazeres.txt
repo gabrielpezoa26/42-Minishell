@@ -60,3 +60,5 @@ no bash:
 
 agora ele ja printa, mas joga as variaveis pra lista de env (ta errado)
 so tem q jogar pra lista de env quando a gnt fizer o export
+
+arrumar leaks

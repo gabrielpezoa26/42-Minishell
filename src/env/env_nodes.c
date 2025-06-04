@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:21:25 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/04 12:43:58 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:18:48 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	append_env(t_env **my_env, char *content)
 	t_env	*env;
 
 	env = init_env(content);
+	if (!env)
+		return ;
 	if (*my_env == NULL)
 		*my_env = env;
 	else

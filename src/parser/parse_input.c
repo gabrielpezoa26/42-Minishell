@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/04 13:40:06 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:10:49 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static bool	is_all_spaces(char *input)
  */
 bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp)
 {
+	(void)my_envp;
 	if (!data->input)
 		exit_minishell(data, "DEBUG: finishhhh\n");
 	else if (ft_strcmp(data->input, "\0") == 0)
@@ -73,12 +74,12 @@ bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp)
 		printf("DEBUG: td espaço\n");
 		return (true);
 	}
-	if (!convert_token(data, tokens, my_envp))
+	if (!convert_token(data, tokens))
 	{
 		printf("DEBUG: convert_token deu ruim\n");
 		return (false);
 	}
 	debug_print_tokens(*tokens);
-	handle_assignments(*tokens, my_envp);
+	handle_assignments(*tokens, &data->locals);
 	return (true);
 }

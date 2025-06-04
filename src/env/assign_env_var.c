@@ -6,124 +6,85 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:12:57 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 13:45:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:58:59 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static bool	is_valid_assignment(char *string)
+static bool	is_valid_assignment(char *str)
 {
-	int	i;
+	int i;
 
-	if (!string || !(ft_isalpha(string[0]) || string[0] == '_'))
+	if (!str || !(ft_isalpha(str[0]) || str[0] == '_'))
 		return (false);
 	i = 1;
-	while (string[i] && string[i] != '=')
+	while (str[i] && str[i] != '=')
 	{
-		if (!(ft_isalnum(string[i]) || string[i] == '_'))
+		if (!(ft_isalnum(str[i]) || str[i] == '_'))
 			return (false);
 		i++;
 	}
-	if (string[i] != '=')
-		return (false);
-	return (true);
+	return (str[i] == '=');
 }
 
-static char	*get_assignment_name(char *string)
+static char	*get_assignment_name(char *str)
 {
-	int		i;
-	int		pos;
-	char	*result;
+	int	len;
+	char	*name;
 
-	i = 0;
-	pos = 0;
-	while (string[pos] != '=')
-		pos++;
-	if (pos == 0)
+	len = 0;
+	while (str[len] && str[len] != '=')
+		len++;
+	if (len == 0)
 		return (NULL);
-	result = malloc((pos + 1) * sizeof(char));
-	if (!result)
+	name = malloc((len + 1) * sizeof(char));
+	if (!name)
 		return (NULL);
-	while (i < pos)
-	{
-		result[i] = string[i];
-		i++;
-	}
-	result[i] = '\0';
-	return (result);
+	ft_memcpy(name, str, len);
+	name[len] = '\0';
+	return (name);
 }
 
-static bool	already_exists(t_env *env, char *name)
+static bool	update_value(t_env **lst, char *name, char *assignment)
 {
-	while (env != NULL)
+	t_env *cur = *lst;
+	while (cur)
 	{
-		if ((ft_strncmp(env->str, name, ft_strlen(name)) == 0)
-				&& (env->str[ft_strlen(name)] == '='))
+		if (ft_strncmp(cur->str, name, ft_strlen(name)) == 0
+			&& cur->str[ft_strlen(name)] == '=')
+		{
+			free(cur->str);
+			cur->str = ft_strdup(assignment);
 			return (true);
-		env = env->next;
+		}
+		cur = cur->next;
 	}
 	return (false);
 }
 
-static void	assign_variable(t_env **env, char *assignment)
+static void	assign_variable(t_env **list, char *assignment)
 {
-	char	*name;
+	char *name;
 
+	if (!is_valid_assignment(assignment))
+		return ;
 	name = get_assignment_name(assignment);
 	if (!name)
 		return ;
-	if (!update_env(env, assignment))
-		append_env(env, assignment);
+	if (!update_value(list, name, assignment))
+		append_env(list, assignment);
 	free(name);
 }
 
-static bool	update_env_value(t_env **env, char *name, char *assignment)
+void	handle_assignments(t_token *tokens, t_env **locals)
 {
-	t_env	*curr;
+	t_token *cur = tokens;
 
-	curr = *env;
-	while (curr)
+	while (cur)
 	{
-		if (ft_strncmp(curr->str, name, ft_strlen(name)) == 0
-			&& curr->str[ft_strlen(name)] == '=')
-		{
-			free(curr->str);
-			curr->str = ft_strdup(assignment);
-			return (true);
-		}
-		curr = curr->next;
-	}
-	return (false);
-}
-
-bool	update_env(t_env **env, char *assignment)
-{
-	char	*name;
-	bool	result;
-
-	if (!is_valid_assignment(assignment))
-		return (false);
-	name = get_assignment_name(assignment);
-	if (!name || !already_exists(*env, name))
-	{
-		free(name);
-		return (false);
-	}
-	result = update_env_value(env, name, assignment);
-	free(name);
-	return (result);
-}
-
-void	handle_assignments(t_token *tokens, t_env **env)
-{
-	t_token *tmp;
-	
-	tmp = tokens;
-	while (tmp)
-	{
-		if (is_valid_assignment(tmp->str))
-			assign_variable(env, tmp->str);
-		tmp = tmp->next;
+		if (is_valid_assignment(cur->str))
+			assign_variable(locals, cur->str);
+		cur = cur->next;
 	}
 }
