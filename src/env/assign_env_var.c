@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:12:57 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 14:58:59 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:13:24 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	is_valid_assignment(char *str)
 {
-	int i;
+	int	i;
 
 	if (!str || !(ft_isalpha(str[0]) || str[0] == '_'))
 		return (false);
@@ -30,7 +30,7 @@ static bool	is_valid_assignment(char *str)
 
 static char	*get_assignment_name(char *str)
 {
-	int	len;
+	int		len;
 	char	*name;
 
 	len = 0;
@@ -48,7 +48,9 @@ static char	*get_assignment_name(char *str)
 
 static bool	update_value(t_env **lst, char *name, char *assignment)
 {
-	t_env *cur = *lst;
+	t_env	*cur;
+
+	cur = *lst;
 	while (cur)
 	{
 		if (ft_strncmp(cur->str, name, ft_strlen(name)) == 0
@@ -65,7 +67,7 @@ static bool	update_value(t_env **lst, char *name, char *assignment)
 
 static void	assign_variable(t_env **list, char *assignment)
 {
-	char *name;
+	char	*name;
 
 	if (!is_valid_assignment(assignment))
 		return ;
@@ -77,14 +79,15 @@ static void	assign_variable(t_env **list, char *assignment)
 	free(name);
 }
 
-void	handle_assignments(t_token *tokens, t_env **locals)
+void	handle_assignments(t_token *tokens, t_env **env)
 {
-	t_token *cur = tokens;
+	t_token	*cur;
 
+	cur = tokens;
 	while (cur)
 	{
 		if (is_valid_assignment(cur->str))
-			assign_variable(locals, cur->str);
+			assign_variable(env, cur->str);
 		cur = cur->next;
 	}
 }

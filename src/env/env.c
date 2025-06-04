@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:37:22 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/04 15:06:01 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:12:05 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	expand_var(char *value, t_token *token, int *i)
 {
-	int	 size;
-	int	 add;
-	char *new;
-	char *old;
+	int		size;
+	int		add;
+	char	*new;
+	char	*old;
 
 	old = token->str;
 	add = ft_strlen(value);
@@ -35,8 +35,9 @@ static void	expand_var(char *value, t_token *token, int *i)
 
 char	*my_getenv(char *name, t_env *env, t_env *locals)
 {
-	size_t len = ft_strlen(name);
+	size_t	len;
 
+	len = ft_strlen(name);
 	while (env)
 	{
 		if (!ft_strncmp(env->str, name, len) && env->str[len] == '=')
@@ -75,9 +76,10 @@ static void	search_and_replace(t_token *tok, int *i, t_env *env, t_env *locals)
 
 void	search_dollar(t_env *env, t_env *locals, t_token **tokens)
 {
-	t_token *cur = *tokens;
+	t_token	*cur;
 	int		i;
 
+	cur = *tokens;
 	while (cur)
 	{
 		if (cur->is_expandable)

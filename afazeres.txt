@@ -48,9 +48,6 @@ fazer pwd e env (acho q eh so printar)
 
 ==================================================================
 
-implementar:
-    my_exit()
-
 
 arrumar a parte de definir variavel de ambiente
 
@@ -61,4 +58,12 @@ no bash:
 agora ele ja printa, mas joga as variaveis pra lista de env (ta errado)
 so tem q jogar pra lista de env quando a gnt fizer o export
 
-arrumar leaks
+arrumar leaks   OK
+
+==================================================================
+
+organizar main() e o minishell_loop(), tem varios frees etc q podem
+estar em uma funcao so
+
+implementar:
+    my_exit()
