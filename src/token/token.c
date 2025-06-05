@@ -6,24 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 15:11:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:28:23 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// static void print_error(void *ptr)
-// {
-// 	char	type;
-
-// 	type = &ptr;
-// 	if (type == '|')
-// 		printf("bash: syntax error near unexpected token `|'\n");
-// 	if (type == '>')
-// 		printf("bash: syntax error near unexpected token `>'\n");
-// 	if (type == '<')
-// 		printf("bash: syntax error near unexpected token `<'\n");
-// }
 
 bool	convert_token(t_data *data, t_token **tokens)
 {

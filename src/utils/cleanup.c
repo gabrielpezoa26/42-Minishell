@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 15:27:15 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:23:23 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,6 @@ void	free_env(t_env **my_env)
 	*my_env = NULL;
 }
 
-void	mango_free(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	if (!matrix)
-		return ;
-	while (matrix[i])
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-}
-
 /**
  * exit_minishell - free's the structs and call's exit(1)
  * 
@@ -62,20 +47,4 @@ void	exit_minishell(t_data *data, char *message)
 	free_structs(data);
 	printf("%s\n", message);
 	exit(1);
-}
-
-void	free_tokens(t_token **tokens)
-{
-	t_token	*next_token;
-
-	if (tokens == NULL)
-		return ;
-	while (*tokens)
-	{
-		next_token = (*tokens)->next;
-		free((*tokens)->str);
-		free(*tokens);
-		*tokens = next_token;
-	}
-	*tokens = NULL;
 }

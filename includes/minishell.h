@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 15:26:51 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:23:30 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ bool	validate_tokens(t_token **tokens);
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, char *message);
 bool	init_data(t_data *data);
-void	mango_free(char **matrix);
 
 /*---------UTILS-PARSER---------*/
 void	*ft_calloc(size_t item_count, size_t size_bytes);
@@ -107,7 +106,6 @@ void	env_dup(char **envp, t_env **my_env);
 size_t	count_rows(char **s);
 bool	char_expandable(char c);
 void	ft_strcat(char *dst, const char *src, size_t index);
-bool	update_env(t_env **env, char *assignment);
 
 /*------------ENVP-NODE-------------*/
 void	append_env(t_env **my_env, char *content);

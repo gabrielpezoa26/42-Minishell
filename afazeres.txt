@@ -62,8 +62,8 @@ arrumar leaks   OK
 
 ==================================================================
 
-organizar main() e o minishell_loop(), tem varios frees etc q podem
-estar em uma funcao so
-
 implementar:
     my_exit()
+
+
+ver quando q eh bom arrumar as msg de erro

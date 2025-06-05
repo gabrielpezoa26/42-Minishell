@@ -6,12 +6,20 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:12:57 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 17:13:24 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:10:07 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * is_valid_assignment-> checks if it's a valid assignment (start with letters
+ * 			or a '_' only)
+ *
+ * @str: the string to be checked
+ * 
+ * @return: true if valid, false otherwise
+ */
 static bool	is_valid_assignment(char *str)
 {
 	int	i;
@@ -28,6 +36,13 @@ static bool	is_valid_assignment(char *str)
 	return (str[i] == '=');
 }
 
+/**
+ * get_assignment_name-> extracts the "name", from the assignment
+ *
+ * @str: the whole assignment, ex:  EXAMPLE=hello
+ * 
+ * @return: the "name" of the assignment
+ */
 static char	*get_assignment_name(char *str)
 {
 	int		len;
@@ -46,25 +61,43 @@ static char	*get_assignment_name(char *str)
 	return (name);
 }
 
-static bool	update_value(t_env **lst, char *name, char *assignment)
+/**
+ * update_value-> if the "name" already exists, then replaces it with
+ * 					the new added value
+ * 
+ * @list: the "env" linked list
+ * @name: only the part before the '=' sign
+ * @assignment: the whole string, ex:  EXAMPLE=hello
+ * 
+ * @return: true if updated, false otherwise
+ */
+static bool	update_value(t_env **list, char *name, char *assignment)
 {
-	t_env	*cur;
+	t_env	*curr;
 
-	cur = *lst;
-	while (cur)
+	curr = *list;
+	while (curr)
 	{
-		if (ft_strncmp(cur->str, name, ft_strlen(name)) == 0
-			&& cur->str[ft_strlen(name)] == '=')
+		if (ft_strncmp(curr->str, name, ft_strlen(name)) == 0
+			&& curr->str[ft_strlen(name)] == '=')
 		{
-			free(cur->str);
-			cur->str = ft_strdup(assignment);
+			free(curr->str);
+			curr->str = ft_strdup(assignment);
 			return (true);
 		}
-		cur = cur->next;
+		curr = curr->next;
 	}
 	return (false);
 }
 
+/**
+ * assign_variable-> assigns a variable, lol
+ * 
+ * @list: the "env" linked list
+ * @assignment: the whole string, ex:  EXAMPLE=hello
+ * 
+ * @return: void
+ */
 static void	assign_variable(t_env **list, char *assignment)
 {
 	char	*name;
@@ -81,13 +114,13 @@ static void	assign_variable(t_env **list, char *assignment)
 
 void	handle_assignments(t_token *tokens, t_env **env)
 {
-	t_token	*cur;
+	t_token	*curr;
 
-	cur = tokens;
-	while (cur)
+	curr = tokens;
+	while (curr)
 	{
-		if (is_valid_assignment(cur->str))
-			assign_variable(env, cur->str);
-		cur = cur->next;
+		if (is_valid_assignment(curr->str))
+			assign_variable(env, curr->str);
+		curr = curr->next;
 	}
 }

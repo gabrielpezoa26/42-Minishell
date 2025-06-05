@@ -6,16 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 19:01:59 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/02 12:03:26 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:14:49 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-/*
-	-> tratar casos de varios 'n', ex: echo -nnnn hello
-	-> tratar caso de vazio, ex: echo ""
-*/
 
 static bool	check_multiple_ns(char *str)
 {
@@ -41,6 +36,13 @@ static int	arg_size(char **args)
 	return (len);
 }
 
+/**
+ * function -> 
+ * 
+ * @parameter:
+ * 
+ * @return:
+ */
 bool	my_echo(char **arg_list)
 {
 	bool	remove_newline;
