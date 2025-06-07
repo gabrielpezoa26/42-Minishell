@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 22:19:57 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:02:42 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ bool	execution(t_data *data, t_token *tokens)
 		my_pwd();
 	if (ft_strcmp(arg_list[0], "env") == 0)
 		my_env(data);
+	if (ft_strcmp(arg_list[0], "export") == 0 && arg_list[1])
+		my_export(data, arg_list[1]);
 	free(arg_list);
 	return (true);
 }

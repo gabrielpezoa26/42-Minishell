@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:12:57 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 22:10:07 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:09:54 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * 
  * @return: true if valid, false otherwise
  */
-static bool	is_valid_assignment(char *str)
+bool	is_valid_assignment(char *str)
 {
 	int	i;
 
@@ -43,7 +43,7 @@ static bool	is_valid_assignment(char *str)
  * 
  * @return: the "name" of the assignment
  */
-static char	*get_assignment_name(char *str)
+char	*get_assignment_name(char *str)
 {
 	int		len;
 	char	*name;
@@ -71,7 +71,7 @@ static char	*get_assignment_name(char *str)
  * 
  * @return: true if updated, false otherwise
  */
-static bool	update_value(t_env **list, char *name, char *assignment)
+bool	update_value(t_env **list, char *name, char *assignment)
 {
 	t_env	*curr;
 

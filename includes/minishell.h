@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 22:23:30 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:26:18 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef enum e_token_types
 	REDIR_APPEND, //>>
 	REDIR_DELIMITER, //<<
 }	t_type;
+
 typedef struct s_token
 {
 	char			*str;
@@ -106,6 +107,9 @@ void	env_dup(char **envp, t_env **my_env);
 size_t	count_rows(char **s);
 bool	char_expandable(char c);
 void	ft_strcat(char *dst, const char *src, size_t index);
+bool	is_valid_assignment(char *str);
+char	*get_assignment_name(char *str);
+bool	update_value(t_env **list, char *name, char *assignment);
 
 /*------------ENVP-NODE-------------*/
 void	append_env(t_env **my_env, char *content);
@@ -119,5 +123,6 @@ bool	execution(t_data *data, t_token *tokens);
 bool	my_pwd(void);
 bool	my_echo(char **args);
 bool	my_env(t_data *data);
+bool	my_export(t_data *data, char *args);
 
 #endif

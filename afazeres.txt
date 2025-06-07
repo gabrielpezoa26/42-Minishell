@@ -62,8 +62,8 @@ arrumar leaks   OK
 
 ==================================================================
 
-implementar:
-    my_exit()
+
+terminar my_export()
 
 
-ver quando q eh bom arrumar as msg de erro
+tratar heredoc

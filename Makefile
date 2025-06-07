@@ -40,6 +40,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(BUILTINS_DIR)/my_pwd.c \
 		$(BUILTINS_DIR)/my_echo.c \
 		$(BUILTINS_DIR)/my_env.c \
+		$(BUILTINS_DIR)/my_export.c \
 		$(EXEC_DIR)/execution.c \
 
 
