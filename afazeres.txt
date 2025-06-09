@@ -66,4 +66,7 @@ arrumar leaks   OK
 terminar my_export()
 
 
-tratar heredoc
+-> tratar heredoc slk
+
+-> unset()
+-> exit()
