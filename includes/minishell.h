@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/05 18:26:18 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:57:45 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_cmd
+{
+	char			*name;		//"ls"
+	char			**args;		//["-la", NULL]
+	char			*in_file;	//NULL ou "input.txt"
+	char			*out_file;	//"output.txt"
+	int				append;		//0 ou 1 (para >>)
+	struct s_cmd	*next;		//para pipes
+}	t_cmd;
+
 /*---------PARSER---------*/
 bool	check_argc(int argc);
 bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp);
@@ -80,7 +90,7 @@ bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
 
 /*--------TOKEN_INIT_UTILS----------*/
-bool	str_string_append(char **input, char **str, bool *is_expandable);
+bool	str_string_append(char **input, char **str, bool *is_exp, char quote);
 
 /*-----------TOKEN_NODES---------------*/
 void	append_token(t_token **tokens, char *content, int op, bool is_expand);
@@ -97,6 +107,7 @@ char	*ft_strdup_char(int *index);
 /*-------TOKEN_NODES_UTILS-----------*/
 void	free_tokens(t_token **tokens);
 void	free_env(t_env **my_env);
+void	free_cmd(t_cmd **cmds); //arrumar
 
 /*----------VERIFY_TOKENS----------*/
 bool	token_valid(t_token **tokens);
@@ -117,12 +128,14 @@ void	add_back_env(t_env **my_env, t_env *node);
 void	handle_assignments(t_token *tokens, t_env **env);
 
 /*--------------EXECUTION----------------*/
-bool	execution(t_data *data, t_token *tokens);
+bool	execution(t_env *my_env, t_token *tokens);
+void	init_cmds(t_cmd **cmds, t_token *tokens);
+void	append_cmd(t_cmd **cmds, t_token *tokens);
 
 /*--------------BUILT-INS----------------*/
 bool	my_pwd(void);
 bool	my_echo(char **args);
-bool	my_env(t_data *data);
-bool	my_export(t_data *data, char *args);
+bool	my_environ(t_env *my_env);
+bool	my_export(t_env *my_env, char *args);
 
 #endif

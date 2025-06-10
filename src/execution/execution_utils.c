@@ -1,28 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_init_utils.c                                 :+:      :+:    :+:   */
+/*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 17:04:55 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/10 14:04:01 by dteruya          ###   ########.fr       */
+/*   Created: 2025/06/10 18:50:54 by dteruya           #+#    #+#             */
+/*   Updated: 2025/06/10 18:50:55 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-bool	str_string_append(char **input, char **str, bool *is_exp, char quote)
-{
-	char	*tmp;
-
-	if (**input == '$' && *(*input + 1) && char_expandable(*(*input + 1)) && quote == '\"')
-		*is_exp = true;
-	tmp = ft_join(*str, **input);
-	if (!tmp)
-		return (false);
-	free(*str);
-	*str = tmp;
-	(*input)++;
-	return (true);
-}

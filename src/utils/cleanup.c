@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 22:23:23 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:14:39 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,31 @@ static void	free_structs(t_data *target)
 {
 	if (target)
 		free(target);
+}
+
+void free_cmd(t_cmd **cmds)
+{
+	t_cmd	*next;
+	int i;
+
+	if (cmds == NULL)
+		return ;
+	while (*cmds)
+	{
+		i = 0;
+		next = (*cmds)->next;
+		free((*cmds)->name);
+		while((*cmds)->args[i])
+		{
+			free((*cmds)->args[i]);
+			i++;
+		}
+		free((*cmds)->args); 
+		free(*cmds);
+		*cmds = next;
+	}
+	*cmds = NULL;
+	
 }
 
 void	free_env(t_env **my_env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 22:34:13 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:54:29 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	minishell_loop(t_data *data, t_env **my_env)
 			add_history(data->input);
 		tokens = NULL;
 		if (parse_input(data, &tokens, my_env))
-			execution(data, tokens);
+			execution(*my_env, tokens);
 		free_tokens(&tokens);
 		free(data->input);
 		data->input = NULL;
