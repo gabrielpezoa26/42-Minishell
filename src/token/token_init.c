@@ -88,21 +88,32 @@ static char	*str_string(char **input, bool *is_expandable)
 	return (str);
 }
 
-static char	*handle_token(char **input, int *operator, bool *is_expandable)
+static char	*handle_token(char **input, int *operator, bool *is_expandable, int *flag)
 {
 	char	quote;
 	char	*str;
 
+	quote = '\0';
 	if (**input == '\'' || **input == '\"')
 	{
 		quote = **input;
 		(*input)++;
-		str = str_quote(input, quote, is_expandable);
+		if (*flag == 0)
+			str = str_quote(input, quote, is_expandable);
+		else
+			str = handle_EOF(input, quote, is_expandable);
 	}
 	else if (is_operator(**input))
+	{
 		str = str_operator(input, operator);
+		if (ft_strcmp(str, "<<") == 0)
+			*flag = 1;
+	}
 	else
-		str = str_string(input, is_expandable);
+		if (*flag == 0)
+			str = str_string(input, is_expandable);
+		else
+			str = handle_EOF(input, quote, is_expandable);
 	return (str);
 }
 
@@ -119,17 +130,19 @@ void	init_tokens(t_token **tokens, char *input)
 {
 	char	*str;
 	int		operator;
+	int		flag;
 	bool	is_expandable;
 
 	while (*input)
 	{
+		flag = 0;
 		is_expandable = false;
 		operator = 0;
 		if (is_wspace(*input))
 			input++;
 		else
 		{
-			str = handle_token(&input, &operator, &is_expandable);
+			str = handle_token(&input, &operator, &is_expandable, &flag);
 			append_token(tokens, str, operator, is_expandable);
 			free(str);
 		}

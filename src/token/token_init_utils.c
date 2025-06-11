@@ -26,3 +26,23 @@ bool	str_string_append(char **input, char **str, bool *is_exp, char quote)
 	(*input)++;
 	return (true);
 }
+
+char	*handle_EOF(char **input, char quote, bool *is_expandable)
+{
+	char	*str;
+	char	*temp;
+
+	str = ft_strdup("");
+	while (**input && **input != quote && !is_wspace(**input))
+	{
+		if (!is_quote(quote))
+			*is_expandable = true;
+		temp = ft_join(str, **input);
+		free(str);
+		str = temp;
+		(*input)++;
+	}
+	if (**input == quote)
+		(*input)++;
+	return (str);
+}

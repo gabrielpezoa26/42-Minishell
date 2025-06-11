@@ -55,6 +55,7 @@ typedef struct s_token
 {
 	char			*str;
 	t_type			type;
+	int				is_EOF;
 	bool			is_expandable;
 	int				index;
 	struct s_token	*next;
@@ -104,6 +105,7 @@ char	*ft_strdup_char(int *index);
 void	free_tokens(t_token **tokens);
 void	free_env(t_env **my_env);
 bool	token_valid(t_token **tokens);
+char	*handle_EOF(char **input, char quote, bool *is_expandable);
 
 /*--------------ENVP----------------*/
 void	search_dollar(t_env *env, t_env *locals, t_token **tokens);
