@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/10 19:54:29 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/06/11 14:46:23 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@
  * 
  * @return: void
  */
+
 static void	minishell_loop(t_data *data, t_env **my_env)
 {
-	t_token	*tokens;
-
 	while (1)
 	{
 		data->input = readline("minishell$ ");
@@ -31,10 +30,14 @@ static void	minishell_loop(t_data *data, t_env **my_env)
 			break ;
 		if (*data->input)
 			add_history(data->input);
-		tokens = NULL;
-		if (parse_input(data, &tokens, my_env))
-			execution(*my_env, tokens);
-		free_tokens(&tokens);
+		data->tokens = NULL;
+		if (parse_input(data, &data->tokens, my_env))
+		{
+			handle_heredocs(&data->tokens);
+			execution(data, data->tokens);
+		}
+		cleanup_heredocs(data->tokens);
+		free_tokens(&data->tokens);
 		free(data->input);
 		data->input = NULL;
 	}
@@ -46,9 +49,9 @@ int	main(int argc, char **argv, char **envp)
 	t_env	*my_env;
 
 	(void)argv;
-	data = ft_calloc(1, sizeof(t_data));
 	if (!check_argc(argc))
 		return (1);
+	data = ft_calloc(1, sizeof(t_data));
 	my_env = NULL;
 	env_dup(envp, &my_env);
 	data->env = my_env;

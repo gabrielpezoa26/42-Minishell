@@ -21,6 +21,7 @@ OBJ_DIR = objects
 
 SRCS = $(SRC_DIR)/main.c \
 		$(PARSER_DIR)/parse_input.c \
+		$(PARSER_DIR)/heredoc.c \
 		$(TOKEN_DIR)/token.c \
 		$(TOKEN_DIR)/operators.c \
 		$(TOKEN_DIR)/quotes.c \

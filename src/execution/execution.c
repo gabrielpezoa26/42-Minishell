@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/10 19:58:23 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:06:21 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,72 +65,81 @@
 // 	}
 // }
 
-void	init_cmds(t_cmd **cmds, t_token *tokens)
+void	setup_redirections(t_token *tokens)
 {
-	append_cmd(cmds, tokens);
-	while (tokens)
+	t_token	*current;
+	int		fd;
+
+	current = tokens;
+	while (current)
 	{
-		if (tokens->type == PIPE)
+		if (current->type == REDIR_IN)
 		{
-			tokens = tokens->next;
-			append_cmd(cmds, tokens);
+			fd = open(current->str, O_RDONLY);
+			if (fd < 0)
+			{
+				perror("minishell: open");
+				return ;
+			}
+			dup2(fd, STDIN_FILENO);
+			close(fd);
 		}
-		tokens = tokens->next;
+		current = current->next;
 	}
-	// print_cmds(cmds);
 }
 
-/**
- * execution -> identifies a built-in and calls the responsible function
- * 
- * @data: a pointer to t_data
- * @tokens: pointer to t_token, lol
- * 
- * @return: true if deu bom
- */
-
-static bool	is_builtin(char *command)
+char	**tokens_to_args(t_token *tokens)
 {
-	if (ft_strcmp("echo", command) == 0)
-		return (true);
-	if (ft_strcmp("pwd", command) == 0)
-		return (true);
-	if (ft_strcmp("env", command) == 0)
-		return (true);
-	if (ft_strcmp("export", command) == 0)
-		return (true);
-	return (false);
+	t_token	*temp;
+	char	**args;
+	int		count;
+	int		i;
+
+	i = 0;
+	count = 0;
+	temp = tokens;
+	while (temp)
+	{
+		count++;
+		temp = temp->next;
+	}
+	args = malloc(sizeof(char *) * (count + 1));
+	if (!args)
+		return (NULL);
+	temp = tokens;
+	i = 0;
+	while (i < count)
+	{
+		args[i++] = temp->str;
+		temp = temp->next;
+	}
+	args[i] = NULL;
+	return (args);
 }
 
-static void execute_builtin(t_env *my_env, t_cmd *command)
+bool	execution(t_data *data, t_token *tokens)
 {
-	
-	if (ft_strcmp(command->name, "echo") == 0)
-		my_echo(command->args);
-	if (ft_strcmp(command->name, "pwd") == 0)
+	char	**arg_list;
+	int		stdin_backup;
+
+	stdin_backup = dup(STDIN_FILENO);
+	setup_redirections(tokens);
+	arg_list = tokens_to_args(tokens);
+	if (!arg_list || !arg_list[0])
+	{
+		free(arg_list);
+		dup2(stdin_backup, STDIN_FILENO);
+		close(stdin_backup);
+		return (false);
+	}
+	if (ft_strcmp(arg_list[0], "echo") == 0)
+		my_echo(arg_list);
+	if (ft_strcmp(arg_list[0], "pwd") == 0)
 		my_pwd();
-	if (ft_strcmp(command->name, "env") == 0)
-		my_environ(my_env);
-	if (ft_strcmp(command->name, "export") == 0 && command->name)
-		my_export(my_env, *command->args);
-}
-
-bool	execution(t_env *my_env, t_token *tokens)
-{
-	t_cmd *cmds = NULL;
-
-	init_cmds(&cmds, tokens);
-	if (is_builtin(cmds->name))
-		execute_builtin(my_env, cmds);
-	else
-		printf("aaaaa\n");
-		// execute_external(cmd);
-	free_cmd(&cmds);
+	if (ft_strcmp(arg_list[0], "env") == 0)
+		my_environ(data->env);
+	free(arg_list);
+	dup2(stdin_backup, STDIN_FILENO);
+	close(stdin_backup);
 	return (true);
 }
-
-
-// if (is_builtin(cmd->name))
-//     execute_builtin(cmd);    // Chama sua função
-// else
-//     execute_external(cmd);   // Usa execve()

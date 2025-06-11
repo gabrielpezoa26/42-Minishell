@@ -1,3 +1,5 @@
 
 -> estudar arvore binaria
 -> estudar heredoc
+
+echo $USER
