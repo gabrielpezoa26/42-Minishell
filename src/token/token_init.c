@@ -105,7 +105,7 @@ static char	*handle_token(char **input, int *operator, bool *is_expandable, int 
 		if (*flag == 0)
 			str = str_quote(input, quote, is_expandable);
 		else
-			str = handle_EOF(input, quote, is_expandable);
+			str = handle_EOF(input, quote, is_expandable, flag);
 	}
 	else if (is_operator(**input))
 	{
@@ -117,8 +117,7 @@ static char	*handle_token(char **input, int *operator, bool *is_expandable, int 
 		if (*flag == 0)
 			str = str_string(input, is_expandable);
 		else
-			str = handle_EOF(input, quote, is_expandable);
-	printf("%d\n", *is_expandable);
+			str = handle_EOF(input, quote, is_expandable, flag);
 	return (str);
 }
 
@@ -138,9 +137,9 @@ void	init_tokens(t_token **tokens, char *input)
 	int		flag;
 	bool	is_expandable;
 
+	flag = 0;
 	while (*input)
 	{
-		flag = 0;
 		is_expandable = false;
 		operator = 0;
 		if (is_wspace(*input))

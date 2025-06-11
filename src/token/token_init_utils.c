@@ -27,7 +27,7 @@ bool	str_string_append(char **input, char **str, bool *is_exp, char quote)
 	return (true);
 }
 
-char	*handle_EOF(char **input, char quote, bool *is_expandable)
+char	*handle_EOF(char **input, char quote, bool *is_expandable, int *flag)
 {
 	char	*str;
 	char	*temp;
@@ -44,5 +44,6 @@ char	*handle_EOF(char **input, char quote, bool *is_expandable)
 	}
 	if (**input == quote)
 		(*input)++;
+	*flag = 0;
 	return (str);
 }
