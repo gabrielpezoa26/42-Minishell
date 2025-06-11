@@ -63,29 +63,33 @@ static char	*str_operator(char **input, int *redir)
 	return (str);
 }
 
-static char	*str_string(char **input, bool *is_expandable)
+static char *str_string(char **input, bool *is_expandable)
 {
-	char	*str;
-	char	quote;
+    char *str;
+    char quote;
 
-	*is_expandable = false;
-	quote = '\0';
-	str = ft_strdup("");
-	if (!str)
-		return (NULL);
-	while (**input && (quote || !is_wspace(**input)))
-	{
-		if (!quote && (**input == '\"' || **input == '\''))
-			quote = *(*input)++;
-		else if (quote && **input == quote)
+    quote = '\0';
+    str = ft_strdup("");
+    if (!str)
+        return (NULL);
+    while (**input && (quote || !is_wspace(**input)))
+    {
+        if (!quote && (**input == '\"' || **input == '\''))
+            quote = *(*input)++;
+        else if (quote && **input == quote)
 		{
-			quote = '\0';
-			(*input)++;
-		}
-		else if (!str_string_append(input, &str, is_expandable, quote))
-			return (NULL);
-	}
-	return (str);
+            quote = '\0';
+            (*input)++;
+        }
+        else 
+        {
+            if ((quote == '\0' || quote == '\"') && **input == '$' && *(*input + 1))
+                *is_expandable = true;
+            if (!str_string_append(input, &str, is_expandable, quote))
+                return (NULL);
+        }
+    }
+    return (str);
 }
 
 static char	*handle_token(char **input, int *operator, bool *is_expandable, int *flag)
@@ -114,6 +118,7 @@ static char	*handle_token(char **input, int *operator, bool *is_expandable, int 
 			str = str_string(input, is_expandable);
 		else
 			str = handle_EOF(input, quote, is_expandable);
+	printf("%d\n", *is_expandable);
 	return (str);
 }
 

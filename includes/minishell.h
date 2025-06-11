@@ -55,7 +55,6 @@ typedef struct s_token
 {
 	char			*str;
 	t_type			type;
-	int				is_EOF;
 	bool			is_expandable;
 	int				index;
 	struct s_token	*next;
