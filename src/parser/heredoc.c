@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:40:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/11 14:45:07 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:31:07 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*get_heredoc_filename(void)
 	return (filename);
 }
 
-static void	read_heredoc_input(int fd, char *delimiter)
+static void	heredoc_loop(int fd, char *delimiter)  //falta coisa
 {
 	char	*line;
 
@@ -58,12 +58,12 @@ static char	*read_and_write_heredoc(char *delimiter)
 		free(tmp_filename);
 		return (NULL);
 	}
-	read_heredoc_input(tmp_fd, delimiter);
+	heredoc_loop(tmp_fd, delimiter);
 	close(tmp_fd);
 	return (tmp_filename);
 }
 
-void	handle_heredocs(t_token **tokens)
+void	handle_heredocs(t_token **tokens) // criar funcao de expandir aq dentro
 {
 	t_token	*current;
 	t_token	*delimiter_token;
