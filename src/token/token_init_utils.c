@@ -31,9 +31,13 @@ char	*handle_EOF(char **input, char quote, bool *is_expandable, int *flag)
 {
 	char	*str;
 	char	*temp;
+	bool	is_open;
 
+	is_open = false;
+	if (quote != '\0')
+		is_open = true;
 	str = ft_strdup("");
-	while (**input && (**input != quote || !is_wspace(**input)))
+	while (**input && **input != quote && (!is_wspace(**input) || is_open))
 	{
 		if (!is_quote(quote))
 			*is_expandable = true;

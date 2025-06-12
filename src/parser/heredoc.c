@@ -25,7 +25,7 @@ static char	*get_heredoc_filename(void)
 	return (filename);
 }
 
-static void	heredoc_loop(int fd, char *delimiter)  //falta coisa
+static void	heredoc_loop(int fd, char *delimiter)
 {
 	char	*line;
 
@@ -63,7 +63,7 @@ static char	*read_and_write_heredoc(char *delimiter)
 	return (tmp_filename);
 }
 
-void	handle_heredocs(t_token **tokens) // criar funcao de expandir aq dentro
+void	handle_heredocs(t_token **tokens)
 {
 	t_token	*current;
 	t_token	*delimiter_token;
@@ -75,6 +75,8 @@ void	handle_heredocs(t_token **tokens) // criar funcao de expandir aq dentro
 		if (current->type == REDIR_DELIMITER)
 		{
 			delimiter_token = current->next;
+			//if (delimiter_token -> is_expandable == true)
+				
 			if (delimiter_token && delimiter_token->type == WORD)
 			{
 				tmp_filename = read_and_write_heredoc(delimiter_token->str);
