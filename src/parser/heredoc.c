@@ -25,7 +25,7 @@ static char	*get_heredoc_filename(void)
 	return (filename);
 }
 
-static void	heredoc_loop(int fd, char *delimiter)
+static void	heredoc_loop(int fd, char *delimiter, bool is_EOF)
 {
 	char	*line;
 
@@ -38,12 +38,14 @@ static void	heredoc_loop(int fd, char *delimiter)
 				free(line);
 			break ;
 		}
+		if (is_EOF)
+			printf("banana\n");
 		ft_putendl_fd(line, fd);
 		free(line);
 	}
 }
 
-static char	*read_and_write_heredoc(char *delimiter)
+static char	*read_and_write_heredoc(char *delimiter, bool is_EOF)
 {
 	int		tmp_fd;
 	char	*tmp_filename;
@@ -58,7 +60,7 @@ static char	*read_and_write_heredoc(char *delimiter)
 		free(tmp_filename);
 		return (NULL);
 	}
-	heredoc_loop(tmp_fd, delimiter);
+	heredoc_loop(tmp_fd, delimiter, is_EOF);
 	close(tmp_fd);
 	return (tmp_filename);
 }
@@ -79,7 +81,7 @@ void	handle_heredocs(t_token **tokens)
 				
 			if (delimiter_token && delimiter_token->type == WORD)
 			{
-				tmp_filename = read_and_write_heredoc(delimiter_token->str);
+				tmp_filename = read_and_write_heredoc(delimiter_token->str, delimiter_token->is_EOF);
 				free(current->str);
 				current->str = tmp_filename;
 				current->type = REDIR_IN;

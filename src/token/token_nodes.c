@@ -20,6 +20,7 @@ static t_token	*init_token(char	*content, int operator, bool is_expandable)
 	new_token->str = ft_strdup(content);
 	new_token->type = operator;
 	new_token->is_expandable = is_expandable;
+	new_token->is_EOF = false;
 	new_token->index = 0;
 	new_token->next = NULL;
 	return (new_token);
