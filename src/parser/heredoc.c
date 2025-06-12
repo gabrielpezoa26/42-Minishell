@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:40:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/11 16:31:07 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:39:20 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
 	}
 }
 
-static char	*read_and_write_heredoc(char *delimiter, bool is_EOF, t_env *my_env)
+static char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_env *my_env)
 {
 	int		tmp_fd;
 	char	*tmp_filename;
@@ -61,7 +61,7 @@ static char	*read_and_write_heredoc(char *delimiter, bool is_EOF, t_env *my_env)
 		free(tmp_filename);
 		return (NULL);
 	}
-	heredoc_loop(tmp_fd, delimiter, is_EOF, my_env);
+	heredoc_loop(tmp_fd, delimiter, is_eof, my_env);
 	close(tmp_fd);
 	return (tmp_filename);
 }
@@ -80,7 +80,7 @@ void	handle_heredocs(t_token **tokens, t_env *my_env)
 			delimiter_token = current->next;
 			if (delimiter_token && delimiter_token->type == WORD)
 			{
-				tmp_filename = read_and_write_heredoc(delimiter_token->str, delimiter_token->is_EOF, my_env);
+				tmp_filename = read_and_write_hdoc(delimiter_token->str, delimiter_token->is_eof, my_env);
 				free(current->str);
 				current->str = tmp_filename;
 				current->type = REDIR_IN;

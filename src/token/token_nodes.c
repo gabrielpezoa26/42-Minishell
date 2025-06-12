@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:23:00 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/04 22:28:35 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:36:45 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_token	*init_token(char	*content, int operator, bool is_expandable)
 	new_token->str = ft_strdup(content);
 	new_token->type = operator;
 	new_token->is_expandable = is_expandable;
-	new_token->is_EOF = false;
+	new_token->is_eof = false;
 	new_token->index = 0;
 	new_token->next = NULL;
 	return (new_token);

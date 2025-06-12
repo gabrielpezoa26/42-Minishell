@@ -1,6 +1,4 @@
 
--> estudar heredoc
-   'eof'
-
+tratar invalid read no token_init
 
 echo $USER

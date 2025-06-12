@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/11 15:05:24 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:54:30 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_token
 	char			*str;
 	t_type			type;
 	bool			is_expandable;
-	bool			is_EOF;
+	bool			is_eof;
 	int				index;
 	struct s_token	*next;
 }	t_token;
@@ -94,7 +94,7 @@ bool	convert_token(t_data *data, t_token **tokens);
 void	init_tokens(t_token **token, char *input);
 bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
-bool	str_string_append(char **input, char **str, bool *is_expandable, char quote);
+bool	str_append(char **input, char **str, bool *is_expandable, char quote);
 void	append_token(t_token **tokens, char *content, int op, bool is_expand);
 void	add_back(t_token **token, t_token *node);
 t_token	*last_token(t_token *token);
@@ -106,7 +106,7 @@ char	*ft_strdup_char(int *index);
 void	free_tokens(t_token **tokens);
 void	free_env(t_env **my_env);
 bool	token_valid(t_token **tokens);
-char	*handle_EOF(char **input, char quote, bool *is_expandable, int *flag);
+char	*handle_eof(char **input, char quote, bool *is_expandable, int *flag);
 
 /*--------------ENVP----------------*/
 void	search_dollar(t_env *env, t_env *locals, t_token **tokens);
@@ -122,10 +122,15 @@ char	*get_assignment_name(char *str);
 bool	update_value(t_env **list, char *name, char *assignment);
 bool	is_valid_assignment(char *str);
 
-
 /*--------------EXECUTION----------------*/
 bool	execution(t_data *data, t_token *tokens);
 void	setup_redirections(t_token *tokens);
+
+void	append_cmd(t_cmd **cmds, t_token *tokens);
+void	add_back_cmd(t_cmd **cmd, t_cmd *node);
+int		count_cmd_args(t_token *temp);
+void	cmd_args(t_cmd *cmd, t_token *token);
+void	cmd_redir(t_cmd *cmd, t_token *token);
 
 /*--------------BUILT-INS----------------*/
 bool	my_pwd(void);

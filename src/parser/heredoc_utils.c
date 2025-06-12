@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:46:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/12 16:12:54 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:41:48 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*my_getenv_heredoc(char *name, t_env *env)
 	return (NULL);
 }
 
-static void	search_and_replace_heredoc(char **line, int *i, t_env *my_env, int achei)
+static void	search_and_replace_hdoc(char **line, int *i, t_env *my_env, int found)
 {
 	char	*var;
 	char	*val;
@@ -64,21 +64,21 @@ static void	search_and_replace_heredoc(char **line, int *i, t_env *my_env, int a
 	free(var);
 	if (!val)
 		val = "";
-	expand_var_heredoc(val, line, i, achei);
+	expand_var_heredoc(val, line, i, found);
 }
 
 void	search_dollar_heredoc(char **line, t_env *my_env)
 {
 	int		i;
 	int		achei;
-	
+
 	i = 0;
 	while ((*line)[i])
 	{
 		if ((*line)[i] == '$')
 		{
 			achei = i;
-			search_and_replace_heredoc(line, &i, my_env, achei);
+			search_and_replace_hdoc(line, &i, my_env, achei);
 		}
 		i++;
 	}

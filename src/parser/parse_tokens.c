@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:26:16 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/05/31 00:24:18 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:40:39 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ bool	validate_tokens(t_token **tokens)
 		return (false);
 	while (current_t->next)
 	{
-		if (current_t->type == REDIR_DELIMITER && current_t->next->is_expandable == true)
+		if (current_t->type == REDIR_DELIMITER
+			&& current_t->next->is_expandable == true)
 		{
 			current_t->next->is_expandable = false;
-			current_t->next->is_EOF = true;
+			current_t->next->is_eof = true;
 		}
 		if (current_t->type == 1 && current_t->next->type == 1)
 			return (false);

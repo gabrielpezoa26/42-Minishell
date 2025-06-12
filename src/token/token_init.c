@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/10 14:01:30 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/06/12 19:21:32 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,36 +63,36 @@ static char	*str_operator(char **input, int *redir)
 	return (str);
 }
 
-static char *str_string(char **input, bool *is_expandable)
+static char	*str_string(char **input, bool *is_expandable)
 {
-    char *str;
-    char quote;
+	char	*str;
+	char	quote;
 
-    quote = '\0';
-    str = ft_strdup("");
-    if (!str)
-        return (NULL);
-    while (**input && (quote || !is_wspace(**input)))
-    {
-        if (!quote && (**input == '\"' || **input == '\''))
-            quote = *(*input)++;
-        else if (quote && **input == quote)
+	quote = '\0';
+	str = ft_strdup("");
+	if (!str)
+		return (NULL);
+	while (**input && (quote || !is_wspace(**input)))
+	{
+		if (!quote && (**input == '\"' || **input == '\''))
+			quote = *(*input)++;
+		else if (quote && **input == quote)
 		{
-            quote = '\0';
-            (*input)++;
-        }
-        else 
-        {
-            if ((quote == '\0' || quote == '\"') && **input == '$' && *(*input + 1))
-                *is_expandable = true;
-            if (!str_string_append(input, &str, is_expandable, quote))
-                return (NULL);
-        }
-    }
-    return (str);
+			quote = '\0';
+			(*input)++;
+		}
+		else
+		{
+			if ((quote == '\0' || quote == '\"') && **input == '$' && *(*input + 1))
+				*is_expandable = true;
+			if (!str_append(input, &str, is_expandable, quote))
+				return (NULL);
+		}
+	}
+	return (str);
 }
 
-static char	*handle_token(char **input, int *operator, bool *is_expandable, int *flag)
+static char	*handle_token(char **input, int *oper, bool *is_expand, int *flag)
 {
 	char	quote;
 	char	*str;
@@ -103,21 +103,21 @@ static char	*handle_token(char **input, int *operator, bool *is_expandable, int 
 		quote = **input;
 		(*input)++;
 		if (*flag == 0)
-			str = str_quote(input, quote, is_expandable);
+			str = str_quote(input, quote, is_expand);
 		else
-			str = handle_EOF(input, quote, is_expandable, flag);
+			str = handle_eof(input, quote, is_expand, flag);
 	}
 	else if (is_operator(**input))
 	{
-		str = str_operator(input, operator);
+		str = str_operator(input, oper);
 		if (ft_strcmp(str, "<<") == 0)
 			*flag = 1;
 	}
 	else
 		if (*flag == 0)
-			str = str_string(input, is_expandable);
+			str = str_string(input, is_expand);
 		else
-			str = handle_EOF(input, quote, is_expandable, flag);
+			str = handle_eof(input, quote, is_expand, flag);
 	return (str);
 }
 

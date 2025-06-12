@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   token_init_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:04:55 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/10 14:04:01 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/06/12 18:37:34 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	str_string_append(char **input, char **str, bool *is_exp, char quote)
+bool	str_append(char **input, char **str, bool *is_exp, char quote)
 {
 	char	*tmp;
 
-	if (**input == '$' && *(*input + 1) && char_expandable(*(*input + 1)) && quote == '\"')
+	if (**input == '$' && *(*input + 1) && char_expandable(*(*input + 1))
+		&& quote == '\"')
 		*is_exp = true;
 	tmp = ft_join(*str, **input);
 	if (!tmp)
@@ -27,7 +28,7 @@ bool	str_string_append(char **input, char **str, bool *is_exp, char quote)
 	return (true);
 }
 
-char	*handle_EOF(char **input, char quote, bool *is_expandable, int *flag)
+char	*handle_eof(char **input, char quote, bool *is_expandable, int *flag)
 {
 	char	*str;
 	char	*temp;
