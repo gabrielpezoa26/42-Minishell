@@ -33,7 +33,7 @@ static void	minishell_loop(t_data *data, t_env **my_env)
 		data->tokens = NULL;
 		if (parse_input(data, &data->tokens, my_env))
 		{
-			handle_heredocs(&data->tokens);
+			handle_heredocs(&data->tokens, *my_env);
 			execution(data, data->tokens);
 		}
 		cleanup_heredocs(data->tokens);

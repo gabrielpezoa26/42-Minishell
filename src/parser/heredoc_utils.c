@@ -12,25 +12,25 @@
 
 #include "../../includes/minishell.h"
 
-static void	expand_var_heredoc(char *value, char *line, int *i)
+static void	expand_var_heredoc(char *value, char **line, int *i, int achei)
 {
 	int		size;
 	int		add;
 	char	*new;
 	char	*old;
 
-	old = token->str;
+	old = *line;
 	add = ft_strlen(value);
-	size = token->index + add + ft_strlen(old + *i);
+	size = achei + add + ft_strlen(old + *i);
 	new = ft_calloc(size + 1, sizeof(char));
 	if (!new)
 		return ;
-	ft_memcpy(new, old, token->index);
-	ft_memcpy(new + token->index, value, add);
-	ft_memcpy(new + token->index + add, old + *i, ft_strlen(old + *i));
-	free(token->str);
-	token->str = new;
-	*i = token->index + add;
+	ft_memcpy(new, old, achei);
+	ft_memcpy(new + achei, value, add);
+	ft_memcpy(new + achei + add, old + *i, ft_strlen(old + *i));
+	free(*line);
+	*line = new;
+	*i = achei + add;
 }
 
 char	*my_getenv_heredoc(char *name, t_env *env)
@@ -47,7 +47,7 @@ char	*my_getenv_heredoc(char *name, t_env *env)
 	return (NULL);
 }
 
-static void	search_and_replace_heredoc(char *line, int *i, t_env *my_env)
+static void	search_and_replace_heredoc(char **line, int *i, t_env *my_env, int achei)
 {
 	char	*var;
 	char	*val;
@@ -56,27 +56,30 @@ static void	search_and_replace_heredoc(char *line, int *i, t_env *my_env)
 
 	(*i)++;
 	start = *i;
-	while (ft_isalnum(line[*i]) || line[*i] == '_')
+	while (ft_isalnum((*line)[*i]) || (*line)[*i] == '_')
 		(*i)++;
 	len = *i - start;
-	var = ft_substr(line, start, len);
+	var = ft_substr(*line, start, len);
 	val = my_getenv_heredoc(var, my_env);
 	free(var);
 	if (!val)
 		val = "";
-	expand_var_heredoc(val, tok, i);
+	expand_var_heredoc(val, line, i, achei);
 }
 
-void	search_dollar_heredoc(char *line, t_env *my_env)
+void	search_dollar_heredoc(char **line, t_env *my_env)
 {
 	int		i;
+	int		achei;
 	
 	i = 0;
-	while (line[i])
+	while ((*line)[i])
 	{
-		if (line[i] == '$')
-			search_and_replace_heredoc(line, &i, my_env);
+		if ((*line)[i] == '$')
+		{
+			achei = i;
+			search_and_replace_heredoc(line, &i, my_env, achei);
+		}
 		i++;
 	}
 }
-

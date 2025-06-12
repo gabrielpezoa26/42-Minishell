@@ -22,6 +22,7 @@ OBJ_DIR = objects
 SRCS = $(SRC_DIR)/main.c \
 		$(PARSER_DIR)/parse_input.c \
 		$(PARSER_DIR)/heredoc.c \
+		$(PARSER_DIR)/heredoc_utils.c \
 		$(TOKEN_DIR)/token.c \
 		$(TOKEN_DIR)/operators.c \
 		$(TOKEN_DIR)/quotes.c \
@@ -43,7 +44,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(BUILTINS_DIR)/my_env.c \
 		$(BUILTINS_DIR)/my_export.c \
 		$(EXEC_DIR)/execution.c \
-		$(EXEC_DIR)/cmd_nodes.c
+		$(EXEC_DIR)/cmd_nodes.c \
 
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)

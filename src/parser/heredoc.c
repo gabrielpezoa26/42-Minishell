@@ -25,27 +25,28 @@ static char	*get_heredoc_filename(void)
 	return (filename);
 }
 
-static void	heredoc_loop(int fd, char *delimiter, bool is_EOF)
+static void	heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
 {
 	char	*line;
 
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, delimiter) == 0)
+		if (!line || ft_strcmp(line, delimiter) == 0) //colocar o sinal aqui SIGINT
 		{
 			if (line)
 				free(line);
 			break ;
 		}
 		if (is_EOF)
-			printf("banana\n");
+			search_dollar_heredoc(&line, my_env);
+		printf("%s\n", line);
 		ft_putendl_fd(line, fd);
 		free(line);
 	}
 }
 
-static char	*read_and_write_heredoc(char *delimiter, bool is_EOF)
+static char	*read_and_write_heredoc(char *delimiter, bool is_EOF, t_env *my_env)
 {
 	int		tmp_fd;
 	char	*tmp_filename;
@@ -60,12 +61,12 @@ static char	*read_and_write_heredoc(char *delimiter, bool is_EOF)
 		free(tmp_filename);
 		return (NULL);
 	}
-	heredoc_loop(tmp_fd, delimiter, is_EOF);
+	heredoc_loop(tmp_fd, delimiter, is_EOF, my_env);
 	close(tmp_fd);
 	return (tmp_filename);
 }
 
-void	handle_heredocs(t_token **tokens)
+void	handle_heredocs(t_token **tokens, t_env *my_env)
 {
 	t_token	*current;
 	t_token	*delimiter_token;
@@ -77,11 +78,9 @@ void	handle_heredocs(t_token **tokens)
 		if (current->type == REDIR_DELIMITER)
 		{
 			delimiter_token = current->next;
-			//if (delimiter_token -> is_expandable == true)
-				
 			if (delimiter_token && delimiter_token->type == WORD)
 			{
-				tmp_filename = read_and_write_heredoc(delimiter_token->str, delimiter_token->is_EOF);
+				tmp_filename = read_and_write_heredoc(delimiter_token->str, delimiter_token->is_EOF, my_env);
 				free(current->str);
 				current->str = tmp_filename;
 				current->type = REDIR_IN;

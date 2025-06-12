@@ -76,8 +76,9 @@ bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp);
 bool	validate_tokens(t_token **tokens);
 
 /*---------HEREDOC----------*/
-void	handle_heredocs(t_token **tokens);
+void	handle_heredocs(t_token **tokens, t_env *my_env);
 void	cleanup_heredocs(t_token *tokens);
+void	search_dollar_heredoc(char **line, t_env *my_env);
 
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, char *message);
