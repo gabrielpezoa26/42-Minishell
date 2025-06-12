@@ -27,7 +27,7 @@ bool	validate_tokens(t_token **tokens)
 		return (false);
 	while (current_t->next)
 	{
-		if (current_t->type == REDIR_DELIMITER && current_t->next->is_expandable)
+		if (current_t->type == REDIR_DELIMITER && current_t->next->is_expandable == true)
 		{
 			current_t->next->is_expandable = false;
 			current_t->next->is_EOF = true;
