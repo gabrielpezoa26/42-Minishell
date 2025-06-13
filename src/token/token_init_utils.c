@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:04:55 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/12 18:37:34 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:20:30 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ bool	str_append(char **input, char **str, bool *is_exp, char quote)
 	char	*tmp;
 
 	if (**input == '$' && *(*input + 1) && char_expandable(*(*input + 1))
-		&& quote == '\"')
+		&& quote != '\'')
+	{
 		*is_exp = true;
+	}
 	tmp = ft_join(*str, **input);
 	if (!tmp)
 		return (false);
@@ -50,5 +52,77 @@ char	*handle_eof(char **input, char quote, bool *is_expandable, int *flag)
 	if (**input == quote)
 		(*input)++;
 	*flag = 0;
+	return (str);
+}
+
+char	*get_double_op(char **input, int *op)
+{
+	if (**input == '<' && *(*input + 1) == '<')
+	{
+		*op = REDIR_DELIMITER;
+		*input += 2;
+		return (ft_strdup("<<"));
+	}
+	if (**input == '>' && *(*input + 1) == '>')
+	{
+		*op = REDIR_APPEND;
+		*input += 2;
+		return (ft_strdup(">>"));
+	}
+	return (NULL);
+}
+
+char	*str_operator(char **input, int *op)
+{
+	char	*str;
+
+	str = get_double_op(input, op);
+	if (str)
+		return (str);
+	if (**input == '<')
+	{
+		*op = REDIR_IN;
+		(*input)++;
+		return (ft_strdup("<"));
+	}
+	if (**input == '>')
+	{
+		*op = REDIR_OUT;
+		(*input)++;
+		return (ft_strdup(">"));
+	}
+	if (**input == '|')
+	{
+		*op = PIPE;
+		(*input)++;
+		return (ft_strdup("|"));
+	}
+	return (NULL);
+}
+
+char	*str_string(char **input, bool *is_expandable)
+{
+	char	*str;
+	char	quote;
+
+	quote = '\0';
+	str = ft_strdup("");
+	if (!str)
+		return (NULL);
+	while (**input && !is_wspace(**input) && !is_operator(**input))
+	{
+		if (!quote && (**input == '\"' || **input == '\''))
+			quote = *(*input)++;
+		else if (quote && **input == quote)
+		{
+			quote = '\0';
+			(*input)++;
+		}
+		else
+		{
+			if (!str_append(input, &str, is_expandable, quote))
+				return (NULL);
+		}
+	}
 	return (str);
 }

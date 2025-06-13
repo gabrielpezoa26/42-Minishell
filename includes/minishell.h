@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/12 18:54:30 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:22:07 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ bool	convert_token(t_data *data, t_token **tokens);
 void	init_tokens(t_token **token, char *input);
 bool	token_operators(char *input);
 bool	are_quotes_valid(char *input);
-bool	str_append(char **input, char **str, bool *is_expandable, char quote);
+bool	str_append(char **input, char **str, bool *is_exp, char quote);
 void	append_token(t_token **tokens, char *content, int op, bool is_expand);
 void	add_back(t_token **token, t_token *node);
 t_token	*last_token(t_token *token);
@@ -106,7 +106,10 @@ char	*ft_strdup_char(int *index);
 void	free_tokens(t_token **tokens);
 void	free_env(t_env **my_env);
 bool	token_valid(t_token **tokens);
-char	*handle_eof(char **input, char quote, bool *is_expandable, int *flag);
+char	*handle_eof(char **input, char quote, bool *is_expand, int *flag);
+char	*str_string(char **input, bool *is_expandable);
+char	*str_operator(char **input, int *op);
+char	*get_double_op(char **input, int *op);
 
 /*--------------ENVP----------------*/
 void	search_dollar(t_env *env, t_env *locals, t_token **tokens);

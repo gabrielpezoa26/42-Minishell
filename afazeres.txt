@@ -1,4 +1,34 @@
 
-tratar invalid read no token_init
+-> tratar invalid read
+-> sigaction
 
 echo $USER
+
+
+
+
+
+
+
+
+
+
+
+-> uns teste padrao pra gnt ter ctz q nao quebrou nd (eu tinha quebrado dnv o echo $USER rs)
+
+
+echo abc
+echo -n abc
+
+
+echo $USER
+echo "$USER"
+echo "$USER   "
+echo '$USER'
+
+cat << eof
+cat << $USER
+cat <<
+
+
+
