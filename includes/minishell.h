@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/16 14:49:14 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:02:04 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ typedef enum e_token_types
 	REDIR_DELIMITER,
 }	t_type;
 
-typedef struct s_cmd
-{
-	char			*name;		//"ls"
-	char			**args;		//["-la", NULL]
-	char			*in_file;	//NULL ou "input.txt"
-	char			*out_file;	//"output.txt"
-	int				append;		//0 ou 1 (para >>)
-	struct s_cmd	*next;		//para pipes
-}	t_cmd;
+// typedef struct s_cmd
+// {
+// 	char			*name;		//"ls"
+// 	char			**args;		//["-la", NULL]
+// 	char			*in_file;	//NULL ou "input.txt"
+// 	char			*out_file;	//"output.txt"
+// 	int				append;		//0 ou 1 (para >>)
+// 	struct s_cmd	*next;		//para pipes
+// }	t_cmd;
 
 typedef struct s_token
 {
@@ -60,6 +60,19 @@ typedef struct s_token
 	int				index;
 	struct s_token	*next;
 }	t_token;
+
+typedef struct s_redir
+{
+	t_type			type;
+	char			*file;
+}	t_redir;
+
+typedef struct s_cmd
+{
+	char			**args;
+	t_list			*redirections;
+	struct s_cmd	*next;
+}	t_cmd;
 
 typedef struct s_data
 {
@@ -129,15 +142,16 @@ bool	is_valid_assignment(char *str);
 bool	execution(t_data *data, t_token *tokens);
 void	setup_redirections(t_token *tokens);
 
-void	append_cmd(t_cmd **cmds, t_token *tokens);
-void	add_back_cmd(t_cmd **cmd, t_cmd *node);
-int		count_cmd_args(t_token *temp);
-void	cmd_args(t_cmd *cmd, t_token *token);
-void	cmd_redir(t_cmd *cmd, t_token *token);
+// void	append_cmd(t_cmd **cmds, t_token *tokens);
+// void	add_back_cmd(t_cmd **cmd, t_cmd *node);
+// int		count_cmd_args(t_token *temp);
+// void	cmd_args(t_cmd *cmd, t_token *token);
+// void	cmd_redir(t_cmd *cmd, t_token *token);
 
 /*--------------BUILT-INS----------------*/
 bool	my_pwd(void);
 bool	my_echo(char **args);
 bool	my_environ(t_env *my_env);
+t_cmd	*parser(t_token *tokens);
 
 #endif

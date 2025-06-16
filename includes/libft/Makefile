@@ -6,7 +6,7 @@
 #    By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:32:25 by gcesar-n          #+#    #+#              #
-#    Updated: 2025/05/08 02:49:15 by gcesar-n         ###   ########.fr        #
+#    Updated: 2025/06/16 15:49:05 by gcesar-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC = \
 
 BONUS_SRCS = \
 	ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
-	ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone.c \
+	ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone.c ft_lstclear.c \
 
 
 DESP = libft.h
