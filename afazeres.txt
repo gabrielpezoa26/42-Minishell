@@ -1,5 +1,5 @@
 
-Diego 42
+roadmapp geral:
 	afazeres:
 	- Implementar Sinais (signal/sigaction):
 	- Implementar waitpid() e Gerenciamento de Status de Saída:
@@ -8,6 +8,17 @@ Diego 42
 	- Implementar Pipes (|):
 	- Redirecionamento Completo (saída > e >>):
 
+
+
+
+
+minishell$ sleep 5
+DEBUG: Token 0: str='sleep' | type=0 | BOOM=0
+DEBUG: Token 1: str='5' | type=0 | BOOM=0
+^C
+minishell$ minishell$ 
+
+^^ tem q arrumar isso, ta printando duas vezes
 
 
 

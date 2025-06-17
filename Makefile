@@ -16,6 +16,7 @@ ENV_DIR = $(SRC_DIR)/env
 VRF_TOKEN = $(SRC_DIR)/verify_tokens
 BUILTINS_DIR = $(SRC_DIR)/builtins
 EXEC_DIR = $(SRC_DIR)/execution
+SIGNALS_DIR = $(SRC_DIR)/signals
 
 SRCS = $(SRC_DIR)/main.c \
 		$(PARSER_DIR)/parse_input.c \
@@ -45,7 +46,8 @@ SRCS = $(SRC_DIR)/main.c \
 		$(EXEC_DIR)/execution.c \
 		$(EXEC_DIR)/cmd_nodes.c \
 		$(EXEC_DIR)/cmd_nodes_utils.c \
-		$(EXEC_DIR)/find_path.c
+		$(EXEC_DIR)/find_path.c \
+		$(SIGNALS_DIR)/signals.c \
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

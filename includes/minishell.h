@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/17 16:08:00 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:28:58 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 # include <sys/wait.h>
 
 /*--------MACROS-------*/
@@ -84,6 +85,10 @@ typedef struct s_data
 	bool	exec;
 	int		last_exit_status;
 }	t_data;
+
+/*---------SIGNALS---------*/
+void	setup_interactive_signals(void);
+void	set_signals_for_child_process(void);
 
 /*---------PARSER---------*/
 bool	check_argc(int argc);
