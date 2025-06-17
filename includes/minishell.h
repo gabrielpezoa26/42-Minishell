@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/16 16:02:04 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:08:00 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 
 /*--------MACROS-------*/
 # define TOKEN "bash: syntax error"
@@ -81,6 +82,7 @@ typedef struct s_data
 	char	*input;
 	t_token	*tokens;
 	bool	exec;
+	int		last_exit_status;
 }	t_data;
 
 /*---------PARSER---------*/
@@ -137,10 +139,13 @@ void	handle_assignments(t_token *tokens, t_env **env);
 char	*get_assignment_name(char *str);
 bool	update_value(t_env **list, char *name, char *assignment);
 bool	is_valid_assignment(char *str);
+char	**env_list_to_array(t_env *my_env);
+char	*my_getenv(char *name, t_env *env, t_env *locals);
 
 /*--------------EXECUTION----------------*/
 bool	execution(t_data *data, t_token *tokens);
 void	setup_redirections(t_token *tokens);
+char	*get_cmd_path(char *cmd, t_env *my_env);
 
 // void	append_cmd(t_cmd **cmds, t_token *tokens);
 // void	add_back_cmd(t_cmd **cmd, t_cmd *node);

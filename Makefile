@@ -44,7 +44,8 @@ SRCS = $(SRC_DIR)/main.c \
 		$(BUILTINS_DIR)/my_export.c \
 		$(EXEC_DIR)/execution.c \
 		$(EXEC_DIR)/cmd_nodes.c \
-		$(EXEC_DIR)/cmd_nodes_utils.c
+		$(EXEC_DIR)/cmd_nodes_utils.c \
+		$(EXEC_DIR)/find_path.c
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

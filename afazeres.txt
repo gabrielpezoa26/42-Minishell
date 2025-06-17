@@ -1,9 +1,12 @@
 
-
--> implementar msg de erro quando aperta ctrl + D no heredoc
--> ajustar chamada my_export()
--> fork
-
+Diego 42
+	afazeres:
+	- Implementar Sinais (signal/sigaction):
+	- Implementar waitpid() e Gerenciamento de Status de Saída:
+	- Implementar Built-in my_exit():
+	- Expandir Funcionalidade do Built-in my_export():
+	- Implementar Pipes (|):
+	- Redirecionamento Completo (saída > e >>):
 
 
 
