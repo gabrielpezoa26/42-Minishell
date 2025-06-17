@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:40:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/12 18:39:20 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:53:21 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, delimiter) == 0) //colocar o sinal aqui SIGINT
+		if (!line || ft_strcmp(line, delimiter) == 0)
 		{
 			if (line)
 				free(line);
@@ -80,7 +80,8 @@ void	handle_heredocs(t_token **tokens, t_env *my_env)
 			delimiter_token = current->next;
 			if (delimiter_token && delimiter_token->type == WORD)
 			{
-				tmp_filename = read_and_write_hdoc(delimiter_token->str, delimiter_token->is_eof, my_env);
+				tmp_filename = read_and_write_hdoc(delimiter_token->str,
+						delimiter_token->is_eof, my_env);
 				free(current->str);
 				current->str = tmp_filename;
 				current->type = REDIR_IN;

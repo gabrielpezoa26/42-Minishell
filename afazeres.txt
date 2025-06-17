@@ -1,24 +1,8 @@
 
-ajustar makefile p rodar o bonus da lib
-fork
 
-
-
-
--> implementar sinais;
-	"• Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.
-	• In interactive mode:
-		◦ ctrl-C displays a new prompt on a new line.
-		◦ ctrl-D exits the shell.
-		◦ ctrl-\ does nothing."
-
-
-
-ver isso aq
-
- "Handle $? which should expand to the exit status of the most recently executed
-foreground pipeline."
-
+-> implementar msg de erro quando aperta ctrl + D no heredoc
+-> ajustar chamada my_export()
+-> fork
 
 
 
@@ -42,5 +26,8 @@ cat << eof
 cat << $USER
 cat <<
 
+pwd
+
+env
 
 

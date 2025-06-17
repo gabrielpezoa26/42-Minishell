@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:07:49 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/16 16:04:24 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:39:44 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,38 @@ static int	count_args(t_token *tokens)
 	return (count);
 }
 
+static void	parse_simple_command(t_token **tokens, t_cmd *current_cmd)
+{
+	int	i;
+
+	current_cmd->args = ft_calloc(count_args(*tokens) + 1, sizeof(char *));
+	if (!current_cmd->args)
+		return ;
+	i = 0;
+	while (*tokens && (*tokens)->type != PIPE)
+	{
+		if ((*tokens)->type == WORD)
+			current_cmd->args[i++] = ft_strdup((*tokens)->str);
+		else
+			parse_redirection(tokens, current_cmd);
+		if (*tokens)
+			*tokens = (*tokens)->next;
+	}
+}
+
+/**
+ * @brief Parses a list of tokens into a linked list of command structures.
+ *
+ * This function iterates through the token list, creating a new command node
+ * for each sequence of tokens separated by a PIPE.
+ *
+ * @param tokens The head of the token list.
+ * @return The head of the newly created command list (`t_cmd *`).
+ */
 t_cmd	*parser(t_token *tokens)
 {
 	t_cmd	*head;
 	t_cmd	*current_cmd;
-	int		i;
 
 	if (!tokens)
 		return (NULL);
@@ -78,19 +105,7 @@ t_cmd	*parser(t_token *tokens)
 	current_cmd = head;
 	while (tokens)
 	{
-		current_cmd->args = ft_calloc(count_args(tokens) + 1, sizeof(char *));
-		if (!current_cmd->args)
-			return (NULL);
-		i = 0;
-		while (tokens && tokens->type != PIPE)
-		{
-			if (tokens->type == WORD)
-				current_cmd->args[i++] = ft_strdup(tokens->str);
-			else
-				parse_redirection(&tokens, current_cmd);
-			if (tokens)
-				tokens = tokens->next;
-		}
+		parse_simple_command(&tokens, current_cmd);
 		if (tokens)
 		{
 			current_cmd->next = init_cmd_node();

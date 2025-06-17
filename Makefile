@@ -1,23 +1,21 @@
 NAME = minishell
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES)
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES) -g
 
 INCLUDES = includes
 LIBFT_DIR = $(INCLUDES)/libft
 LIBFT = $(LIBFT_DIR)/libft.a
+OBJ_DIR = objects
 
 SRC_DIR = src
 PARSER_DIR = $(SRC_DIR)/parser
-EXEC_DIR = $(SRC_DIR)/executor
 TOKEN_DIR = $(SRC_DIR)/token
 UTILS_DIR = $(SRC_DIR)/utils
 ENV_DIR = $(SRC_DIR)/env
 VRF_TOKEN = $(SRC_DIR)/verify_tokens
 BUILTINS_DIR = $(SRC_DIR)/builtins
 EXEC_DIR = $(SRC_DIR)/execution
-
-OBJ_DIR = objects
 
 SRCS = $(SRC_DIR)/main.c \
 		$(PARSER_DIR)/parse_input.c \
@@ -46,40 +44,34 @@ SRCS = $(SRC_DIR)/main.c \
 		$(BUILTINS_DIR)/my_export.c \
 		$(EXEC_DIR)/execution.c \
 		$(EXEC_DIR)/cmd_nodes.c \
-		$(EXEC_DIR)/cmd_nodes_utils.c \
-
+		$(EXEC_DIR)/cmd_nodes_utils.c
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
+
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR) bonus --no-print-directory
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(OBJ_DIR) $(NAME)
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-
-$(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
-
-$(NAME): $(OBJS)
-	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lreadline -o $(NAME)
-
 clean:
 	rm -rf $(OBJ_DIR)
-	@make -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
 
 fclean: clean
 	rm -f $(NAME)
-	@make -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory
 
 re: fclean all
 
 SUPP = supp.supp
-
-val: $(NAME)
+val: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=$(SUPP) ./$(NAME)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re val
