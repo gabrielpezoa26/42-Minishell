@@ -6,162 +6,166 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/17 16:43:30 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 15:51:14 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**tokens_to_args(t_token *tokens)
+static bool	is_builtin(const char *cmd_name)
 {
-	t_token	*temp;
-	char	**args;
-	int		count;
-	int		i;
-
-	i = 0;
-	count = 0;
-	temp = tokens;
-	while (temp)
-	{
-		count++;
-		temp = temp->next;
-	}
-	args = malloc(sizeof(char *) * (count + 1));
-	if (!args)
-		return (NULL);
-	temp = tokens;
-	i = 0;
-	while (i < count)
-	{
-		args[i++] = temp->str;
-		temp = temp->next;
-	}
-	args[i] = NULL;
-	return (args);
+	if (!cmd_name)
+		return (false);
+	if (ft_strcmp(cmd_name, "echo") == 0)
+		return (true);
+	if (ft_strcmp(cmd_name, "pwd") == 0)
+		return (true);
+	if (ft_strcmp(cmd_name, "env") == 0)
+		return (true);
+	if (ft_strcmp(cmd_name, "exit") == 0)
+		return (true);
+	return (false);
 }
 
 static int	execute_builtin(char **arg_list, t_data *data)
 {
+	if (!arg_list || !arg_list[0])
+		return (0);
 	if (ft_strcmp(arg_list[0], "echo") == 0)
 		return (my_echo(arg_list), 0);
 	if (ft_strcmp(arg_list[0], "pwd") == 0)
 		return (my_pwd(), 0);
 	if (ft_strcmp(arg_list[0], "env") == 0)
 		return (my_environ(data->env), 0);
+	if (ft_strcmp(arg_list[0], "exit") == 0)
+		return (my_exit(arg_list, data));
 	return (-1);
 }
 
-/*
-** This is the routine for the parent process. It waits for the child
-** and interprets its exit status.
-*/
-static int	parent_routine(pid_t pid)
+void	setup_redirections(t_list *redirections)
 {
-	int	status;
-
-	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status))
-	{
-		if (WTERMSIG(status) == SIGQUIT)
-			ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO);
-		return (128 + WTERMSIG(status));
-	}
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (1);
-}
-
-/*
-** This is the routine for the child process. It sets signals
-** and attempts to execute the command. It only returns on error.
-*/
-static void	child_routine(char *cmd_path, char **arg_list, char **envp)
-{
-	set_signals_for_child_process();
-	execve(cmd_path, arg_list, envp);
-	perror("minishell");
-	free(cmd_path);
-	mango_free(envp);
-	exit(126);
-}
-
-/*
-** This function is now much shorter. It prepares for the fork,
-** forks, and then calls the appropriate routine for parent or child.
-*/
-static int	execute_external(char **arg_list, t_data *data)
-{
-	pid_t	pid;
-	char	*cmd_path;
-	char	**envp;
-
-	cmd_path = get_cmd_path(arg_list[0], data->env);
-	if (!cmd_path)
-	{
-		ft_putstr_fd("minishell: command not found: ", 2);
-		ft_putendl_fd(arg_list[0], 2);
-		return (127);
-	}
-	envp = env_list_to_array(data->env);
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("minishell: fork");
-		free(cmd_path);
-		mango_free(envp);
-		return (1);
-	}
-	if (pid == 0)
-		child_routine(cmd_path, arg_list, envp);
-	free(cmd_path);
-	mango_free(envp);
-	return (parent_routine(pid));
-}
-
-void	setup_redirections(t_token *tokens)
-{
-	t_token	*current;
+	t_list	*current;
+	t_redir	*redir;
 	int		fd;
 
-	current = tokens;
+	current = redirections;
 	while (current)
 	{
-		if (current->type == REDIR_IN)
+		redir = (t_redir *)current->content;
+		if (redir->type == REDIR_OUT)
+			fd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if (redir->type == REDIR_APPEND)
+			fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else
+			fd = open(redir->file, O_RDONLY);
+		if (fd < 0)
 		{
-			fd = open(current->str, O_RDONLY);
-			if (fd < 0)
-			{
-				perror("minishell: open");
-				return ;
-			}
-			dup2(fd, STDIN_FILENO);
-			close(fd);
+			perror("minishell");
+			exit(1);
 		}
+		if (redir->type == REDIR_IN || redir->type == REDIR_DELIMITER)
+			dup2(fd, STDIN_FILENO);
+		else
+			dup2(fd, STDOUT_FILENO);
+		close(fd);
 		current = current->next;
 	}
 }
 
-bool	execution(t_data *data, t_token *tokens)
+static void	execute_command(t_cmd *cmd, t_data *data)
 {
-	char	**arg_list;
-	int		stdin_backup;
+	char	*path;
+	char	**envp;
+	int		status;
 
-	stdin_backup = dup(STDIN_FILENO);
-	setup_redirections(tokens);
-	arg_list = tokens_to_args(tokens);
-	if (!arg_list || !arg_list[0])
+	if (!cmd->args || !cmd->args[0])
+		exit(0);
+	setup_redirections(cmd->redirections);
+	status = execute_builtin(cmd->args, data);
+	if (status != -1)
+		exit(status);
+	path = get_cmd_path(cmd->args[0], data->env);
+	if (!path)
 	{
-		free(arg_list);
-		dup2(stdin_backup, STDIN_FILENO);
-		close(stdin_backup);
-		return (false);
+		ft_putstr_fd("minishell: command not found: ", 2);
+		ft_putendl_fd(cmd->args[0], 2);
+		exit(127);
 	}
-	data->last_exit_status = execute_builtin(arg_list, data);
-	if (data->last_exit_status == -1)
-		data->last_exit_status = execute_external(arg_list, data);
-	free(arg_list);
-	dup2(stdin_backup, STDIN_FILENO);
-	close(stdin_backup);
-	return (true);
+	envp = env_list_to_array(data->env);
+	execve(path, cmd->args, envp);
+	perror("minishell");
+	free(path);
+	mango_free(envp);
+	exit(126);
+}
+
+static void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read_end)
+{
+	set_signals_for_child_process();
+	if (prev_read_end != STDIN_FILENO)
+	{
+		dup2(prev_read_end, STDIN_FILENO);
+		close(prev_read_end);
+	}
+	if (cmd->next)
+	{
+		close(pfd[0]);
+		dup2(pfd[1], STDOUT_FILENO);
+		close(pfd[1]);
+	}
+	execute_command(cmd, data);
+}
+
+static int	wait_for_pipeline(pid_t last_pid)
+{
+	int	status;
+	int	last_status;
+
+	if (last_pid == -1)
+		return (0);
+	waitpid(last_pid, &status, 0);
+	if (WIFEXITED(status))
+		last_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGQUIT)
+			ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO);
+		last_status = 128 + WTERMSIG(status);
+	}
+	else
+		last_status = 1;
+	while (wait(NULL) > 0)
+		;
+	return (last_status);
+}
+
+int	execution(t_cmd *cmds, t_data *data)
+{
+	int		pfd[2];
+	int		prev_read_end;
+	pid_t	pid;
+
+	if (!cmds->next && cmds->args[0] && is_builtin(cmds->args[0]))
+		return (execute_builtin(cmds->args, data));
+	prev_read_end = STDIN_FILENO;
+	pid = -1;
+	while (cmds)
+	{
+		if (cmds->next && pipe(pfd) == -1)
+			return (perror("minishell: pipe"), 1);
+		pid = fork();
+		if (pid == -1)
+			return (perror("minishell: fork"), 1);
+		if (pid == 0)
+			child_process(cmds, data, pfd, prev_read_end);
+		if (prev_read_end != STDIN_FILENO)
+			close(prev_read_end);
+		if (cmds->next)
+		{
+			close(pfd[1]);
+			prev_read_end = pfd[0];
+		}
+		cmds = cmds->next;
+	}
+	return (wait_for_pipeline(pid));
 }

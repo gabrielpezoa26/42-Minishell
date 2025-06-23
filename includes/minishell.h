@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/17 16:28:58 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 15:45:50 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,11 @@ char	**env_list_to_array(t_env *my_env);
 char	*my_getenv(char *name, t_env *env, t_env *locals);
 
 /*--------------EXECUTION----------------*/
-bool	execution(t_data *data, t_token *tokens);
-void	setup_redirections(t_token *tokens);
+int		execution(t_cmd *cmds, t_data *data);
+void	setup_redirections(t_list *redirections);
 char	*get_cmd_path(char *cmd, t_env *my_env);
+void	free_commands(t_cmd **commands);
+
 
 // void	append_cmd(t_cmd **cmds, t_token *tokens);
 // void	add_back_cmd(t_cmd **cmd, t_cmd *node);
@@ -162,6 +164,7 @@ char	*get_cmd_path(char *cmd, t_env *my_env);
 bool	my_pwd(void);
 bool	my_echo(char **args);
 bool	my_environ(t_env *my_env);
+int	my_exit(char **args, t_data *data);
 t_cmd	*parser(t_token *tokens);
 
 #endif
