@@ -6,12 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 22:23:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 15:36:23 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:10:51 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 static bool	is_numeric(const char *str)
 {
@@ -30,15 +29,6 @@ static bool	is_numeric(const char *str)
 	return (true);
 }
 
-static void	handle_non_numeric(t_data *data, char *arg)
-{
-	ft_putstr_fd("minishell: exit: ", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd(": numeric argument required\n", 2);
-	exit_minishell(data, NULL);
-	exit(255);
-}
-
 static int	arg_count(char **args)
 {
 	int	i;
@@ -47,6 +37,14 @@ static int	arg_count(char **args)
 	while (args[i])
 		i++;
 	return (i);
+}
+
+static void	handle_non_numeric(t_data *data, char *arg)
+{
+	ft_putstr_fd("minishell: exit: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
+	exit_minishell(data, 255);
 }
 
 int	my_exit(char **args, t_data *data)
@@ -59,8 +57,7 @@ int	my_exit(char **args, t_data *data)
 	if (count == 1)
 	{
 		exit_code = data->last_exit_status;
-		exit_minishell(data, NULL);
-		exit(exit_code);
+		exit_minishell(data, exit_code);
 	}
 	if (!is_numeric(args[1]))
 		handle_non_numeric(data, args[1]);
@@ -70,6 +67,6 @@ int	my_exit(char **args, t_data *data)
 		return (1);
 	}
 	exit_code = ft_atoi(args[1]);
-	exit_minishell(data, NULL);
-	exit(exit_code % 256);
+	exit_minishell(data, exit_code % 256);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 15:51:14 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:18:43 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,24 +79,24 @@ static void	execute_command(t_cmd *cmd, t_data *data)
 	int		status;
 
 	if (!cmd->args || !cmd->args[0])
-		exit(0);
+		child_cleanup(data, 0);
 	setup_redirections(cmd->redirections);
 	status = execute_builtin(cmd->args, data);
 	if (status != -1)
-		exit(status);
+		child_cleanup(data, status);
 	path = get_cmd_path(cmd->args[0], data->env);
 	if (!path)
 	{
 		ft_putstr_fd("minishell: command not found: ", 2);
 		ft_putendl_fd(cmd->args[0], 2);
-		exit(127);
+		child_cleanup(data, 127);
 	}
 	envp = env_list_to_array(data->env);
 	execve(path, cmd->args, envp);
 	perror("minishell");
 	free(path);
 	mango_free(envp);
-	exit(126);
+	child_cleanup(data, 126);
 }
 
 static void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read_end)

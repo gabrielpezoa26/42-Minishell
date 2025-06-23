@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 15:45:50 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:18:22 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_data
 	t_env	*locals;
 	char	*input;
 	t_token	*tokens;
+	t_cmd	*cmds;
 	bool	exec;
 	int		last_exit_status;
 }	t_data;
@@ -101,7 +102,8 @@ void	cleanup_heredocs(t_token *tokens);
 void	search_dollar_heredoc(char **line, t_env *my_env);
 
 /*---------UTILS---------*/
-void	exit_minishell(t_data *data, char *message);
+void	exit_minishell(t_data *data, int exit_code);
+void	child_cleanup(t_data *data, int exit_code);
 bool	init_data(t_data *data);
 void	mango_free(char **matrix);
 void	*ft_calloc(size_t item_count, size_t size_bytes);

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/04 15:10:49 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:06:56 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp)
 {
 	(void)my_envp;
 	if (!data->input)
-		exit_minishell(data, "DEBUG: finishhhh\n");
+		exit_minishell(data, 0);
 	else if (ft_strcmp(data->input, "\0") == 0)
 	{
 		printf("DEBUG: enter\n");

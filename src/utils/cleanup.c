@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 15:46:36 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:17:19 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,35 @@ void	free_env(t_env **my_env)
 	*my_env = NULL;
 }
 
-void	exit_minishell(t_data *data, char *message)
+void	child_cleanup(t_data *data, int exit_code)
+{
+	if (data)
+	{
+		free_tokens(&data->tokens);
+		if (data->cmds)
+			free_commands(&data->cmds);
+		free_env(&data->env);
+		free_env(&data->locals);
+		if (data->input)
+			free(data->input);
+		free(data);
+	}
+	exit(exit_code);
+}
+
+void	exit_minishell(t_data *data, int exit_code)
 {
 	if (data)
 	{
 		if (data->input)
 			free(data->input);
+		free_tokens(&data->tokens);
+		if (data->cmds)
+			free_commands(&data->cmds);
 		free_env(&data->env);
 		free_env(&data->locals);
 		free(data);
 	}
-	if (message)
-		ft_putstr_fd(message, 2);
 	clear_history();
-	exit(1);
+	exit(exit_code);
 }
