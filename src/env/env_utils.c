@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 10:29:09 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/17 16:21:39 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:02:57 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	env_dup(char **envp, t_env **my_env)
 
 bool	char_expandable(char c)
 {
-	if (ft_isalpha(c) || c == '_')
+	if (ft_isalpha(c) || c == '_' || c == '?')
 		return (true);
 	return (false);
 }

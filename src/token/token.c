@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:41:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/04 22:28:23 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:55:23 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ bool	convert_token(t_data *data, t_token **tokens)
 		printf("%s\n", TOKEN);
 		return (false);
 	}
-	search_dollar(data->env, data->locals, tokens);
+	search_dollar(data, tokens);
 	return (true);
 }

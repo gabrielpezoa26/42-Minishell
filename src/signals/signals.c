@@ -6,12 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:29:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/17 16:49:26 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:51:18 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 /*
 ** This handler is for SIGINT (Ctrl+C) in interactive mode.

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 16:18:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:59:35 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	handle_heredocs(t_token **tokens, t_env *my_env);
 void	cleanup_heredocs(t_token *tokens);
 void	search_dollar_heredoc(char **line, t_env *my_env);
 
+
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, int exit_code);
 void	child_cleanup(t_data *data, int exit_code);
@@ -134,7 +135,7 @@ char	*str_operator(char **input, int *op);
 char	*get_double_op(char **input, int *op);
 
 /*--------------ENVP----------------*/
-void	search_dollar(t_env *env, t_env *locals, t_token **tokens);
+void	search_dollar(t_data *data, t_token **tokens);
 void	env_dup(char **envp, t_env **my_env);
 size_t	count_rows(char **s);
 bool	char_expandable(char c);

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:37:22 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/04 17:12:05 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:57:25 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*my_getenv(char *name, t_env *env, t_env *locals)
 	return (NULL);
 }
 
-static void	search_and_replace(t_token *tok, int *i, t_env *env, t_env *locals)
+static void	search_and_replace(t_data *data, t_token *tok, int *i)
 {
 	char	*var;
 	char	*val;
@@ -62,19 +62,27 @@ static void	search_and_replace(t_token *tok, int *i, t_env *env, t_env *locals)
 
 	tok->index = *i;
 	(*i)++;
+	if (tok->str[*i] == '?')
+	{
+		(*i)++;
+		val = ft_itoa(data->last_exit_status);
+		expand_var(val, tok, i);
+		free(val);
+		return ;
+	}
 	start = *i;
 	while (ft_isalnum(tok->str[*i]) || tok->str[*i] == '_')
 		(*i)++;
 	len = *i - start;
 	var = ft_substr(tok->str, start, len);
-	val = my_getenv(var, env, locals);
+	val = my_getenv(var, data->env, data->locals);
 	free(var);
 	if (!val)
 		val = "";
 	expand_var(val, tok, i);
 }
 
-void	search_dollar(t_env *env, t_env *locals, t_token **tokens)
+void	search_dollar(t_data *data, t_token **tokens)
 {
 	t_token	*cur;
 	int		i;
@@ -89,7 +97,7 @@ void	search_dollar(t_env *env, t_env *locals, t_token **tokens)
 			{
 				if (cur->str[i] == '$')
 				{
-					search_and_replace(cur, &i, env, locals);
+					search_and_replace(data, cur, &i);
 					i = 0;
 				}
 				else
