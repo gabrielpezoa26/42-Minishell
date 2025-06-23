@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 15:47:06 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:32:46 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * 
  * @return: void
  */
-static void	minishell_loop(t_data *data, t_env **my_env)
+static void	minishell_loop(t_data *data)
 {
 	t_cmd	*cmds;
 
@@ -34,14 +34,15 @@ static void	minishell_loop(t_data *data, t_env **my_env)
 			add_history(data->input);
 		data->tokens = NULL;
 		cmds = NULL;
-		if (parse_input(data, &data->tokens, my_env))
+		data->cmds = NULL;
+		if (parse_input(data, &data->tokens, &data->env))
 		{
-			handle_heredocs(&data->tokens, *my_env);
+			handle_heredocs(&data->tokens, data->env);
 			cmds = parser(data->tokens);
+			data->cmds = cmds;
 			if (cmds)
 				data->last_exit_status = execution(cmds, data);
 		}
-		cleanup_heredocs(data->tokens);
 		free_tokens(&data->tokens);
 		free_commands(&cmds);
 		free(data->input);
@@ -52,20 +53,15 @@ static void	minishell_loop(t_data *data, t_env **my_env)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
-	t_env	*my_env;
 
 	(void)argv;
 	if (!check_argc(argc))
 		return (1);
-	setup_interactive_signals();
 	data = ft_calloc(1, sizeof(t_data));
-	my_env = NULL;
-	env_dup(envp, &my_env);
-	data->env = my_env;
+	data->env = NULL;
+	env_dup(envp, &data->env);
 	data->locals = NULL;
-	minishell_loop(data, &my_env);
-	free_env(&data->locals);
-	free_env(&my_env);
-	free(data);
+	minishell_loop(data);
+	exit_minishell(data, data->last_exit_status);
 	return (0);
 }
