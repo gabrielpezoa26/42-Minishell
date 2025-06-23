@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 16:59:35 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:43:14 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,11 @@ void	free_commands(t_cmd **commands);
 bool	my_pwd(void);
 bool	my_echo(char **args);
 bool	my_environ(t_env *my_env);
-int	my_exit(char **args, t_data *data);
+int		my_exit(char **args, t_data *data);
+int		my_cd(char **args, t_data *data);
+int		my_export(char **args, t_data *data);
+int		my_unset(char **args, t_data *data);
+
 t_cmd	*parser(t_token *tokens);
 
 #endif
