@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 16:32:46 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:37:24 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
  */
 static void	minishell_loop(t_data *data)
 {
-	t_cmd	*cmds;
-
 	while (1)
 	{
 		setup_interactive_signals();
@@ -33,18 +31,16 @@ static void	minishell_loop(t_data *data)
 		if (*data->input)
 			add_history(data->input);
 		data->tokens = NULL;
-		cmds = NULL;
 		data->cmds = NULL;
 		if (parse_input(data, &data->tokens, &data->env))
 		{
 			handle_heredocs(&data->tokens, data->env);
-			cmds = parser(data->tokens);
-			data->cmds = cmds;
-			if (cmds)
-				data->last_exit_status = execution(cmds, data);
+			data->cmds = parser(data->tokens);
+			if (data->cmds)
+				data->last_exit_status = execution(data->cmds, data);
 		}
 		free_tokens(&data->tokens);
-		free_commands(&cmds);
+		free_commands(&data->cmds);
 		free(data->input);
 		data->input = NULL;
 	}
