@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 17:42:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 22:46:35 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ static void	execute_command(t_cmd *cmd, t_data *data)
 
 	if (!cmd->args || !cmd->args[0])
 		child_cleanup(data, 0);
+	if (cmd->args[0][0] == '\0')
+		child_cleanup(data, 0);
 	setup_redirections(cmd->redirections);
 	status = execute_builtin(cmd->args, data);
 	if (status != -1)
@@ -157,7 +159,7 @@ int	execution(t_cmd *cmds, t_data *data)
 	int		prev_read_end;
 	pid_t	pid;
 
-	if (!cmds->next && cmds->args[0] && is_builtin(cmds->args[0]))
+	if (!cmds->next && cmds->args[0] && is_builtin(cmds->args[0]) && !cmds->redirections)
 		return (execute_builtin(cmds->args, data));
 	prev_read_end = STDIN_FILENO;
 	pid = -1;

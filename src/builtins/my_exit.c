@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 22:23:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 16:10:51 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/23 22:24:27 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	handle_non_numeric(t_data *data, char *arg)
 	ft_putstr_fd("minishell: exit: ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
-	exit_minishell(data, 255);
+	exit_minishell(data, 2);
 }
 
 int	my_exit(char **args, t_data *data)
