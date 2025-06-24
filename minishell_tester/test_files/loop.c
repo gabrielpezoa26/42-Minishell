@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 10:07:47 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 22:15:53 by gcesar-n         ###   ########.fr       */
+/*   Created: 2022/06/22 17:32:45 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/06/22 17:32:50 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
 
-t_list	*ft_lstlast(t_list *lst)
+int	main(int argc, char const *argv[])
 {
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next != NULL)
+	int	pid;
+
+	pid = fork();
+	open("infile", O_RDONLY);
+	while (1)
 	{
-		lst = lst->next;
+		printf("Helloo miniHELL %i\n", pid);
+		sleep(1);
 	}
-	return (lst);
+	return (0);
 }
