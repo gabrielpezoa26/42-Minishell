@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:29:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/25 17:13:50 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:23:53 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ static void	handle_interactive_sigint(int sig)
 ** - SIGINT (Ctrl+C): Catches the signal to show a new prompt.
 ** - SIGQUIT (Ctrl+\): Is ignored, as is standard in bash.
 */
-void	setup_interactive_signals(void)
+void    setup_interactive_signals(void)
 {
-	struct sigaction	sa_int;
-	struct sigaction	sa_quit;
+	struct sigaction    sa_int;
+	struct sigaction    sa_quit;
 
 	sa_int.sa_handler = handle_interactive_sigint;
 	sigemptyset(&sa_int.sa_mask);
 	sa_int.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa_int, NULL);
-	sa_quit.sa_handler = SIG_IGN;
+	sa_quit.sa_handler = SIG_DFL;
 	sigemptyset(&sa_quit.sa_mask);
 	sa_quit.sa_flags = 0;
 	sigaction(SIGQUIT, &sa_quit, NULL);

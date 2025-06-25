@@ -1,12 +1,11 @@
 25/06
 
 oq falta:
-	-> ctrl + \ tem q parar o minishell em si
-
-	-> qdo aperta Ctrl + C ele printa "minishell> "duas vezes
 
 	-> aspas duplas
 
 	-> heredoc
 
+na 42:
 	-> espaços no historico (ver como funfa na 42)
+	-> ctrl + \ tem q parar o minishell em si
