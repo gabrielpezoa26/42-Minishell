@@ -1,47 +1,12 @@
+25/06
 
-roadmapp geral:
-	afazeres:
-	- Implementar Sinais (signal/sigaction):
-	- Implementar waitpid() e Gerenciamento de Status de Saída:
-	- Implementar Built-in my_exit():
-	- Expandir Funcionalidade do Built-in my_export():
-	- Implementar Pipes (|):
-	- Redirecionamento Completo (saída > e >>):
+oq falta:
+	-> ctrl + \ tem q parar o minishell em si
 
+	-> qdo aperta Ctrl + C ele printa "minishell> "duas vezes
 
+	-> aspas duplas
 
+	-> heredoc
 
-
-minishell$ sleep 5
-DEBUG: Token 0: str='sleep' | type=0 | BOOM=0
-DEBUG: Token 1: str='5' | type=0 | BOOM=0
-^C
-minishell$ minishell$ 
-
-^^ tem q arrumar isso, ta printando duas vezes
-
-
-
-
--> uns teste padrao pra gnt ter ctz q nao quebrou nd 
-		(eu tinha quebrado dnv o echo $USER rs)
-
-
-echo abc
-echo -n abc
-
-
-echo $USER
-echo "$USER"
-echo "$USER   "
-echo '$USER'
-
-cat << eof
-cat << $USER
-cat <<
-
-pwd
-
-env
-
-
+	-> espaços no historico (ver como funfa na 42)
