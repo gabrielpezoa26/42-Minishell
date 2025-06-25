@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:29:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 16:51:18 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:13:50 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 ** This handler is for SIGINT (Ctrl+C) in interactive mode.
 ** It clears the current readline input and displays a new prompt.
 */
+
 static void	handle_interactive_sigint(int sig)
 {
 	(void)sig;
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();
 	rl_replace_line("", 0);
-	rl_redisplay();
 }
 
 /*
