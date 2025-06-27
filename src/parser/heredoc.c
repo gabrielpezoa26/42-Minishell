@@ -6,16 +6,16 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:40:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/16 17:53:21 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:11:37 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static char	*get_heredoc_filename(void)
+static char *get_heredoc_filename(void)
 {
-	char	*filename;
-	char	*pid_str;
+	char    *filename;
+	char    *pid_str;
 
 	pid_str = ft_itoa(getpid());
 	if (!pid_str)
@@ -25,9 +25,9 @@ static char	*get_heredoc_filename(void)
 	return (filename);
 }
 
-static void	heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
+static void heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
 {
-	char	*line;
+	char    *line;
 
 	while (1)
 	{
@@ -40,13 +40,12 @@ static void	heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
 		}
 		if (is_EOF)
 			search_dollar_heredoc(&line, my_env);
-		printf("%s\n", line);
 		ft_putendl_fd(line, fd);
 		free(line);
 	}
 }
 
-static char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_env *my_env)
+static char *read_and_write_hdoc(char *delimiter, bool is_eof, t_env *my_env)
 {
 	int		tmp_fd;
 	char	*tmp_filename;
@@ -82,12 +81,14 @@ void	handle_heredocs(t_token **tokens, t_env *my_env)
 			{
 				tmp_filename = read_and_write_hdoc(delimiter_token->str,
 						delimiter_token->is_eof, my_env);
-				free(current->str);
-				current->str = tmp_filename;
-				current->type = REDIR_IN;
-				current->next = delimiter_token->next;
-				free(delimiter_token->str);
-				free(delimiter_token);
+				if (tmp_filename)
+				{
+					current->type = REDIR_IN;
+					free(current->str);
+					current->str = ft_strdup("<");
+					free(delimiter_token->str);
+					delimiter_token->str = tmp_filename;
+				}
 			}
 		}
 		current = current->next;
@@ -96,17 +97,17 @@ void	handle_heredocs(t_token **tokens, t_env *my_env)
 
 void	cleanup_heredocs(t_token *tokens)
 {
-	t_token	*current;
-	char	*prefix;
+	t_token *current;
+	char    *prefix;
 
 	prefix = "/tmp/minishell-heredoc-";
 	current = tokens;
 	while (current)
 	{
-		if (current->type == REDIR_IN)
+		if (current->type == REDIR_IN && current->next)
 		{
-			if (ft_strncmp(current->str, prefix, ft_strlen(prefix)) == 0)
-				unlink(current->str);
+			if (ft_strncmp(current->next->str, prefix, ft_strlen(prefix)) == 0)
+				unlink(current->next->str);
 		}
 		current = current->next;
 	}
