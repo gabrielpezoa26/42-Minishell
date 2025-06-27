@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:37:22 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/23 16:57:25 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:36:18 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,30 @@ void	delone(t_list *lst, void (*del)(void *))
 
 static void    del_node(t_token **tokens, t_token *node_to_delete, void (*del)(void *))
 {
-    t_token  *current;
-    t_token  *prev;
+	t_token  *current;
+	t_token  *prev;
 
-    if (!tokens || !*tokens || !node_to_delete || !del)
-        return ;
-    if (*tokens == node_to_delete)
-    {
-        *tokens = node_to_delete->next;
-        delone((t_list *)node_to_delete, del);
-        return ;
-    }
-    prev = *tokens;
-    current = (*tokens)->next;
-    while (current)
-    {
-        if (current == node_to_delete)
-        {
-            prev->next = current->next;
-            delone((t_list *)current, del);
-            return ;
-        }
-        prev = current;
-        current = current->next;
-    }
+	if (!tokens || !*tokens || !node_to_delete || !del)
+		return ;
+	if (*tokens == node_to_delete)
+	{
+		*tokens = node_to_delete->next;
+		delone((t_list *)node_to_delete, del);
+		return ;
+	}
+	prev = *tokens;
+	current = (*tokens)->next;
+	while (current)
+	{
+		if (current == node_to_delete)
+		{
+			prev->next = current->next;
+			delone((t_list *)current, del);
+			return ;
+		}
+		prev = current;
+		current = current->next;
+	}
 }
 
 static void	expand_var(char *value, t_token *token, int *i)
@@ -120,32 +120,32 @@ static void	search_and_replace(t_data *data, t_token *tok, int *i)
 
 void    search_dollar(t_data *data, t_token **tokens)
 {
-    t_token *cur;
-    t_token *temp_next_node;
+	t_token *cur;
+	t_token *temp_next_node;
 	int 	i;
 
-    cur = *tokens;
-    while (cur)
-    {
-        temp_next_node = cur->next;
-        if (cur->is_expandable)
-        {
-            i = 0;
-            while (cur->str && cur->str[i])
-            {
-                if (cur->str[i] == '$')
-                {
-                    search_and_replace(data, cur, &i);
-                    if (ft_strcmp(cur->str, "") == 0)
-                    {
-                        del_node(tokens, cur, free);
-                        break;
-                    }
-                }
-                else
-                    i++;
-            }
-        }
-        cur = temp_next_node;
-    }
+	cur = *tokens;
+	while (cur)
+	{
+		temp_next_node = cur->next;
+		if (cur->is_expandable)
+		{
+			i = 0;
+			while (cur->str && cur->str[i])
+			{
+				if (cur->str[i] == '$')
+				{
+					search_and_replace(data, cur, &i);
+					if (ft_strcmp(cur->str, "") == 0)
+					{
+						del_node(tokens, cur, free);
+						break;
+					}
+				}
+				else
+					i++;
+			}
+		}
+		cur = temp_next_node;
+	}
 }

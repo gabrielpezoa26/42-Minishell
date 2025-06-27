@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 22:37:32 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:51:51 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-#include <sys/stat.h>
-#include <errno.h>
+# include <sys/stat.h>
+# include <errno.h>
 # include <sys/wait.h>
 
 /*--------MACROS-------*/
@@ -103,7 +103,6 @@ void	handle_heredocs(t_token **tokens, t_env *my_env);
 void	cleanup_heredocs(t_token *tokens);
 void	search_dollar_heredoc(char **line, t_env *my_env);
 
-
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, int exit_code);
 void	child_cleanup(t_data *data, int exit_code);
@@ -158,7 +157,6 @@ void	setup_redirections(t_list *redirections);
 char	*get_cmd_path(char *cmd, t_env *my_env);
 void	free_commands(t_cmd **commands);
 
-
 // void	append_cmd(t_cmd **cmds, t_token *tokens);
 // void	add_back_cmd(t_cmd **cmd, t_cmd *node);
 // int		count_cmd_args(t_token *temp);
@@ -175,5 +173,24 @@ int		my_export(char **args, t_data *data);
 int		my_unset(char **args, t_data *data);
 
 t_cmd	*parser(t_token *tokens);
+
+
+
+// void	handle_path_error(char *cmd_name, t_data *data);
+// void	execute_builtin_child(t_cmd *cmd, t_data *data);
+// void	execute_external(char *path, t_cmd *cmd, t_data *data);
+// bool	is_cd_export_unset_exit(t_cmd *cmds);
+// int		execute_builtin(char **arg_list, t_data *data);
+// bool	is_builtin(const char *cmd_name);
+
+int		execution(t_cmd *cmds, t_data *data);
+void	setup_redirections(t_list *redirections);
+char	*get_cmd_path(char *cmd, t_env *my_env);
+void	free_commands(t_cmd **commands);
+bool	is_builtin(const char *cmd_name);
+int		execute_builtin(char **arg_list, t_data *data);
+void	handle_path_error(char *cmd_name, t_data *data);
+void	execute_builtin_child(t_cmd *cmd, t_data *data);
+void	execute_external(char *path, t_cmd *cmd, t_data *data);
 
 #endif

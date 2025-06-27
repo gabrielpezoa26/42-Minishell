@@ -47,6 +47,9 @@ SRCS = $(SRC_DIR)/main.c \
 		$(BUILTINS_DIR)/my_cd.c \
 		$(BUILTINS_DIR)/my_unset.c \
 		$(EXEC_DIR)/execution.c \
+		$(EXEC_DIR)/execution_utils.c \
+		$(EXEC_DIR)/builtin_id.c \
+		$(EXEC_DIR)/redirs.c \
 		$(EXEC_DIR)/cmd_nodes.c \
 		$(EXEC_DIR)/cmd_nodes_utils.c \
 		$(EXEC_DIR)/find_path.c \

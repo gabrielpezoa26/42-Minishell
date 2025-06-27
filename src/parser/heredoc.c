@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:40:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 14:11:37 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:38:40 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char *get_heredoc_filename(void)
 {
-	char    *filename;
-	char    *pid_str;
+	char	*filename;
+	char	*pid_str;
 
 	pid_str = ft_itoa(getpid());
 	if (!pid_str)
