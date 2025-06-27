@@ -12,6 +12,42 @@
 
 #include "../../includes/minishell.h"
 
+void	delone(t_list *lst, void (*del)(void *))
+{
+	if (!lst)
+		return ;
+	(*del)(lst->content);
+	free(lst);
+}
+
+static void    del_node(t_token **tokens, t_token *node_to_delete, void (*del)(void *))
+{
+    t_token  *current;
+    t_token  *prev;
+
+    if (!tokens || !*tokens || !node_to_delete || !del)
+        return ;
+    if (*tokens == node_to_delete)
+    {
+        *tokens = node_to_delete->next;
+        delone((t_list *)node_to_delete, del);
+        return ;
+    }
+    prev = *tokens;
+    current = (*tokens)->next;
+    while (current)
+    {
+        if (current == node_to_delete)
+        {
+            prev->next = current->next;
+            delone((t_list *)current, del);
+            return ;
+        }
+        prev = current;
+        current = current->next;
+    }
+}
+
 static void	expand_var(char *value, t_token *token, int *i)
 {
 	int		size;
@@ -82,28 +118,34 @@ static void	search_and_replace(t_data *data, t_token *tok, int *i)
 	expand_var(val, tok, i);
 }
 
-void	search_dollar(t_data *data, t_token **tokens)
+void    search_dollar(t_data *data, t_token **tokens)
 {
-	t_token	*cur;
-	int		i;
+    t_token *cur;
+    t_token *temp_next_node;
+	int 	i;
 
-	cur = *tokens;
-	while (cur)
-	{
-		if (cur->is_expandable)
-		{
-			i = 0;
-			while (cur->str[i])
-			{
-				if (cur->str[i] == '$')
-				{
-					search_and_replace(data, cur, &i);
-					i = 0;
-				}
-				else
-					i++;
-			}
-		}
-		cur = cur->next;
-	}
+    cur = *tokens;
+    while (cur)
+    {
+        temp_next_node = cur->next;
+        if (cur->is_expandable)
+        {
+            i = 0;
+            while (cur->str && cur->str[i])
+            {
+                if (cur->str[i] == '$')
+                {
+                    search_and_replace(data, cur, &i);
+                    if (ft_strcmp(cur->str, "") == 0)
+                    {
+                        del_node(tokens, cur, free);
+                        break;
+                    }
+                }
+                else
+                    i++;
+            }
+        }
+        cur = temp_next_node;
+    }
 }
