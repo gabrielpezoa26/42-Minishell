@@ -18,7 +18,7 @@ static char	*banana(char *str, char **input)
 {
 	char	*temp;
 
-	while (**input && **input != ' ')
+	while (**input && **input != ' ' && !is_operator(**input))
 	{
 
 		while (**input == '\'' || **input == '\"')
