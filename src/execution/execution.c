@@ -84,33 +84,87 @@ void	setup_redirections(t_list *redirections)
 	}
 }
 
-static void	execute_command(t_cmd *cmd, t_data *data)
+static void execute_command(t_cmd *cmd, t_data *data)
 {
-	char	*path;
-	char	**envp;
-	int		status;
+    char    *path;
+    char    **envp;
+    struct stat file_stat;
 
-	if (!cmd->args || !cmd->args[0])
-		child_cleanup(data, 0);
-	if (cmd->args[0][0] == '\0')
-		child_cleanup(data, 0);
-	setup_redirections(cmd->redirections);
-	status = execute_builtin(cmd->args, data);
-	if (status != -1)
-		child_cleanup(data, status);
-	path = get_cmd_path(cmd->args[0], data->env);
-	if (!path)
-	{
-		ft_putstr_fd("minishell: command not found: ", 2);
-		ft_putendl_fd(cmd->args[0], 2);
-		child_cleanup(data, 127);
-	}
-	envp = env_list_to_array(data->env);
-	execve(path, cmd->args, envp);
-	perror("minishell");
-	free(path);
-	mango_free(envp);
-	child_cleanup(data, 126);
+    if (!cmd->args || !cmd->args[0] || cmd->args[0][0] == '\0')
+        child_cleanup(data, 0);
+
+    if (is_builtin(cmd->args[0]))
+    {
+        setup_redirections(cmd->redirections);
+        int builtin_status = execute_builtin(cmd->args, data);
+        child_cleanup(data, builtin_status);
+    }
+
+    path = get_cmd_path(cmd->args[0], data->env);
+
+    if (!path)
+    {
+        if (ft_strchr(cmd->args[0], '/'))
+        {
+            if (access(cmd->args[0], F_OK) == 0)
+            {
+                if (stat(cmd->args[0], &file_stat) == 0 && S_ISDIR(file_stat.st_mode))
+                {
+                    ft_putstr_fd("minishell: ", STDERR_FILENO);
+                    ft_putstr_fd(cmd->args[0], STDERR_FILENO);
+                    ft_putendl_fd(": Is a directory", STDERR_FILENO);
+                    child_cleanup(data, 126);
+                }
+                else
+                {
+                    ft_putstr_fd("minishell: ", STDERR_FILENO);
+                    ft_putstr_fd(cmd->args[0], STDERR_FILENO);
+                    ft_putendl_fd(": Permission denied", STDERR_FILENO);
+                    child_cleanup(data, 126);
+                }
+            }
+            else
+            {
+                ft_putstr_fd("minishell: ", STDERR_FILENO);
+                ft_putstr_fd(cmd->args[0], STDERR_FILENO);
+                ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+                child_cleanup(data, 127);
+            }
+        }
+        else
+        {
+            ft_putstr_fd("minishell: ", STDERR_FILENO);
+            ft_putstr_fd(cmd->args[0], STDERR_FILENO);
+            ft_putendl_fd(": command not found", STDERR_FILENO);
+            child_cleanup(data, 127);
+        }
+    }
+    else
+    {
+        setup_redirections(cmd->redirections);
+        envp = env_list_to_array(data->env);
+
+        execve(path, cmd->args, envp);
+
+        ft_putstr_fd("minishell: ", STDERR_FILENO);
+        ft_putstr_fd(cmd->args[0], STDERR_FILENO);
+
+        if (errno == EACCES)
+            ft_putendl_fd(": Permission denied", STDERR_FILENO);
+        else if (errno == ENOENT)
+            ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+        else if (errno == EISDIR)
+            ft_putendl_fd(": Is a directory", STDERR_FILENO);
+        else
+        {
+            ft_putstr_fd(": ", STDERR_FILENO);
+            perror(NULL);
+        }
+
+        free(path);
+        mango_free(envp);
+        child_cleanup(data, 126);
+    }
 }
 
 static void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read_end)

@@ -32,31 +32,6 @@ static char	*find_in_path(char *cmd, char **paths)
 	return (NULL);
 }
 
-/*
-** Finds the full path of a command.
-** It checks if the command is an absolute/relative path first.
-** If not, it searches in the directories specified by the PATH environment variable.
-*/
-// char	*get_cmd_path(char *cmd, t_env *my_env)
-// {
-// 	char	*path_env;
-// 	char	**paths;
-// 	char	*full_path;
-
-// 	if (access(cmd, X_OK) == 0)
-// 		return (ft_strdup(cmd));
-// 	path_env = my_getenv("PATH", my_env, NULL);
-// 	if (!path_env)
-// 		return (NULL);
-// 	paths = ft_split(path_env, ':');
-// 	if (!paths)
-// 		return (NULL);
-// 	full_path = find_in_path(cmd, paths);
-// 	mango_free(paths);
-// 	return (full_path);
-// }
-
-
 char	*get_cmd_path(char *cmd, t_env *my_env)
 {
 	char	*path_env;

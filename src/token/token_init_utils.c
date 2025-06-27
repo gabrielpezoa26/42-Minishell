@@ -100,6 +100,22 @@ char	*str_operator(char **input, int *op)
 	return (NULL);
 }
 
+char *banana2(char **input, char *str, char quote)
+{
+	char	*tmp;
+
+	while(**input != quote)
+	{
+		tmp = ft_join(str, **input);
+		if (!tmp)
+			return (NULL);
+		free(str);
+		str = tmp;
+		(*input)++;
+	}
+	return (str);
+}
+
 char	*str_string(char **input, bool *is_expandable)
 {
 	char	*str;
@@ -122,6 +138,8 @@ char	*str_string(char **input, bool *is_expandable)
 		{
 			if (!str_append(input, &str, is_expandable, quote))
 				return (NULL);
+			if (quote != '\0')
+				str = banana2(input, str, quote);
 		}
 	}
 	return (str);
