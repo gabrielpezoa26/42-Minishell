@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 14:47:43 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:59:44 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	execute_command(t_cmd *cmd, t_data *data)
 	execute_external(path, cmd, data);
 }
 
-static void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read)
+void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read)
 {
 	set_signals_for_child_process();
 	if (prev_read != STDIN_FILENO)
@@ -72,31 +72,13 @@ static int	wait_for_children(pid_t last_pid)
 
 int	execution(t_cmd *cmds, t_data *data)
 {
-	int		pfd[2];
-	int		prev_read;
-	pid_t	pid;
+	pid_t	last_pid;
 
-	if (!cmds->next && is_builtin(cmds->args[0]) && !cmds->redirections)
+	if (!cmds->next && cmds->args[0] && is_builtin(cmds->args[0])
+		&& !cmds->redirections)
 		return (execute_builtin(cmds->args, data));
-	prev_read = STDIN_FILENO;
-	pid = -1;
-	while (cmds)
-	{
-		if (cmds->next && pipe(pfd) == -1)
-			return (perror("minishell: pipe"), 1);
-		pid = fork();
-		if (pid == -1)
-			return (perror("minishell: fork"), 1);
-		if (pid == 0)
-			child_process(cmds, data, pfd, prev_read);
-		if (prev_read != STDIN_FILENO)
-			close(prev_read);
-		if (cmds->next)
-		{
-			close(pfd[1]);
-			prev_read = pfd[0];
-		}
-		cmds = cmds->next;
-	}
-	return (wait_for_children(pid));
+	last_pid = create_pipeline(cmds, data);
+	if (last_pid == -1)
+		return (1);
+	return (wait_for_children(last_pid));
 }

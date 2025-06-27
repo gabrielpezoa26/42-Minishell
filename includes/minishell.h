@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 14:51:51 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:59:48 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,5 +192,7 @@ int		execute_builtin(char **arg_list, t_data *data);
 void	handle_path_error(char *cmd_name, t_data *data);
 void	execute_builtin_child(t_cmd *cmd, t_data *data);
 void	execute_external(char *path, t_cmd *cmd, t_data *data);
+pid_t	create_pipeline(t_cmd *cmds, t_data *data);
+void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read);
 
 #endif
