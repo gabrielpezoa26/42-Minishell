@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 14:59:48 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:42:38 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,9 @@ bool	validate_tokens(t_token **tokens);
 void	handle_heredocs(t_token **tokens, t_env *my_env);
 void	cleanup_heredocs(t_token *tokens);
 void	search_dollar_heredoc(char **line, t_env *my_env);
+void	process_heredoc_token(t_token *current, t_env *my_env);
+void	handle_heredocs(t_token **tokens, t_env *my_env);
+char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_env *my_env);
 
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, int exit_code);
@@ -173,8 +176,6 @@ int		my_export(char **args, t_data *data);
 int		my_unset(char **args, t_data *data);
 
 t_cmd	*parser(t_token *tokens);
-
-
 
 // void	handle_path_error(char *cmd_name, t_data *data);
 // void	execute_builtin_child(t_cmd *cmd, t_data *data);

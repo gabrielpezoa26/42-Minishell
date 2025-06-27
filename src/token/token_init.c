@@ -6,21 +6,18 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/13 16:20:19 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:47:40 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-//botar no utils depois
 static char	*banana(char *str, char **input)
 {
 	char	*temp;
 
 	while (**input && **input != ' ' && !is_operator(**input))
 	{
-
 		while (**input == '\'' || **input == '\"')
 			(*input)++;
 		if (**input)
@@ -62,7 +59,6 @@ static char	*str_quote(char **input, char quote, bool *is_expandable)
 		str = banana(str, input);
 	return (str);
 }
-
 
 static char	*handle_heredoc_delimiter(char **input, bool *is_expandable)
 {

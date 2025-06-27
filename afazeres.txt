@@ -1,11 +1,16 @@
-25/06
 
-oq falta:
+implementar/consertar:
+    -> heredoc
+    -> msgs d erro
+    -> Ctrl + C ta dando ruim dnv
 
-	-> aspas duplas
+finalizar:
+    -> norma
+    -> tirar comentarios
+    -> tirar as funcao q n ta usando
 
-	-> heredoc
-
-na 42:
-	-> espaços no historico (ver como funfa na 42)
-	-> ctrl + \ tem q parar o minishell em si
+testes especificos:
+    ->    $variavel dentro do heredoc
+    ->    << echo oi
+    ->    cat <minishell.h <<HERE <missing | ls
+	

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:04:55 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/13 16:20:30 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:57:22 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,11 @@ char	*str_operator(char **input, int *op)
 	return (NULL);
 }
 
-char *banana2(char **input, char *str, char quote)
+char	*banana2(char **input, char *str, char quote)
 {
 	char	*tmp;
 
-	while(**input != quote)
+	while (**input != quote)
 	{
 		tmp = ft_join(str, **input);
 		if (!tmp)

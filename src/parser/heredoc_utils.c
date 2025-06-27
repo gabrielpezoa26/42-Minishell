@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:46:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/16 18:44:01 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:54:15 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,18 @@ void	search_dollar_heredoc(char **line, t_env *my_env)
 			expand_hdoc_line(line, &i, my_env, achei);
 		}
 		i++;
+	}
+}
+
+void	handle_heredocs(t_token **tokens, t_env *my_env)
+{
+	t_token	*current;
+
+	current = *tokens;
+	while (current)
+	{
+		if (current->type == REDIR_DELIMITER)
+			process_heredoc_token(current, my_env);
+		current = current->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:29:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 14:36:50 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:58:26 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	handle_interactive_sigint(int sig)
 	rl_replace_line("", 0);
 }
 
-void    setup_interactive_signals(void)
+void	setup_interactive_signals(void)
 {
-	struct sigaction    sa_int;
-	struct sigaction    sa_quit;
+	struct sigaction	sa_int;
+	struct sigaction	sa_quit;
 
 	sa_int.sa_handler = handle_interactive_sigint;
 	sigemptyset(&sa_int.sa_mask);

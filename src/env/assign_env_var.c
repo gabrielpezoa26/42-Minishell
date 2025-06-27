@@ -6,12 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:12:57 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/05 18:09:54 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:57:43 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 static char	*str_suport(char *input)
 {
@@ -35,6 +34,7 @@ static char	*str_suport(char *input)
 		input++;
 	return (str);
 }
+
 /**
  * is_valid_assignment-> checks if it's a valid assignment (start with letters
  * 			or a '_' only)

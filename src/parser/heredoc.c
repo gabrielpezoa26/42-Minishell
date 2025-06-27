@@ -6,13 +6,13 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:40:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 14:38:40 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/27 15:42:06 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static char *get_heredoc_filename(void)
+static char	*get_heredoc_filename(void)
 {
 	char	*filename;
 	char	*pid_str;
@@ -25,9 +25,9 @@ static char *get_heredoc_filename(void)
 	return (filename);
 }
 
-static void heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
+static void	heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
 {
-	char    *line;
+	char	*line;
 
 	while (1)
 	{
@@ -45,7 +45,7 @@ static void heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
 	}
 }
 
-static char *read_and_write_hdoc(char *delimiter, bool is_eof, t_env *my_env)
+char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_env *my_env)
 {
 	int		tmp_fd;
 	char	*tmp_filename;
@@ -65,40 +65,31 @@ static char *read_and_write_hdoc(char *delimiter, bool is_eof, t_env *my_env)
 	return (tmp_filename);
 }
 
-void	handle_heredocs(t_token **tokens, t_env *my_env)
+void	process_heredoc_token(t_token *current, t_env *my_env)
 {
-	t_token	*current;
 	t_token	*delimiter_token;
 	char	*tmp_filename;
 
-	current = *tokens;
-	while (current)
+	delimiter_token = current->next;
+	if (delimiter_token && delimiter_token->type == WORD)
 	{
-		if (current->type == REDIR_DELIMITER)
+		tmp_filename = read_and_write_hdoc(delimiter_token->str,
+				delimiter_token->is_eof, my_env);
+		if (tmp_filename)
 		{
-			delimiter_token = current->next;
-			if (delimiter_token && delimiter_token->type == WORD)
-			{
-				tmp_filename = read_and_write_hdoc(delimiter_token->str,
-						delimiter_token->is_eof, my_env);
-				if (tmp_filename)
-				{
-					current->type = REDIR_IN;
-					free(current->str);
-					current->str = ft_strdup("<");
-					free(delimiter_token->str);
-					delimiter_token->str = tmp_filename;
-				}
-			}
+			current->type = REDIR_IN;
+			free(current->str);
+			current->str = ft_strdup("<");
+			free(delimiter_token->str);
+			delimiter_token->str = tmp_filename;
 		}
-		current = current->next;
 	}
 }
 
 void	cleanup_heredocs(t_token *tokens)
 {
-	t_token *current;
-	char    *prefix;
+	t_token	*current;
+	char	*prefix;
 
 	prefix = "/tmp/minishell-heredoc-";
 	current = tokens;
