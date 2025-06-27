@@ -12,6 +12,29 @@
 
 #include "../../includes/minishell.h"
 
+
+static char	*str_suport(char *input)
+{
+	char	*str;
+	char	*temp;
+	char	quote;
+
+	quote = *input;
+	str = ft_strdup("");
+	input++;
+	while (*input && *input != quote)
+	{
+		temp = ft_join(str, *input);
+		if (!temp)
+			return (NULL);
+		free(str);
+		str = temp;
+		input++;
+	}
+	if (*input == quote)
+		input++;
+	return (str);
+}
 /**
  * is_valid_assignment-> checks if it's a valid assignment (start with letters
  * 			or a '_' only)
@@ -82,7 +105,10 @@ bool	update_value(t_env **list, char *name, char *assignment)
 			&& curr->str[ft_strlen(name)] == '=')
 		{
 			free(curr->str);
-			curr->str = ft_strdup(assignment);
+			if (is_quote(assignment[0]))
+				curr->str = str_suport(assignment);
+			else
+				curr->str = ft_strdup(assignment);
 			return (true);
 		}
 		curr = curr->next;

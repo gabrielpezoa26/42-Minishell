@@ -137,7 +137,7 @@ static bool	is_valid_identifier(char *str)
 {
 	int	i;
 
-	if (!str || !(ft_isalpha(str[0]) || str[0] == '_'))
+	if (!str || !(ft_isalpha(str[0]) || str[0] == '_' || is_quote(str[0])))
 		return (false);
 	i = 1;
 	while (str[i] && str[i] != '=')

@@ -12,6 +12,30 @@
 
 #include "../../includes/minishell.h"
 
+
+//botar no utils depois
+static char	*banana(char *str, char **input)
+{
+	char	*temp;
+
+	while (**input && **input != ' ')
+	{
+
+		while (**input == '\'' || **input == '\"')
+			(*input)++;
+		if (**input)
+		{
+			temp = ft_join(str, **input);
+			if (!temp)
+				return (NULL);
+			free(str);
+			str = temp;
+			(*input)++;
+		}
+	}
+	return (str);
+}
+
 static char	*str_quote(char **input, char quote, bool *is_expandable)
 {
 	char	*str;
@@ -34,8 +58,11 @@ static char	*str_quote(char **input, char quote, bool *is_expandable)
 	}
 	if (**input == quote)
 		(*input)++;
+	if (**input != ' ')
+		str = banana(str, input);
 	return (str);
 }
+
 
 static char	*handle_heredoc_delimiter(char **input, bool *is_expandable)
 {
