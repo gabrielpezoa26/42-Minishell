@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 14:59:44 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/29 15:05:07 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,16 @@ static int	get_exit_status(int status)
 		return (WEXITSTATUS(status));
 	if (WIFSIGNALED(status))
 	{
+		if (WTERMSIG(status) == SIGINT)
+		{
+			ft_putchar_fd('\n', STDERR_FILENO);
+			return (130);
+		}
 		if (WTERMSIG(status) == SIGQUIT)
+		{
 			ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO);
-		return (128 + WTERMSIG(status));
+			return (131);
+		}
 	}
 	return (1);
 }
@@ -73,12 +80,21 @@ static int	wait_for_children(pid_t last_pid)
 int	execution(t_cmd *cmds, t_data *data)
 {
 	pid_t	last_pid;
+	int		exit_status;
 
 	if (!cmds->next && cmds->args[0] && is_builtin(cmds->args[0])
 		&& !cmds->redirections)
 		return (execute_builtin(cmds->args, data));
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+
 	last_pid = create_pipeline(cmds, data);
 	if (last_pid == -1)
+	{
+		setup_interactive_signals();
 		return (1);
-	return (wait_for_children(last_pid));
+	}
+	exit_status = wait_for_children(last_pid);
+	setup_interactive_signals();
+	return (exit_status);
 }
