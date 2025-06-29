@@ -32,6 +32,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(TOKEN_DIR)/token_utils.c \
 		$(UTILS_DIR)/utils_parser.c \
 		$(UTILS_DIR)/cleanup.c \
+		$(UTILS_DIR)/cleanup_utils.c \
 		$(PARSER_DIR)/parse_tokens.c \
 		$(PARSER_DIR)/parser.c \
 		$(VRF_TOKEN)/verify.c \
@@ -39,6 +40,7 @@ SRCS = $(SRC_DIR)/main.c \
 		$(ENV_DIR)/env_utils.c \
 		$(ENV_DIR)/env_nodes.c \
 		$(ENV_DIR)/assign_env_var.c \
+		$(ENV_DIR)/env_nodes_utils.c \
 		$(BUILTINS_DIR)/my_pwd.c \
 		$(BUILTINS_DIR)/my_echo.c \
 		$(BUILTINS_DIR)/my_env.c \

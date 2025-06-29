@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:12:57 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 15:57:43 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:54:46 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,21 @@ static char	*str_suport(char *input)
  * 
  * @return: true if valid, false otherwise
  */
-bool	is_valid_assignment(char *str)
-{
-	int	i;
+// bool	is_valid_assignment(char *str)
+// {
+// 	int	i;
 
-	if (!str || !(ft_isalpha(str[0]) || str[0] == '_'))
-		return (false);
-	i = 1;
-	while (str[i] && str[i] != '=')
-	{
-		if (!(ft_isalnum(str[i]) || str[i] == '_'))
-			return (false);
-		i++;
-	}
-	return (str[i] == '=');
-}
+// 	if (!str || !(ft_isalpha(str[0]) || str[0] == '_'))
+// 		return (false);
+// 	i = 1;
+// 	while (str[i] && str[i] != '=')
+// 	{
+// 		if (!(ft_isalnum(str[i]) || str[i] == '_'))
+// 			return (false);
+// 		i++;
+// 	}
+// 	return (str[i] == '=');
+// }
 
 /**
  * get_assignment_name-> extracts the "name", from the assignment

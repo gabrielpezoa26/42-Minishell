@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/29 15:05:07 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:44:47 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	execution(t_cmd *cmds, t_data *data)
 		return (execute_builtin(cmds->args, data));
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-
 	last_pid = create_pipeline(cmds, data);
 	if (last_pid == -1)
 	{

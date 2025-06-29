@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:04:17 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/15 22:03:51 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:48:30 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,20 @@ bool	are_quotes_valid(char *input)
 	single_q = 0;
 	count_quotes(input, quote, &double_q, &single_q);
 	return (double_q % 2 == 0 && single_q % 2 == 0);
+}
+
+char	*append_until_quote(char **input, char *str, char quote)
+{
+	char	*tmp;
+
+	while (**input != quote)
+	{
+		tmp = ft_join(str, **input);
+		if (!tmp)
+			return (NULL);
+		free(str);
+		str = tmp;
+		(*input)++;
+	}
+	return (str);
 }

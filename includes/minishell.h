@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 15:42:38 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:58:41 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,6 @@ typedef enum e_token_types
 	REDIR_APPEND,
 	REDIR_DELIMITER,
 }	t_type;
-
-// typedef struct s_cmd
-// {
-// 	char			*name;		//"ls"
-// 	char			**args;		//["-la", NULL]
-// 	char			*in_file;	//NULL ou "input.txt"
-// 	char			*out_file;	//"output.txt"
-// 	int				append;		//0 ou 1 (para >>)
-// 	struct s_cmd	*next;		//para pipes
-// }	t_cmd;
 
 typedef struct s_token
 {
@@ -97,24 +87,7 @@ void	set_signals_for_child_process(void);
 bool	check_argc(int argc);
 bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp);
 bool	validate_tokens(t_token **tokens);
-
-/*---------HEREDOC----------*/
-void	handle_heredocs(t_token **tokens, t_env *my_env);
-void	cleanup_heredocs(t_token *tokens);
-void	search_dollar_heredoc(char **line, t_env *my_env);
-void	process_heredoc_token(t_token *current, t_env *my_env);
-void	handle_heredocs(t_token **tokens, t_env *my_env);
-char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_env *my_env);
-
-/*---------UTILS---------*/
-void	exit_minishell(t_data *data, int exit_code);
-void	child_cleanup(t_data *data, int exit_code);
-bool	init_data(t_data *data);
-void	mango_free(char **matrix);
-void	*ft_calloc(size_t item_count, size_t size_bytes);
-void	*ft_malloc(size_t size, size_t type);
-bool	verify_space(char *str);
-char	*trim_space(char *string);
+t_cmd	*parser(t_token *tokens);
 
 /*-----------TOKEN---------------*/
 bool	convert_token(t_data *data, t_token **tokens);
@@ -137,12 +110,13 @@ char	*handle_eof(char **input, char quote, bool *is_expand, int *flag);
 char	*str_string(char **input, bool *is_expandable);
 char	*str_operator(char **input, int *op);
 char	*get_double_op(char **input, int *op);
+char	*append_until_quote(char **input, char *str, char quote);
 
 /*--------------ENVP----------------*/
 void	search_dollar(t_data *data, t_token **tokens);
 void	env_dup(char **envp, t_env **my_env);
 size_t	count_rows(char **s);
-bool	char_expandable(char c);
+bool	is_char_expandable(char c);
 void	ft_strcat(char *dst, const char *src, size_t index);
 bool	update_env(t_env **env, char *assignment);
 void	append_env(t_env **my_env, char *content);
@@ -151,20 +125,17 @@ void	handle_assignments(t_token *tokens, t_env **env);
 char	*get_assignment_name(char *str);
 bool	update_value(t_env **list, char *name, char *assignment);
 bool	is_valid_assignment(char *str);
+size_t	count_env_nodes(t_env *my_env);
 char	**env_list_to_array(t_env *my_env);
 char	*my_getenv(char *name, t_env *env, t_env *locals);
 
-/*--------------EXECUTION----------------*/
-int		execution(t_cmd *cmds, t_data *data);
-void	setup_redirections(t_list *redirections);
-char	*get_cmd_path(char *cmd, t_env *my_env);
-void	free_commands(t_cmd **commands);
-
-// void	append_cmd(t_cmd **cmds, t_token *tokens);
-// void	add_back_cmd(t_cmd **cmd, t_cmd *node);
-// int		count_cmd_args(t_token *temp);
-// void	cmd_args(t_cmd *cmd, t_token *token);
-// void	cmd_redir(t_cmd *cmd, t_token *token);
+/*---------HEREDOC----------*/
+void	handle_heredocs(t_token **tokens, t_env *my_env);
+void	cleanup_heredocs(t_token *tokens);
+void	search_dollar_heredoc(char **line, t_env *my_env);
+void	process_heredoc_token(t_token *current, t_env *my_env);
+void	handle_heredocs(t_token **tokens, t_env *my_env);
+char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_env *my_env);
 
 /*--------------BUILT-INS----------------*/
 bool	my_pwd(void);
@@ -175,15 +146,7 @@ int		my_cd(char **args, t_data *data);
 int		my_export(char **args, t_data *data);
 int		my_unset(char **args, t_data *data);
 
-t_cmd	*parser(t_token *tokens);
-
-// void	handle_path_error(char *cmd_name, t_data *data);
-// void	execute_builtin_child(t_cmd *cmd, t_data *data);
-// void	execute_external(char *path, t_cmd *cmd, t_data *data);
-// bool	is_cd_export_unset_exit(t_cmd *cmds);
-// int		execute_builtin(char **arg_list, t_data *data);
-// bool	is_builtin(const char *cmd_name);
-
+/*--------------EXECUTION----------------*/
 int		execution(t_cmd *cmds, t_data *data);
 void	setup_redirections(t_list *redirections);
 char	*get_cmd_path(char *cmd, t_env *my_env);
@@ -195,5 +158,15 @@ void	execute_builtin_child(t_cmd *cmd, t_data *data);
 void	execute_external(char *path, t_cmd *cmd, t_data *data);
 pid_t	create_pipeline(t_cmd *cmds, t_data *data);
 void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read);
+
+/*---------UTILS---------*/
+void	exit_minishell(t_data *data, int exit_code);
+void	child_cleanup(t_data *data, int exit_code);
+bool	init_data(t_data *data);
+void	mango_free(char **matrix);
+void	*ft_calloc(size_t item_count, size_t size_bytes);
+void	*ft_malloc(size_t size, size_t type);
+bool	verify_space(char *str);
+char	*trim_space(char *string);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:04:55 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/27 15:57:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:49:40 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	str_append(char **input, char **str, bool *is_exp, char quote)
 {
 	char	*tmp;
 
-	if (**input == '$' && *(*input + 1) && char_expandable(*(*input + 1))
+	if (**input == '$' && *(*input + 1) && is_char_expandable(*(*input + 1))
 		&& quote != '\'')
 	{
 		*is_exp = true;
@@ -100,22 +100,6 @@ char	*str_operator(char **input, int *op)
 	return (NULL);
 }
 
-char	*banana2(char **input, char *str, char quote)
-{
-	char	*tmp;
-
-	while (**input != quote)
-	{
-		tmp = ft_join(str, **input);
-		if (!tmp)
-			return (NULL);
-		free(str);
-		str = tmp;
-		(*input)++;
-	}
-	return (str);
-}
-
 char	*str_string(char **input, bool *is_expandable)
 {
 	char	*str;
@@ -139,7 +123,7 @@ char	*str_string(char **input, bool *is_expandable)
 			if (!str_append(input, &str, is_expandable, quote))
 				return (NULL);
 			if (quote != '\0')
-				str = banana2(input, str, quote);
+				str = append_until_quote(input, str, quote);
 		}
 	}
 	return (str);

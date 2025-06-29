@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 16:17:19 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:44:13 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,5 @@ void	child_cleanup(t_data *data, int exit_code)
 			free(data->input);
 		free(data);
 	}
-	exit(exit_code);
-}
-
-void	exit_minishell(t_data *data, int exit_code)
-{
-	if (data)
-	{
-		if (data->input)
-			free(data->input);
-		free_tokens(&data->tokens);
-		if (data->cmds)
-			free_commands(&data->cmds);
-		free_env(&data->env);
-		free_env(&data->locals);
-		free(data);
-	}
-	clear_history();
 	exit(exit_code);
 }

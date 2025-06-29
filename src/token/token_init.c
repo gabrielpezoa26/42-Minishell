@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/27 15:47:40 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/29 17:49:40 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*str_quote(char **input, char quote, bool *is_expandable)
 	while (**input && **input != quote)
 	{
 		if (quote == '\"' && **input == '$' && *(*input + 1)
-			&& char_expandable(*(*input + 1)))
+			&& is_char_expandable(*(*input + 1)))
 			*is_expandable = true;
 		temp = ft_join(str, **input);
 		if (!temp)
