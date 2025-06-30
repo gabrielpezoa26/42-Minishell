@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/29 17:58:41 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/29 18:07:27 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,14 @@ void	*ft_calloc(size_t item_count, size_t size_bytes);
 void	*ft_malloc(size_t size, size_t type);
 bool	verify_space(char *str);
 char	*trim_space(char *string);
+
+void	ft_swap_str(char **a, char **b);
+void	sort_env_array(char **array, size_t count);
+char	**create_env_array(t_env *env, size_t *count);
+void	print_sorted_env(t_env *env);
+t_env	*find_node(t_env *list, const char *name);
+
+void	delone(t_list *lst, void (*del)(void *));
+void	del_node(t_token **tokens, t_token *to_delete, void (*del)(void *));
 
 #endif

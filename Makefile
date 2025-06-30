@@ -33,6 +33,8 @@ SRCS = $(SRC_DIR)/main.c \
 		$(UTILS_DIR)/utils_parser.c \
 		$(UTILS_DIR)/cleanup.c \
 		$(UTILS_DIR)/cleanup_utils.c \
+		$(UTILS_DIR)/utils_builtins.c \
+		$(UTILS_DIR)/general_utils.c \
 		$(PARSER_DIR)/parse_tokens.c \
 		$(PARSER_DIR)/parser.c \
 		$(VRF_TOKEN)/verify.c \
