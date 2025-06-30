@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:07:49 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/16 17:39:44 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:49:50 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,6 @@ static void	parse_simple_command(t_token **tokens, t_cmd *current_cmd)
 	}
 }
 
-/**
- * @brief Parses a list of tokens into a linked list of command structures.
- *
- * This function iterates through the token list, creating a new command node
- * for each sequence of tokens separated by a PIPE.
- *
- * @param tokens The head of the token list.
- * @return The head of the newly created command list (`t_cmd *`).
- */
 t_cmd	*parser(t_token *tokens)
 {
 	t_cmd	*head;

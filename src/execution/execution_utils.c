@@ -6,13 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 14:40:36 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 14:58:12 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:17:56 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// a gnt divide a funcao de 80 linha e joga as auxiliar aq
 
 static void	report_file_error(char *cmd_name, t_data *data)
 {
@@ -76,15 +74,18 @@ void	execute_external(char *path, t_cmd *cmd, t_data *data)
 			ft_putendl_fd(": Permission denied", STDERR_FILENO);
 		if (errno == EISDIR)
 			ft_putendl_fd(": Is a directory", STDERR_FILENO);
+		free(path);
+		free_array(envp);
 		child_cleanup(data, 126);
 	}
 	else
 	{
 		perror(NULL);
+		free(path);
+		free_array(envp);
 		child_cleanup(data, 127);
 	}
-	free(path);
-	mango_free(envp);
+	clean_pointers(path, envp);
 }
 
 pid_t	create_pipeline(t_cmd *cmds, t_data *data)

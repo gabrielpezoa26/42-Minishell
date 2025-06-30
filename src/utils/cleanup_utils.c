@@ -6,11 +6,32 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 17:42:32 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/29 17:44:19 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:19:36 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	free_array(char **matrix)
+{
+	int	i;
+
+	if (!matrix)
+		return ;
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+}
+
+void	clean_pointers(char *single_pointer, char **double_pointer)
+{
+	free(single_pointer);
+	free_array(double_pointer);
+}
 
 void	exit_minishell(t_data *data, int exit_code)
 {

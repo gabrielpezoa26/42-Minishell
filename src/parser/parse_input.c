@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/23 18:47:12 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:49:36 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,6 @@ static bool	is_all_spaces(char *input)
 	return (true);
 }
 
-/**
- * parse_input - validates and tokenizes the user input string
- * 
- * @data: pointer to the main struct
- * @tokens: pointer to the token list
- * @my_envp:
- * 
- * @return: true if input is valid, returns false otherwise
- */
 bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp)
 {
 	(void)my_envp;

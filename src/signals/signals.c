@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:29:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/29 14:29:45 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:49:58 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ void	setup_interactive_signals(void)
 	sigaction(SIGQUIT, &sa_quit, NULL);
 }
 
-/*
-** Resets signal handlers to their default behavior for a child process.
-** This ensures that a child process can be terminated by Ctrl+C and Ctrl+\.
-*/
 void	set_signals_for_child_process(void)
 {
 	struct sigaction	sa_int;

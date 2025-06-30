@@ -6,22 +6,12 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:04:17 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/29 17:48:30 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:50:20 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/**
- * void count_quotes -> counts all single and double quotes in the prompt
- * 
- * @input: input from command-line
- * @quote: "holds" the current char being counted
- * @db: amount of double quotes
- * @db: amount of single quotes
- * 
- * @return: void (bc it directly increments the respective pointers)
- */
 static void	count_quotes(char *input, char quote, int *db, int *sg)
 {
 	bool	is_open;
@@ -50,13 +40,6 @@ static void	count_quotes(char *input, char quote, int *db, int *sg)
 	}
 }
 
-/**
- * bool are_quotes_valid -> determines if the quotes are valid(properly closed)
- * 
- * @input: input from command-line
- * 
- * @return: bool 
- */
 bool	are_quotes_valid(char *input)
 {
 	int		double_q;

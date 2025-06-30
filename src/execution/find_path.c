@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:49:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/23 22:40:12 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:17:56 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ char	*get_cmd_path(char *cmd, t_env *my_env)
 	if (!paths)
 		return (NULL);
 	full_path = find_in_path(cmd, paths);
-	mango_free(paths);
+	free_array(paths);
 	return (full_path);
 }

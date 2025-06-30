@@ -6,13 +6,13 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:56 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/29 17:49:40 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:52:28 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*banana(char *str, char **input)
+static char	*append_word(char *str, char **input)
 {
 	char	*temp;
 
@@ -56,7 +56,7 @@ static char	*str_quote(char **input, char quote, bool *is_expandable)
 	if (**input == quote)
 		(*input)++;
 	if (**input != ' ')
-		str = banana(str, input);
+		str = append_word(str, input);
 	return (str);
 }
 

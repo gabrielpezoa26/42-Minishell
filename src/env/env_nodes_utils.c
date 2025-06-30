@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 17:52:26 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/29 17:58:05 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:17:56 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**env_list_to_array(t_env *my_env)
 		env_array[i] = ft_strdup(my_env->str);
 		if (!env_array[i])
 		{
-			mango_free(env_array);
+			free_array(env_array);
 			return (NULL);
 		}
 		my_env = my_env->next;

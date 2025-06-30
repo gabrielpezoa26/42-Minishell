@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:23:00 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/12 18:36:45 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:53:02 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ void	append_token(t_token **tokens, char *content, int op, bool is_expand)
 		add_back(tokens, token);
 }
 
-/**
- * t_token *last_node -> finds the last node from the list and returns it
- *
- * @token: the token at the top of the list
- * 
- * @return: returns the last token
- */
 t_token	*last_token(t_token *token)
 {
 	if (!token)
@@ -53,14 +46,6 @@ t_token	*last_token(t_token *token)
 	return (token);
 }
 
-/**
- * void add_back -> adds the given token at the end of the list
- *
- * @tokens: the list of the tokens
- * @node: the token to be added
- * 
- * @return: void
- */
 void	add_back(t_token **token, t_token *node)
 {
 	t_token	*last;

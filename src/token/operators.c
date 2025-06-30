@@ -6,19 +6,12 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:04:15 by dteruya           #+#    #+#             */
-/*   Updated: 2025/05/27 16:19:56 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:50:12 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/**
- * bool is_invalid_operator -> validates the operators (no "||", ">>>", "<<")
- *  obs: tem q mexer aqui
- * @input: operator to be validated
- * 
- * @return: bool 
- */
 static bool	is_invalid_operator(const char *input)
 {
 	if (input[0] == '|'
@@ -39,13 +32,6 @@ static bool	is_invalid_operator(const char *input)
 	return (false);
 }
 
-/**
- * bool is_operator -> detects any operator(valid or invalid) then validates it
- * 
- * @input: the prompt to be scanned for operators
- * 
- * @return: bool
- */
 static bool	is_operators(char *input)
 {
 	int	i;
@@ -60,14 +46,6 @@ static bool	is_operators(char *input)
 	return (false);
 }
 
-/**
- * bool token_operators -> reads the prompt looking for operatorns in general
- * 						(either valid or invalid) and calls the helper funcs
- * 
- * @input: the prompt from the command-line
- * 
- * @return: bool
- */
 bool	token_operators(char *input)
 {
 	bool	in_quote;

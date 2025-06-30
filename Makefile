@@ -13,7 +13,6 @@ PARSER_DIR = $(SRC_DIR)/parser
 TOKEN_DIR = $(SRC_DIR)/token
 UTILS_DIR = $(SRC_DIR)/utils
 ENV_DIR = $(SRC_DIR)/env
-VRF_TOKEN = $(SRC_DIR)/verify_tokens
 BUILTINS_DIR = $(SRC_DIR)/builtins
 EXEC_DIR = $(SRC_DIR)/execution
 SIGNALS_DIR = $(SRC_DIR)/signals
@@ -37,7 +36,6 @@ SRCS = $(SRC_DIR)/main.c \
 		$(UTILS_DIR)/general_utils.c \
 		$(PARSER_DIR)/parse_tokens.c \
 		$(PARSER_DIR)/parser.c \
-		$(VRF_TOKEN)/verify.c \
 		$(ENV_DIR)/env.c \
 		$(ENV_DIR)/env_utils.c \
 		$(ENV_DIR)/env_nodes.c \
@@ -54,8 +52,6 @@ SRCS = $(SRC_DIR)/main.c \
 		$(EXEC_DIR)/execution_utils.c \
 		$(EXEC_DIR)/builtin_id.c \
 		$(EXEC_DIR)/redirs.c \
-		$(EXEC_DIR)/cmd_nodes.c \
-		$(EXEC_DIR)/cmd_nodes_utils.c \
 		$(EXEC_DIR)/find_path.c \
 		$(SIGNALS_DIR)/signals.c \
 

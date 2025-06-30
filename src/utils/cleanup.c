@@ -6,26 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/29 17:44:13 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:19:43 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	mango_free(char **matrix)
-{
-	int	i;
-
-	if (!matrix)
-		return ;
-	i = 0;
-	while (matrix[i])
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-}
 
 static void	free_redirection(void *content)
 {
@@ -51,7 +36,7 @@ void	free_commands(t_cmd **commands)
 	{
 		next = current->next;
 		if (current->args)
-			mango_free(current->args);
+			free_array(current->args);
 		if (current->redirections)
 			ft_lstclear(&current->redirections, free_redirection);
 		free(current);

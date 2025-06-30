@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/29 17:44:47 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 11:59:09 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	execute_command(t_cmd *cmd, t_data *data)
 	if (!path)
 		handle_path_error(cmd->args[0], data);
 	execute_external(path, cmd, data);
+	free(path);
 }
 
 void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read)

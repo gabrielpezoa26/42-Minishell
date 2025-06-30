@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:21:25 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/04 15:18:48 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:47:11 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,6 @@ void	append_env(t_env **my_env, char *content)
 		add_back_env(my_env, env);
 }
 
-/**
- * t_env *last_node -> finds the last node from the list and returns it
- *
- * @token: the token at the top of the list
- * 
- * @return: returns the last token
- */
 t_env	*last_env(t_env *env)
 {
 	if (!env)
@@ -51,14 +44,6 @@ t_env	*last_env(t_env *env)
 	return (env);
 }
 
-/**
- * void add_back -> adds the given token at the end of the list
- *
- * @tokens: the list of the tokens
- * @node: the token to be added
- * 
- * @return: void
- */
 void	add_back_env(t_env **my_env, t_env *node)
 {
 	t_env	*last;

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/29 18:07:27 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:47:53 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,11 +163,12 @@ void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read);
 void	exit_minishell(t_data *data, int exit_code);
 void	child_cleanup(t_data *data, int exit_code);
 bool	init_data(t_data *data);
-void	mango_free(char **matrix);
+void	free_array(char **matrix);
 void	*ft_calloc(size_t item_count, size_t size_bytes);
 void	*ft_malloc(size_t size, size_t type);
 bool	verify_space(char *str);
 char	*trim_space(char *string);
+void	clean_pointers(char *single_pointer, char **double_pointer);
 
 void	ft_swap_str(char **a, char **b);
 void	sort_env_array(char **array, size_t count);
