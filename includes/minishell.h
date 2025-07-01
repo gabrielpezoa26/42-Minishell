@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/30 12:47:53 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 21:04:50 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	set_signals_for_child_process(void);
 
 /*---------PARSER---------*/
 bool	check_argc(int argc);
+bool	is_all_spaces(char *input);
 bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp);
 bool	validate_tokens(t_token **tokens);
 t_cmd	*parser(t_token *tokens);
@@ -105,7 +106,6 @@ char	*ft_join(const char *s1, char s2);
 char	*ft_strdup_char(int *index);
 void	free_tokens(t_token **tokens);
 void	free_env(t_env **my_env);
-bool	token_valid(t_token **tokens);
 char	*handle_eof(char **input, char quote, bool *is_expand, int *flag);
 char	*str_string(char **input, bool *is_expandable);
 char	*str_operator(char **input, int *op);
@@ -118,7 +118,6 @@ void	env_dup(char **envp, t_env **my_env);
 size_t	count_rows(char **s);
 bool	is_char_expandable(char c);
 void	ft_strcat(char *dst, const char *src, size_t index);
-bool	update_env(t_env **env, char *assignment);
 void	append_env(t_env **my_env, char *content);
 void	add_back_env(t_env **my_env, t_env *node);
 void	handle_assignments(t_token *tokens, t_env **env);
@@ -162,20 +161,17 @@ void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read);
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, int exit_code);
 void	child_cleanup(t_data *data, int exit_code);
-bool	init_data(t_data *data);
 void	free_array(char **matrix);
 void	*ft_calloc(size_t item_count, size_t size_bytes);
 void	*ft_malloc(size_t size, size_t type);
 bool	verify_space(char *str);
 char	*trim_space(char *string);
 void	clean_pointers(char *single_pointer, char **double_pointer);
-
 void	ft_swap_str(char **a, char **b);
 void	sort_env_array(char **array, size_t count);
 char	**create_env_array(t_env *env, size_t *count);
 void	print_sorted_env(t_env *env);
 t_env	*find_node(t_env *list, const char *name);
-
 void	delone(t_list *lst, void (*del)(void *));
 void	del_node(t_token **tokens, t_token *to_delete, void (*del)(void *));
 

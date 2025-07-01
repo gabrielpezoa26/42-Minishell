@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/30 12:45:55 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 20:18:38 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	minishell_loop(t_data *data)
 		data->input = readline("minishell$ ");
 		if (!data->input)
 			break ;
-		if (*data->input)
+		if (*data->input && !is_all_spaces(data->input))
 			add_history(data->input);
 		data->tokens = NULL;
 		data->cmds = NULL;

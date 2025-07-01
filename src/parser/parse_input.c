@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/30 12:49:36 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/06/30 20:18:46 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	check_argc(int argc)
 // 	}
 // }
 
-static bool	is_all_spaces(char *input)
+bool	is_all_spaces(char *input)
 {
 	int	i;
 
