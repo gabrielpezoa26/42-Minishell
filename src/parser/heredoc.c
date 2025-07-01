@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:40:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 15:42:06 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/01 16:44:18 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*get_heredoc_filename(void)
 	return (filename);
 }
 
-static void	heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
+static void	heredoc_loop(int fd, char *delimiter, bool is_eof, t_env *my_env)
 {
 	char	*line;
 
@@ -38,7 +38,7 @@ static void	heredoc_loop(int fd, char *delimiter, bool is_EOF, t_env *my_env)
 				free(line);
 			break ;
 		}
-		if (is_EOF)
+		if (is_eof)
 			search_dollar_heredoc(&line, my_env);
 		ft_putendl_fd(line, fd);
 		free(line);
