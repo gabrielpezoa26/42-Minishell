@@ -80,7 +80,11 @@ fclean: clean
 re: fclean all
 
 SUPP = supp.supp
+
 val: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=$(SUPP) ./$(NAME)
+
+fds: all
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=$(SUPP) ./$(NAME)
 
 .PHONY: all clean fclean re val
