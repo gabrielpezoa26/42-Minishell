@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:46:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/27 15:54:15 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/01 19:02:06 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	expand_var_heredoc(char *value, char **line, int *i, int achei)
+static void	expand_var_heredoc(char *value, char **line, int *i, int index)
 {
 	int		size;
 	int		add;
@@ -21,16 +21,16 @@ static void	expand_var_heredoc(char *value, char **line, int *i, int achei)
 
 	old = *line;
 	add = ft_strlen(value);
-	size = achei + add + ft_strlen(old + *i);
+	size = index + add + ft_strlen(old + *i);
 	new = ft_calloc(size + 1, sizeof(char));
 	if (!new)
 		return ;
-	ft_memcpy(new, old, achei);
-	ft_memcpy(new + achei, value, add);
-	ft_memcpy(new + achei + add, old + *i, ft_strlen(old + *i));
+	ft_memcpy(new, old, index);
+	ft_memcpy(new + index, value, add);
+	ft_memcpy(new + index + add, old + *i, ft_strlen(old + *i));
 	free(*line);
 	*line = new;
-	*i = achei + add;
+	*i = index + add;
 }
 
 char	*my_getenv_heredoc(char *name, t_env *env)
@@ -70,15 +70,15 @@ static void	expand_hdoc_line(char **line, int *i, t_env *my_env, int found)
 void	search_dollar_heredoc(char **line, t_env *my_env)
 {
 	int		i;
-	int		achei;
+	int		index;
 
 	i = 0;
 	while ((*line)[i])
 	{
 		if ((*line)[i] == '$')
 		{
-			achei = i;
-			expand_hdoc_line(line, &i, my_env, achei);
+			index = i;
+			expand_hdoc_line(line, &i, my_env, index);
 		}
 		i++;
 	}
