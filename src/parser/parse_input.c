@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/07/01 22:04:31 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/02 12:40:35 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,20 @@ bool	is_all_spaces(char *input)
 	return (true);
 }
 
+bool	is_all_quotes(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if ((input[i] != '\'') && (input[i] != '\"'))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp)
 {
 	(void)my_envp;
@@ -59,6 +73,11 @@ bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp)
 		return (false);
 	else if (is_all_spaces(data->input))
 		return (true);
+	else if (is_all_quotes(data->input))
+	{
+		handle_all_quotes();
+		return (false);
+	}
 	if (!convert_token(data, tokens))
 		return (false);
 	// debug_print_tokens(*tokens);

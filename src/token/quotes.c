@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 12:04:17 by dteruya           #+#    #+#             */
-/*   Updated: 2025/06/30 12:50:20 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/02 12:46:32 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,9 @@ char	*append_until_quote(char **input, char *str, char quote)
 		(*input)++;
 	}
 	return (str);
+}
+
+void	handle_all_quotes(void)
+{
+	printf("Command '' not found \n");
 }

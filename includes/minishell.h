@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/01 22:00:15 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/02 12:45:05 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	set_signals_for_child_process(void);
 /*---------PARSER---------*/
 bool	check_argc(int argc);
 bool	is_all_spaces(char *input);
+bool	is_all_quotes(char *input);
+void	handle_all_quotes(void);
 bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp);
 bool	validate_tokens(t_token **tokens);
 t_cmd	*parser(t_token *tokens);

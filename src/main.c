@@ -6,11 +6,18 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/01 21:59:43 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/02 12:19:38 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static void	free_minishell_loop(t_data *data)
+{
+	free_tokens(&data->tokens);
+	free_commands(&data->cmds);
+	free(data->input);
+}
 
 static void	minishell_loop(t_data *data)
 {
@@ -36,9 +43,7 @@ static void	minishell_loop(t_data *data)
 					data->last_exit_status = execution(data->cmds, data);
 			}
 		}
-		free_tokens(&data->tokens);
-		free_commands(&data->cmds);
-		free(data->input);
+		free_minishell_loop(data);
 		data->input = NULL;
 	}
 }
