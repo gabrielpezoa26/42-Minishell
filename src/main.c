@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/30 20:18:38 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/01 21:59:43 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ static void	minishell_loop(t_data *data)
 			add_history(data->input);
 		data->tokens = NULL;
 		data->cmds = NULL;
+		data->exec = true;
 		if (parse_input(data, &data->tokens, &data->env))
 		{
-			handle_heredocs(&data->tokens, data->env);
-			data->cmds = parser(data->tokens);
-			if (data->cmds)
-				data->last_exit_status = execution(data->cmds, data);
+			if (!handle_heredocs(&data->tokens, data))
+				data->exec = false;
+			if (data->exec)
+			{
+				data->cmds = parser(data->tokens);
+				if (data->cmds)
+					data->last_exit_status = execution(data->cmds, data);
+			}
 		}
 		free_tokens(&data->tokens);
 		free_commands(&data->cmds);
@@ -46,6 +51,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!check_argc(argc))
 		return (1);
 	data = ft_calloc(1, sizeof(t_data));
+	get_data(true, data);
 	data->env = NULL;
 	env_dup(envp, &data->env);
 	data->locals = NULL;

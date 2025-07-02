@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:06:40 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/29 18:08:12 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/01 21:38:55 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,13 @@ void	del_node(t_token **tokens, t_token *to_delete, void (*del)(void *))
 		prev = current;
 		current = current->next;
 	}
+}
+
+t_data	*get_data(bool set, t_data *data_ptr)
+{
+	static t_data	*static_data_ptr = NULL;
+
+	if (set)
+		static_data_ptr = data_ptr;
+	return (static_data_ptr);
 }

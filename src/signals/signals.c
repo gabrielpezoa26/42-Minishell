@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:29:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/30 12:49:58 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:01:55 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,33 @@ static void	handle_interactive_sigint(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+}
+
+static void	handle_heredoc_sigint(int sig)
+{
+	t_data	*data;
+
+	(void)sig;
+	data = get_data(false, NULL);
+	if (data)
+		data->last_exit_status = 130;
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	close(STDIN_FILENO);
+}
+
+void	setup_heredoc_signals(void)
+{
+	struct sigaction	sa_int;
+	struct sigaction	sa_quit;
+
+	sa_int.sa_handler = handle_heredoc_sigint;
+	sigemptyset(&sa_int.sa_mask);
+	sa_int.sa_flags = 0;
+	sigaction(SIGINT, &sa_int, NULL);
+	sa_quit.sa_handler = SIG_IGN;
+	sigemptyset(&sa_quit.sa_mask);
+	sa_quit.sa_flags = 0;
+	sigaction(SIGQUIT, &sa_quit, NULL);
 }
 
 void	setup_interactive_signals(void)

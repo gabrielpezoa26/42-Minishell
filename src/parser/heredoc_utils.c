@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:46:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/01 19:02:06 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/07/01 21:59:00 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	search_dollar_heredoc(char **line, t_env *my_env)
 	}
 }
 
-void	handle_heredocs(t_token **tokens, t_env *my_env)
+bool	handle_heredocs(t_token **tokens, t_data *data)
 {
 	t_token	*current;
 
@@ -92,7 +92,11 @@ void	handle_heredocs(t_token **tokens, t_env *my_env)
 	while (current)
 	{
 		if (current->type == REDIR_DELIMITER)
-			process_heredoc_token(current, my_env);
+		{
+			if (!process_heredoc_token(current, data))
+				return (false);
+		}
 		current = current->next;
 	}
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/30 21:04:50 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/01 22:00:15 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,12 @@ char	**env_list_to_array(t_env *my_env);
 char	*my_getenv(char *name, t_env *env, t_env *locals);
 
 /*---------HEREDOC----------*/
-void	handle_heredocs(t_token **tokens, t_env *my_env);
-void	cleanup_heredocs(t_token *tokens);
+bool	handle_heredocs(t_token **tokens, t_data *data);
+bool	process_heredoc_token(t_token *current, t_data *data);
+char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_data *data);
 void	search_dollar_heredoc(char **line, t_env *my_env);
-void	process_heredoc_token(t_token *current, t_env *my_env);
-void	handle_heredocs(t_token **tokens, t_env *my_env);
-char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_env *my_env);
+void	cleanup_heredocs(t_token *tokens);
+void	setup_heredoc_signals(void);
 
 /*--------------BUILT-INS----------------*/
 bool	my_pwd(void);
@@ -172,6 +172,7 @@ void	sort_env_array(char **array, size_t count);
 char	**create_env_array(t_env *env, size_t *count);
 void	print_sorted_env(t_env *env);
 t_env	*find_node(t_env *list, const char *name);
+t_data	*get_data(bool set, t_data *data_ptr);
 void	delone(t_list *lst, void (*del)(void *));
 void	del_node(t_token **tokens, t_token *to_delete, void (*del)(void *));
 
