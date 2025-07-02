@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/30 11:59:09 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/02 16:46:59 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	execute_command(t_cmd *cmd, t_data *data)
 	free(path);
 }
 
-void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read)
+void	child_process(t_cmd *cmd, t_data *data, int *pipe_fd, int prev_read)
 {
 	set_signals_for_child_process();
 	if (prev_read != STDIN_FILENO)
@@ -37,9 +37,9 @@ void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read)
 	}
 	if (cmd->next)
 	{
-		close(pfd[0]);
-		dup2(pfd[1], STDOUT_FILENO);
-		close(pfd[1]);
+		close(pipe_fd[0]);
+		dup2(pipe_fd[1], STDOUT_FILENO);
+		close(pipe_fd[1]);
 	}
 	execute_command(cmd, data);
 }

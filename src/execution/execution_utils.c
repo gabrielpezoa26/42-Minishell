@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 14:40:36 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/30 12:17:56 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/02 16:46:43 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	execute_external(char *path, t_cmd *cmd, t_data *data)
 
 pid_t	create_pipeline(t_cmd *cmds, t_data *data)
 {
-	int		pfd[2];
+	int		pipe_fd[2];
 	int		prev_read;
 	pid_t	pid;
 
@@ -98,19 +98,19 @@ pid_t	create_pipeline(t_cmd *cmds, t_data *data)
 	pid = -1;
 	while (cmds)
 	{
-		if (cmds->next && pipe(pfd) == -1)
+		if (cmds->next && pipe(pipe_fd) == -1)
 			return (perror("minishell: pipe"), -1);
 		pid = fork();
 		if (pid == -1)
 			return (perror("minishell: fork"), -1);
 		if (pid == 0)
-			child_process(cmds, data, pfd, prev_read);
+			child_process(cmds, data, pipe_fd, prev_read);
 		if (prev_read != STDIN_FILENO)
 			close(prev_read);
 		if (cmds->next)
 		{
-			close(pfd[1]);
-			prev_read = pfd[0];
+			close(pipe_fd[1]);
+			prev_read = pipe_fd[0];
 		}
 		cmds = cmds->next;
 	}
