@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/02 12:45:05 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:03:00 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ char	*my_getenv(char *name, t_env *env, t_env *locals);
 
 /*---------HEREDOC----------*/
 bool	handle_heredocs(t_token **tokens, t_data *data);
+char	*get_heredoc_filename(void);
 bool	process_heredoc_token(t_token *current, t_data *data);
 char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_data *data);
 void	search_dollar_heredoc(char **line, t_env *my_env);

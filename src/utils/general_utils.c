@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:06:40 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/01 21:38:55 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/02 13:00:45 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,17 @@ t_data	*get_data(bool set, t_data *data_ptr)
 	if (set)
 		static_data_ptr = data_ptr;
 	return (static_data_ptr);
+}
+
+char	*get_heredoc_filename(void)
+{
+	char	*filename;
+	char	*pid_str;
+
+	pid_str = ft_itoa(getpid());
+	if (!pid_str)
+		return (NULL);
+	filename = ft_strjoin("/tmp/minishell-heredoc-", pid_str);
+	free(pid_str);
+	return (filename);
 }

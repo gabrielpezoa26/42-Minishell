@@ -6,24 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:40:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/01 22:04:49 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:00:21 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static char	*get_heredoc_filename(void)
-{
-	char	*filename;
-	char	*pid_str;
-
-	pid_str = ft_itoa(getpid());
-	if (!pid_str)
-		return (NULL);
-	filename = ft_strjoin("/tmp/minishell-heredoc-", pid_str);
-	free(pid_str);
-	return (filename);
-}
 
 static void	heredoc_loop(int fd, char *delimiter, bool is_eof, t_data *data)
 {
@@ -51,11 +38,54 @@ static void	heredoc_loop(int fd, char *delimiter, bool is_eof, t_data *data)
 	}
 }
 
+// char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_data *data)
+// {
+// 	int		tmp_fd;
+// 	char	*tmp_filename;
+// 	int		stdin_backup;
+
+// 	tmp_filename = get_heredoc_filename();
+// 	if (!tmp_filename)
+// 		return (NULL);
+// 	tmp_fd = open(tmp_filename, O_CREAT | O_WRONLY | O_TRUNC, 0600);
+// 	if (tmp_fd < 0)
+// 	{
+// 		perror("minishell: open");
+// 		free(tmp_filename);
+// 		return (NULL);
+// 	}
+// 	stdin_backup = dup(STDIN_FILENO);
+// 	setup_heredoc_signals();
+// 	heredoc_loop(tmp_fd, delimiter, is_eof, data);
+// 	dup2(stdin_backup, STDIN_FILENO);
+// 	close(stdin_backup);
+// 	setup_interactive_signals();
+// 	close(tmp_fd);
+// 	if (data->last_exit_status == 130)
+// 	{
+// 		unlink(tmp_filename);
+// 		free(tmp_filename);
+// 		return (NULL);
+// 	}
+// 	return (tmp_filename);
+// }
+
+static void	run_hdoc_loop(int tmp_fd, char *delimiter, bool eof, t_data *data)
+{
+	int	stdin_backup;
+
+	stdin_backup = dup(STDIN_FILENO);
+	setup_heredoc_signals();
+	heredoc_loop(tmp_fd, delimiter, eof, data);
+	dup2(stdin_backup, STDIN_FILENO);
+	close(stdin_backup);
+	setup_interactive_signals();
+}
+
 char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_data *data)
 {
 	int		tmp_fd;
 	char	*tmp_filename;
-	int		stdin_backup;
 
 	tmp_filename = get_heredoc_filename();
 	if (!tmp_filename)
@@ -67,12 +97,7 @@ char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_data *data)
 		free(tmp_filename);
 		return (NULL);
 	}
-	stdin_backup = dup(STDIN_FILENO);
-	setup_heredoc_signals();
-	heredoc_loop(tmp_fd, delimiter, is_eof, data);
-	dup2(stdin_backup, STDIN_FILENO);
-	close(stdin_backup);
-	setup_interactive_signals();
+	run_hdoc_loop(tmp_fd, delimiter, is_eof, data);
 	close(tmp_fd);
 	if (data->last_exit_status == 130)
 	{
