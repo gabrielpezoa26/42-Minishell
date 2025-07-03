@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 14:40:36 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/02 16:46:43 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:12:18 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	report_file_error(char *cmd_name, t_data *data)
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(cmd_name, STDERR_FILENO);
 		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
-		child_cleanup(data, 127);
+		free_child(data, 127);
 	}
 	stat(cmd_name, &file_stat);
 	if (S_ISDIR(file_stat.st_mode))
@@ -29,12 +29,12 @@ static void	report_file_error(char *cmd_name, t_data *data)
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(cmd_name, STDERR_FILENO);
 		ft_putendl_fd(": Is a directory", STDERR_FILENO);
-		child_cleanup(data, 126);
+		free_child(data, 126);
 	}
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(cmd_name, STDERR_FILENO);
 	ft_putendl_fd(": Permission denied", STDERR_FILENO);
-	child_cleanup(data, 126);
+	free_child(data, 126);
 }
 
 void	handle_path_error(char *cmd_name, t_data *data)
@@ -46,7 +46,7 @@ void	handle_path_error(char *cmd_name, t_data *data)
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(cmd_name, STDERR_FILENO);
 		ft_putendl_fd(": command not found", STDERR_FILENO);
-		child_cleanup(data, 127);
+		free_child(data, 127);
 	}
 }
 
@@ -56,10 +56,10 @@ void	execute_builtin_child(t_cmd *cmd, t_data *data)
 
 	setup_redirections(cmd->redirections);
 	builtin_status = execute_builtin(cmd->args, data);
-	child_cleanup(data, builtin_status);
+	free_child(data, builtin_status);
 }
 
-void	execute_external(char *path, t_cmd *cmd, t_data *data)
+void	execute_external_cmd(char *path, t_cmd *cmd, t_data *data)
 {
 	char	**envp;
 
@@ -75,17 +75,17 @@ void	execute_external(char *path, t_cmd *cmd, t_data *data)
 		if (errno == EISDIR)
 			ft_putendl_fd(": Is a directory", STDERR_FILENO);
 		free(path);
-		free_array(envp);
-		child_cleanup(data, 126);
+		free_matrix(envp);
+		free_child(data, 126);
 	}
 	else
 	{
 		perror(NULL);
 		free(path);
-		free_array(envp);
-		child_cleanup(data, 127);
+		free_matrix(envp);
+		free_child(data, 127);
 	}
-	clean_pointers(path, envp);
+	free_pointers(path, envp);
 }
 
 pid_t	create_pipeline(t_cmd *cmds, t_data *data)

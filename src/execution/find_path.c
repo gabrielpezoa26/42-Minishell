@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:49:15 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/30 12:17:56 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:12:18 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ char	*get_cmd_path(char *cmd, t_env *my_env)
 	if (!paths)
 		return (NULL);
 	full_path = find_in_path(cmd, paths);
-	free_array(paths);
+	free_matrix(paths);
 	return (full_path);
 }

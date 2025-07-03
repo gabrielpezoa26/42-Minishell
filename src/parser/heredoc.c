@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 14:40:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/02 16:20:38 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:49:34 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	run_hdoc_loop(int tmp_fd, char *delimiter, bool eof, t_data *data)
 	int	stdin_backup;
 
 	stdin_backup = dup(STDIN_FILENO);
-	setup_heredoc_signals();
+	set_heredoc_signals();
 	heredoc_loop(tmp_fd, delimiter, eof, data);
 	dup2(stdin_backup, STDIN_FILENO);
 	close(stdin_backup);

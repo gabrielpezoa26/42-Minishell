@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/30 12:19:43 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:57:14 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_commands(t_cmd **commands)
 	{
 		next = current->next;
 		if (current->args)
-			free_array(current->args);
+			free_matrix(current->args);
 		if (current->redirections)
 			ft_lstclear(&current->redirections, free_redirection);
 		free(current);
@@ -62,7 +62,7 @@ void	free_env(t_env **my_env)
 	*my_env = NULL;
 }
 
-void	child_cleanup(t_data *data, int exit_code)
+void	free_child(t_data *data, int exit_code)
 {
 	if (data)
 	{

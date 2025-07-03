@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 17:42:32 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/30 12:19:36 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:36:22 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	free_array(char **matrix)
+void	free_matrix(char **matrix)
 {
 	int	i;
 
@@ -27,10 +27,10 @@ void	free_array(char **matrix)
 	free(matrix);
 }
 
-void	clean_pointers(char *single_pointer, char **double_pointer)
+void	free_pointers(char *single_pointer, char **double_pointer)
 {
 	free(single_pointer);
-	free_array(double_pointer);
+	free_matrix(double_pointer);
 }
 
 void	exit_minishell(t_data *data, int exit_code)
@@ -46,6 +46,6 @@ void	exit_minishell(t_data *data, int exit_code)
 		free_env(&data->locals);
 		free(data);
 	}
-	clear_history();
+	rl_clear_history();
 	exit(exit_code);
 }

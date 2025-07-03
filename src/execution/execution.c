@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/02 16:46:59 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:11:32 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	execute_command(t_cmd *cmd, t_data *data)
+static void	execute_single_command(t_cmd *cmd, t_data *data)
 {
 	char	*path;
 
 	if (!cmd->args || !cmd->args[0] || cmd->args[0][0] == '\0')
-		child_cleanup(data, 0);
+		free_child(data, 0);
 	if (is_builtin(cmd->args[0]))
 		execute_builtin_child(cmd, data);
 	path = get_cmd_path(cmd->args[0], data->env);
 	if (!path)
 		handle_path_error(cmd->args[0], data);
-	execute_external(path, cmd, data);
+	execute_external_cmd(path, cmd, data);
 	free(path);
 }
 
@@ -41,7 +41,7 @@ void	child_process(t_cmd *cmd, t_data *data, int *pipe_fd, int prev_read)
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close(pipe_fd[1]);
 	}
-	execute_command(cmd, data);
+	execute_single_command(cmd, data);
 }
 
 static int	get_exit_status(int status)

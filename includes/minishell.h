@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/02 15:03:00 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:58:00 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ bool	process_heredoc_token(t_token *current, t_data *data);
 char	*read_and_write_hdoc(char *delimiter, bool is_eof, t_data *data);
 void	search_dollar_heredoc(char **line, t_env *my_env);
 void	cleanup_heredocs(t_token *tokens);
-void	setup_heredoc_signals(void);
+void	set_heredoc_signals(void);
 
 /*--------------BUILT-INS----------------*/
 bool	my_pwd(void);
@@ -157,19 +157,19 @@ bool	is_builtin(const char *cmd_name);
 int		execute_builtin(char **arg_list, t_data *data);
 void	handle_path_error(char *cmd_name, t_data *data);
 void	execute_builtin_child(t_cmd *cmd, t_data *data);
-void	execute_external(char *path, t_cmd *cmd, t_data *data);
+void	execute_external_cmd(char *path, t_cmd *cmd, t_data *data);
 pid_t	create_pipeline(t_cmd *cmds, t_data *data);
 void	child_process(t_cmd *cmd, t_data *data, int *pfd, int prev_read);
 
 /*---------UTILS---------*/
 void	exit_minishell(t_data *data, int exit_code);
-void	child_cleanup(t_data *data, int exit_code);
-void	free_array(char **matrix);
+void	free_child(t_data *data, int exit_code);
+void	free_matrix(char **matrix);
 void	*ft_calloc(size_t item_count, size_t size_bytes);
 void	*ft_malloc(size_t size, size_t type);
 bool	verify_space(char *str);
 char	*trim_space(char *string);
-void	clean_pointers(char *single_pointer, char **double_pointer);
+void	free_pointers(char *single_pointer, char **double_pointer);
 void	ft_swap_str(char **a, char **b);
 void	sort_env_array(char **array, size_t count);
 char	**create_env_array(t_env *env, size_t *count);
