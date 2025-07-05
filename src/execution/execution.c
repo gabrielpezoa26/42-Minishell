@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/03 12:11:32 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/07/04 15:48:51 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,16 @@ void	child_process(t_cmd *cmd, t_data *data, int *pipe_fd, int prev_read)
 	execute_single_command(cmd, data);
 }
 
-static int	get_exit_status(int status)
+void	execute_builtin_child(t_cmd *cmd, t_data *data)
+{
+	int	builtin_status;
+
+	setup_redirections(cmd->redirections);
+	builtin_status = execute_builtin(cmd->args, data);
+	free_child(data, builtin_status);
+}
+
+int	get_exit_status(int status)
 {
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
@@ -62,20 +71,6 @@ static int	get_exit_status(int status)
 		}
 	}
 	return (1);
-}
-
-static int	wait_for_children(pid_t last_pid)
-{
-	int	status;
-	int	last_status;
-
-	if (last_pid == -1)
-		return (0);
-	waitpid(last_pid, &status, 0);
-	last_status = get_exit_status(status);
-	while (wait(NULL) > 0)
-		;
-	return (last_status);
 }
 
 int	execution(t_cmd *cmds, t_data *data)

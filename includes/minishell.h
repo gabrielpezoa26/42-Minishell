@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/03 15:58:00 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/07/04 15:49:01 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ int		my_unset(char **args, t_data *data);
 int		execution(t_cmd *cmds, t_data *data);
 void	setup_redirections(t_list *redirections);
 char	*get_cmd_path(char *cmd, t_env *my_env);
+int		wait_for_children(pid_t last_pid);
+int		get_exit_status(int status);
 void	free_commands(t_cmd **commands);
 bool	is_builtin(const char *cmd_name);
 int		execute_builtin(char **arg_list, t_data *data);

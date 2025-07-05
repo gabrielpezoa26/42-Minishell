@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 14:40:36 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/03 12:12:18 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/07/04 15:49:26 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,18 @@ void	handle_path_error(char *cmd_name, t_data *data)
 	}
 }
 
-void	execute_builtin_child(t_cmd *cmd, t_data *data)
+int	wait_for_children(pid_t last_pid)
 {
-	int	builtin_status;
+	int	status;
+	int	last_status;
 
-	setup_redirections(cmd->redirections);
-	builtin_status = execute_builtin(cmd->args, data);
-	free_child(data, builtin_status);
+	if (last_pid == -1)
+		return (0);
+	waitpid(last_pid, &status, 0);
+	last_status = get_exit_status(status);
+	while (wait(NULL) > 0)
+		;
+	return (last_status);
 }
 
 void	execute_external_cmd(char *path, t_cmd *cmd, t_data *data)
