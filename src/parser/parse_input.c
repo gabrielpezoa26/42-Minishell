@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:22:33 by dteruya           #+#    #+#             */
-/*   Updated: 2025/07/02 15:56:03 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:40:55 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,11 @@ bool	check_argc(int argc)
 {
 	if (argc != 1)
 	{
-		printf("Invalid argument count :(( \n");
+		printf("Invalid argument count \n");
 		return (false);
 	}
 	return (true);
 }
-
-// void	debug_print_tokens(t_token *tokens)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (tokens)
-// 	{
-// 		ft_printf("DEBUG: Token %d: str='%s' | type=%d | BOOM=%d\n",
-// 			i, tokens->str, tokens->type, tokens->is_expandable);
-// 		tokens = tokens->next;
-// 		i++;
-// 	}
-// }
 
 bool	is_all_spaces(char *input)
 {
@@ -80,7 +66,6 @@ bool	parse_input(t_data *data, t_token **tokens, t_env **my_envp)
 	}
 	if (!convert_token(data, tokens))
 		return (false);
-	// debug_print_tokens(*tokens);
 	handle_assignments(*tokens, &data->locals);
 	return (true);
 }

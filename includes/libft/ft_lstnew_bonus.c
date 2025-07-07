@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:19:41 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/16 17:49:23 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:40:19 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*mango_loko;
+	t_list	*result;
 
-	mango_loko = malloc(sizeof(t_list));
-	if (mango_loko == NULL)
+	result = malloc(sizeof(t_list));
+	if (result == NULL)
 	{
 		return (NULL);
 	}
-	mango_loko->content = content;
-	mango_loko->next = NULL;
-	return (mango_loko);
+	result->content = content;
+	result->next = NULL;
+	return (result);
 }
