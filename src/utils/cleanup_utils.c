@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 17:42:32 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/04 12:10:23 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/07 20:51:32 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ void	exit_minishell(t_data *data, int exit_code)
 	}
 	rl_clear_history();
 	exit(exit_code);
+}
+
+void	free_minishell_loop(t_data *data)
+{
+	free_tokens(&data->tokens);
+	free_commands(&data->cmds);
+	free(data->input);
 }

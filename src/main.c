@@ -6,18 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:37:42 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/02 15:01:47 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:55:20 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static void	free_minishell_loop(t_data *data)
-{
-	free_tokens(&data->tokens);
-	free_commands(&data->cmds);
-	free(data->input);
-}
 
 static void	minishell_loop(t_data *data)
 {

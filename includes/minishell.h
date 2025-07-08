@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/04 15:49:01 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:54:48 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ void	free_child(t_data *data, int exit_code);
 void	free_matrix(char **matrix);
 void	*ft_calloc(size_t item_count, size_t size_bytes);
 void	*ft_malloc(size_t size, size_t type);
+void	free_minishell_loop(t_data *data);
 bool	verify_space(char *str);
 char	*trim_space(char *string);
 void	free_pointers(char *single_pointer, char **double_pointer);
