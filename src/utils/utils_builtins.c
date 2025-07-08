@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:02:25 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/06/29 18:04:53 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:59:01 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	print_sorted_env(t_env *env)
 	char	**array;
 	size_t	count;
 	size_t	i;
+	size_t	j;
 
 	array = create_env_array(env, &count);
 	if (!array)
@@ -78,8 +79,16 @@ void	print_sorted_env(t_env *env)
 	i = 0;
 	while (i < count)
 	{
+		j = 0;
 		ft_putstr_fd("declare -x ", 1);
-		ft_putendl_fd(array[i], 1);
+		while (array[i][j] != '\0')
+		{
+			if (array[i][j - 1] == '=')
+				ft_putchar_fd('\"', 1);
+			ft_putchar_fd(array[i][j], 1);
+			j++;
+		}
+		ft_putstr_fd("\"\n", 1);
 		i++;
 	}
 	free(array);

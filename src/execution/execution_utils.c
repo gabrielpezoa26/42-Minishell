@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 14:40:36 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/04 15:49:26 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/08 19:04:32 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,22 @@ static void	report_file_error(char *cmd_name, t_data *data)
 	ft_putendl_fd(": Permission denied", STDERR_FILENO);
 	free_child(data, 126);
 }
+
+// void	free_child(t_data *data, int exit_code)
+// {
+// 	if (data)
+// 	{
+// 		free_tokens(&data->tokens);
+// 		if (data->cmds)
+// 			free_commands(&data->cmds);
+// 		free_env(&data->env);
+// 		free_env(&data->locals);
+// 		if (data->input)
+// 			free(data->input);
+// 		free(data);
+// 	}
+// 	exit(exit_code);
+// }
 
 void	handle_path_error(char *cmd_name, t_data *data)
 {
