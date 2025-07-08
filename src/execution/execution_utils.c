@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 14:40:36 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/08 19:04:32 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/07/08 19:28:27 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,6 @@ static void	report_file_error(char *cmd_name, t_data *data)
 	ft_putendl_fd(": Permission denied", STDERR_FILENO);
 	free_child(data, 126);
 }
-
-// void	free_child(t_data *data, int exit_code)
-// {
-// 	if (data)
-// 	{
-// 		free_tokens(&data->tokens);
-// 		if (data->cmds)
-// 			free_commands(&data->cmds);
-// 		free_env(&data->env);
-// 		free_env(&data->locals);
-// 		if (data->input)
-// 			free(data->input);
-// 		free(data);
-// 	}
-// 	exit(exit_code);
-// }
 
 void	handle_path_error(char *cmd_name, t_data *data)
 {
@@ -84,7 +68,7 @@ void	execute_external_cmd(char *path, t_cmd *cmd, t_data *data)
 {
 	char	**envp;
 
-	setup_redirections(cmd->redirections);
+	setup_redirections(data, cmd->redirections);
 	envp = env_list_to_array(data->env);
 	execve(path, cmd->args, envp);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
@@ -95,14 +79,12 @@ void	execute_external_cmd(char *path, t_cmd *cmd, t_data *data)
 			ft_putendl_fd(": Permission denied", STDERR_FILENO);
 		if (errno == EISDIR)
 			ft_putendl_fd(": Is a directory", STDERR_FILENO);
-		free(path);
 		free_matrix(envp);
 		free_child(data, 126);
 	}
 	else
 	{
 		perror(NULL);
-		free(path);
 		free_matrix(envp);
 		free_child(data, 127);
 	}

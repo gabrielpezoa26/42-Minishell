@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:50:37 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/04 15:48:51 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/08 19:20:02 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	execute_single_command(t_cmd *cmd, t_data *data)
 	if (is_builtin(cmd->args[0]))
 		execute_builtin_child(cmd, data);
 	path = get_cmd_path(cmd->args[0], data->env);
+	data->path = path;
 	if (!path)
 		handle_path_error(cmd->args[0], data);
 	execute_external_cmd(path, cmd, data);
@@ -48,7 +49,7 @@ void	execute_builtin_child(t_cmd *cmd, t_data *data)
 {
 	int	builtin_status;
 
-	setup_redirections(cmd->redirections);
+	setup_redirections(data, cmd->redirections);
 	builtin_status = execute_builtin(cmd->args, data);
 	free_child(data, builtin_status);
 }

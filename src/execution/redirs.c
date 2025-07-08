@@ -6,13 +6,13 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 14:51:06 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/08 19:05:02 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/07/08 19:26:30 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	open_file_for_redir(t_redir *redir)
+static int	open_file_for_redir(t_data *data, t_redir *redir)
 {
 	int	fd;
 
@@ -25,6 +25,7 @@ static int	open_file_for_redir(t_redir *redir)
 	if (fd < 0)
 	{
 		perror("minishell");
+		free_child(data, 1);
 		exit(1);
 	}
 	return (fd);
@@ -39,7 +40,7 @@ static void	apply_redirection(int fd, t_type type)
 	close(fd);
 }
 
-void	setup_redirections(t_list *redirections)
+void	setup_redirections(t_data *data, t_list *redirections)
 {
 	t_list	*current;
 	t_redir	*redir;
@@ -49,7 +50,7 @@ void	setup_redirections(t_list *redirections)
 	while (current)
 	{
 		redir = (t_redir *)current->content;
-		fd = open_file_for_redir(redir);
+		fd = open_file_for_redir(data, redir);
 		apply_redirection(fd, redir->type);
 		current = current->next;
 	}

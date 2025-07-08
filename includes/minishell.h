@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:40:00 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/07 22:54:48 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/08 19:17:25 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_data
 	char	*input;
 	t_token	*tokens;
 	t_cmd	*cmds;
+	char	*path;
 	bool	exec;
 	int		last_exit_status;
 }	t_data;
@@ -150,7 +151,7 @@ int		my_unset(char **args, t_data *data);
 
 /*--------------EXECUTION----------------*/
 int		execution(t_cmd *cmds, t_data *data);
-void	setup_redirections(t_list *redirections);
+void	setup_redirections(t_data *data, t_list *redirections);
 char	*get_cmd_path(char *cmd, t_env *my_env);
 int		wait_for_children(pid_t last_pid);
 int		get_exit_status(int status);

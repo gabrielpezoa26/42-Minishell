@@ -6,7 +6,7 @@
 /*   By: dteruya <dteruya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:16:51 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/07/08 18:12:15 by dteruya          ###   ########.fr       */
+/*   Updated: 2025/07/08 19:24:13 by dteruya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	free_child(t_data *data, int exit_code)
 {
 	if (data)
 	{
-		printf("OIIIIIIIIIIIIIIIIIIIIIIIIIIII\n");
 		free_tokens(&data->tokens);
 		if (data->cmds)
 			free_commands(&data->cmds);
@@ -74,6 +73,7 @@ void	free_child(t_data *data, int exit_code)
 		free_env(&data->locals);
 		if (data->input)
 			free(data->input);
+		free(data->path);
 		free(data);
 	}
 	exit(exit_code);
